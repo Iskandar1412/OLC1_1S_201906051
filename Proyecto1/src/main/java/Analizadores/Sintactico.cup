@@ -1,0 +1,63 @@
+
+/*1. Package e importaciones*/
+package Analizadores;
+import java_cup.runtime.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
+/*2. Codigo para el parser, variables, metodos*/
+parser code
+{:
+	//objetos, variables, ... sintaxis java
+
+:}
+
+
+/*3. Terminales*/
+
+terminal String PR_CALCULAR
+terminal String PTCOMA,PARIZQ,PARDER,LLAVIZQ,LLAVDER,CORIZQ,CORDER
+terminal String MAS,MENOS,POR,DIVIDIDO,UMENOS
+terminal String ENTERO,DECIMAL
+
+/*4. No terminales*/
+non terminal ini;
+non terminal instrucciones;
+non terminal instruccion;
+non terminal Double expresion;
+
+/*5. Precedencias*/
+
+precedence left MAS,MENOS;
+precedence left POR,DIVIDIDO;
+precedence right UMENOS;
+
+/*6. Producciones*/
+start with ini;
+
+ini::=LLAVIZQ instrucciones LLAVDER;
+
+instrucciones::= instruccion instrucciones
+				| instruccion
+				| error instrucciones
+;
+
+instruccion::=
+	PR_CALCULAR CORIZQ expresion:a CORDER PTCOMA
+	{:
+		System.out.println("El valor de la expresion es: " + a);
+		resultados.add("El valor de la expresion es: " + a);
+	:}
+;
+
+expresion::=
+	MENOS expresion:a 								{:RESULT=a*-1;:}%prec UMENOS
+	| expresion:a 		MAS			expresion:b 	{:RESULT=a+b;:}
+	| expresion:a 		MENOS		expresion:b 	{:RESULT=a-b;:}
+	| expresion:a  		POR 		expresion:b 	{:RESULT=a*b;:}
+	| expresion:a   	DIVIDIDO	expresion:b 	{:RESULT=a/b;:}
+	| ENTERO:a 										{:RESULT=new Double(a);:}
+	| DECIMAL:a 									{:RESULT=new Double(a);:}
+	| PARIZQ expresion:a PARDER						{:RESULT=a;:}
+;
