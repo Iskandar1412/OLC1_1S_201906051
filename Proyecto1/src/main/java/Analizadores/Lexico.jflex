@@ -27,6 +27,7 @@ import java_cup.runtime.Symbol;
 %init}
 
 //Expresiones regulares
+
 BLANCOS=[ \r\t]+
 D=[0-9]+
 DD=[0-9]+("."[  |0-9]+)?
@@ -38,31 +39,65 @@ comentariosimple    = "//" {InputCharacter}* {LineTerminator}?
 comentario = ("//".*\r\n)|("//".*\n)|("//".*\r)
 comentarioMultilinea = "/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"
 
+
+STR = [\"][^\"]*[\"]
+LETRA = [a-zA-Z]
+
+IDENTIFICADOR = ({LETRA})?("_"|{LETRA}|{D})
+
+%{
+	public static ArrayList<String[] err = new ArrayList<String[]>(); 
+%}
+
+
 %%
 /* 3. Reglas Semanticas */
+/*System.out.println("Reconocio PR: "+yytext());*/
+"CONJ" {return new Symbol(sym.PR_CALCULAR,yyline,yychar,yytext());} 
+/* System.out.println("Reconocio "+yytext()+" punto y coma"); */
+";" {return new Symbol(sym.PTCOMA,yyline,yychar, yytext());} 
+/* System.out.println("Reconocio "+yytext()+" parentesis abre"); */
+"(" {return new Symbol(sym.PARIZQ,yyline,yychar, yytext());} 
+/* System.out.println("Reconocio "+yytext()+" parentesis cierra"); */
+")" {return new Symbol(sym.PARDER,yyline,yychar, yytext());} 
+/* System.out.println("Reconocio "+yytext()+" corchete abre"); */
+"[" {return new Symbol(sym.CORIZQ,yyline,yychar, yytext());} 
+/* System.out.println("Reconocio "+yytext()+" corchete cierra"); */
+"]" {return new Symbol(sym.CORDER,yyline,yychar, yytext());} 
+/* System.out.println("Reconocio "+yytext()+" llave abre"); */
+"}" {return new Symbol(sym.LLAVDER,yyline,yychar, yytext());} 
+/* System.out.println("Reconocio "+yytext()+" llave cierra"); */
+"{" {return new Symbol(sym.LLAVIZQ,yyline,yychar, yytext());} 
 
-"CONJ" {  System.out.println("Reconocio PR: "+yytext()); return new Symbol(sym.PR_CALCULAR,yyline,yychar,yytext());} 
-";" { System.out.println("Reconocio "+yytext()+" punto y coma"); return new Symbol(sym.PTCOMA,yyline,yychar, yytext());} 
-"(" { System.out.println("Reconocio "+yytext()+" parentesis abre"); return new Symbol(sym.PARIZQ,yyline,yychar, yytext());} 
-")" { System.out.println("Reconocio "+yytext()+" parentesis cierra"); return new Symbol(sym.PARDER,yyline,yychar, yytext());} 
-"[" { System.out.println("Reconocio "+yytext()+" corchete abre"); return new Symbol(sym.CORIZQ,yyline,yychar, yytext());} 
-"]" { System.out.println("Reconocio "+yytext()+" corchete cierra"); return new Symbol(sym.CORDER,yyline,yychar, yytext());} 
-"}" { System.out.println("Reconocio "+yytext()+" llave abre"); return new Symbol(sym.LLAVDER,yyline,yychar, yytext());} 
-"{" { System.out.println("Reconocio "+yytext()+" llave cierra"); return new Symbol(sym.LLAVIZQ,yyline,yychar, yytext());} 
 
-"+" {return new Symbol(sym.MAS,yyline,yychar, yytext());} 
-"-" {return new Symbol(sym.MENOS,yyline,yychar, yytext());} 
-"*" {return new Symbol(sym.POR,yyline,yychar, yytext());} 
-"/" {return new Symbol(sym.DIVIDIDO,yyline,yychar, yytext());} 
+"+" 	{return new Symbol(sym.MAS,yyline,yychar, yytext());} 
+"-" 	{return new Symbol(sym.MENOS,yyline,yychar, yytext());} 
+"*" 	{return new Symbol(sym.POR,yyline,yychar, yytext());} 
+"/" 	{return new Symbol(sym.DIVIDIDO,yyline,yychar, yytext());} 
+/*Del proyecto a ver que sale :v*/
+">" 	{return new Symbol(sym.MAYOR,yyline,yychar,yytext());}
+"," 	{return new Symbol(sym.CMA,yyline,yychar,yytext());}
+"~" 	{return new Symbol(sym.APROX,yyline,yychar,yytext());}
+"\"" 	{return new Symbol(sym.COMILLA,yyline,yychar,yytext());}
+
+"." 	{return new Symbol(sym.AND,yyline,yychar,yytext());}
+"|"		{return new Symbol(sym.OR,yyline,yychar,yytext());}
+"?"		{return new Symbol(sym.STARNO,yyline,yychar,yytext());}
+"!"		{return new Symbol(sym.SG_ADMIRACION,yyline,yychar,yytext());}
+"&"		{return new Symbol(sym.YY,yyline,yychar,yytext());}
+
+
 
 \n {yychar=1;}
+{BLANCOS} 				{} 
+{comentario} 			{}
+{comentarioMultilinea} 	{}
+{comentariosimple} 		{} /*System.out.println("Comentario: "+yytext());*/
+{IDENTIFICADOR}			{return new Symbol(sym.IDENT,yyline,yychar,yytext());}
 
-{BLANCOS} {} 
-{comentario} {}
-{comentarioMultilinea} {}
-{comentariosimple} {System.out.println("Comentario: "+yytext()); }
-{D} {return new Symbol(sym.ENTERO,yyline,yychar, yytext());} 
-{DD} {return new Symbol(sym.DECIMAL,yyline,yychar, yytext());} 
+{STR} 	{return new Symbol(sym.STRING,yyline,yychar, yytext());}
+{D} 	{return new Symbol(sym.ENTERO,yyline,yychar, yytext());} 
+{DD} 	{return new Symbol(sym.DECIMAL,yyline,yychar, yytext());} 
 
 . {
     //Aqui se debe guardar los valores (yytext(), yyline, yychar ) para posteriormente generar el reporte de errores Léxicos.
