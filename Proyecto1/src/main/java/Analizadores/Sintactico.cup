@@ -1,63 +1,81 @@
 
-/*1. Package e importaciones*/
+/*------------------------------1. Package e importaciones------------------------------*/
 package Analizadores;
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.LinkedList;
+import Project.errors.SyntaxError;
 
 
-/*2. Codigo para el parser, variables, metodos*/
+/*------------------------------2. Codigo para el parser, variables, metodos------------------------------*/
 parser code
 {:
 	//objetos, variables, ... sintaxis java
+	public LinkedList<SyntaxError> errors = new LinkedList<>();
 
+	public void syntax_error(Symbol s) {
+		if(s.value != null) {
+			errors.add(new SyntaxError(s.value.toString(), s.left, s.right));
+		}
+	}
+	public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
+		throw new Exception("Error irrecuperable en la linea: " + s.left + ", columna: " s.right);
+	}
 :}
 
 
-/*3. Terminales*/
+/*------------------------------3. Terminales------------------------------*/
 
-terminal String PR_CALCULAR
-terminal String PTCOMA,PARIZQ,PARDER,LLAVIZQ,LLAVDER,CORIZQ,CORDER
-terminal String MAS,MENOS,POR,DIVIDIDO,UMENOS
-terminal String ENTERO,DECIMAL
+terminal String CONJ;
+terminal String PTCOMA,PARIZQ,PARDER,LLAVIZQ,LLAVDER,CORIZQ,CORDER;
+terminal String MAS,MENOS,POR,DIVIDIDO,UMENOS;
+terminal String MAYOR,COMA,APROX,COMILLA;
+terminal String AND,OR,STARNO,SG_ADMIRACION,YY;
+terminal String IDENT;
+terminal String STRING,ENTERO,DECIMAL;
+terminal String DOBPOR,DOBPT;
 
-/*4. No terminales*/
+
+/*------------------------------4. No terminales------------------------------*/
 non terminal ini;
+non terminal inicio;
 non terminal instrucciones;
 non terminal instruccion;
-non terminal Double expresion;
+non terminal conjunto;
+non terminal conjuntoinst;
+non terminal grupoconjunto;
 
-/*5. Precedencias*/
+non terminal numeros;
+non terminal letras;
+non terminal polacaexp;
+non terminal polaco;
+
+non terminal expresion;
+non terminal expresiones;
+non terminal comprobar;
+non terminal finalizar;
+
+non terminal pruebas;
+
+/*non terminal Double expresion;*/
+
+/*------------------------------5. Precedencias------------------------------*/
 
 precedence left MAS,MENOS;
 precedence left POR,DIVIDIDO;
 precedence right UMENOS;
 
-/*6. Producciones*/
+/*------------------------------6. Producciones------------------------------*/
 start with ini;
 
-ini::=LLAVIZQ instrucciones LLAVDER;
+ini::=LLAVIZQ inicio LLAVDER;
 
-instrucciones::= instruccion instrucciones
-				| instruccion
-				| error instrucciones
+inicio::=
+	conjunto expresion DOBPOR pruebas
 ;
 
-instruccion::=
-	PR_CALCULAR CORIZQ expresion:a CORDER PTCOMA
-	{:
-		System.out.println("El valor de la expresion es: " + a);
-		resultados.add("El valor de la expresion es: " + a);
-	:}
-;
-
-expresion::=
-	MENOS expresion:a 								{:RESULT=a*-1;:}%prec UMENOS
-	| expresion:a 		MAS			expresion:b 	{:RESULT=a+b;:}
-	| expresion:a 		MENOS		expresion:b 	{:RESULT=a-b;:}
-	| expresion:a  		POR 		expresion:b 	{:RESULT=a*b;:}
-	| expresion:a   	DIVIDIDO	expresion:b 	{:RESULT=a/b;:}
-	| ENTERO:a 										{:RESULT=new Double(a);:}
-	| DECIMAL:a 									{:RESULT=new Double(a);:}
-	| PARIZQ expresion:a PARDER						{:RESULT=a;:}
+conjunto::=
+	CONJ DOBPT IDENT:a MENOS MAYOR gupoconjunto
+	| conjunto
 ;
