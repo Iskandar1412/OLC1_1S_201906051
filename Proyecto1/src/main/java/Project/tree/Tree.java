@@ -92,8 +92,8 @@ public class Tree {
     
     public void Graph() {
         try {
-            String path = "";
-            String toString = "";
+            String path = this.ID + ".txt";
+            String toString = this.ID + ".png";
             write(path, grapho());
             ProcessBuilder todot;
             todot = new ProcessBuilder("dot", "-Tpng", toString, path);
