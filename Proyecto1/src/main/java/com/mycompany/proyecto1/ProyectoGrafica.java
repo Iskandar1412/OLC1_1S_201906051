@@ -4,6 +4,8 @@
  */
 package com.mycompany.proyecto1;
 
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author Pacos
@@ -26,25 +28,40 @@ public class ProyectoGrafica extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BtonPntalla1 = new javax.swing.JRadioButton();
+        BtonPntalla2 = new javax.swing.JRadioButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
+        NewMenuItem = new javax.swing.JMenuItem();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
+        generateMenu = new javax.swing.JMenu();
+        automatonMenuItem = new javax.swing.JMenuItem();
+        analizeMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        BtonPntalla1.setText("Txt");
+        BtonPntalla1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtonPntalla1ActionPerformed(evt);
+            }
+        });
+
+        BtonPntalla2.setText("Archive");
+        BtonPntalla2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtonPntalla2ActionPerformed(evt);
+            }
+        });
+
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
+
+        NewMenuItem.setText("New");
+        fileMenu.add(NewMenuItem);
 
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Open");
@@ -85,39 +102,28 @@ public class ProyectoGrafica extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
+        generateMenu.setMnemonic('h');
+        generateMenu.setText("Generate & Analize");
 
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
+        automatonMenuItem.setMnemonic('c');
+        automatonMenuItem.setText("Automaton Generation");
+        automatonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                automatonMenuItemActionPerformed(evt);
+            }
+        });
+        generateMenu.add(automatonMenuItem);
 
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
+        analizeMenuItem.setMnemonic('a');
+        analizeMenuItem.setText("Analize & Generate");
+        analizeMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                analizeMenuItemActionPerformed(evt);
+            }
+        });
+        generateMenu.add(analizeMenuItem);
 
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Contents");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
+        menuBar.add(generateMenu);
 
         setJMenuBar(menuBar);
 
@@ -125,11 +131,21 @@ public class ProyectoGrafica extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1082, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(BtonPntalla1)
+                .addGap(18, 18, 18)
+                .addComponent(BtonPntalla2)
+                .addContainerGap(1118, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 527, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtonPntalla2)
+                    .addComponent(BtonPntalla1))
+                .addContainerGap(652, Short.MAX_VALUE))
         );
 
         pack();
@@ -149,7 +165,34 @@ public class ProyectoGrafica extends javax.swing.JFrame {
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
         // TODO add your handling code here:
+        final JFileChooser fc = new JFileChooser();
+        
+        
     }//GEN-LAST:event_openMenuItemActionPerformed
+
+    private void BtonPntalla2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtonPntalla2ActionPerformed
+        // TODO add your handling code here:
+        BtonPntalla2.setSelected(true);
+        if(BtonPntalla2.isSelected()){
+            BtonPntalla1.setSelected(false);
+        }
+    }//GEN-LAST:event_BtonPntalla2ActionPerformed
+
+    private void BtonPntalla1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtonPntalla1ActionPerformed
+        // TODO add your handling code here:
+        BtonPntalla1.setSelected(true);
+        if(BtonPntalla1.isSelected()){
+            BtonPntalla2.setSelected(false);
+        }
+    }//GEN-LAST:event_BtonPntalla1ActionPerformed
+
+    private void analizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizeMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_analizeMenuItemActionPerformed
+
+    private void automatonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automatonMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_automatonMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,18 +230,16 @@ public class ProyectoGrafica extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
-    private javax.swing.JMenu editMenu;
+    private javax.swing.JRadioButton BtonPntalla1;
+    private javax.swing.JRadioButton BtonPntalla2;
+    private javax.swing.JMenuItem NewMenuItem;
+    private javax.swing.JMenuItem analizeMenuItem;
+    private javax.swing.JMenuItem automatonMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenu generateMenu;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables

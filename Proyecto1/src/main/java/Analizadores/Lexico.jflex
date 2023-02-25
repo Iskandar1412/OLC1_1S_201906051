@@ -41,6 +41,7 @@ InputCharacter = [^\r\n]
 comentariosimple    = "//" {InputCharacter}* {LineTerminator}?
 comentario = ("//".*\r\n)|("//".*\n)|("//".*\r)
 comentarioMultilinea = "/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"
+comentarioMultiple = \<\!([^"!>"]|[\r|\f|\s|\t|\n])*\!\>
 
 
 STR = [\"][^\"]*[\"]
@@ -95,6 +96,7 @@ IDENTIFICADOR = ({LETRA})?("_"|{LETRA}|{D})
 {comentario} 			{}
 {comentarioMultilinea} 	{}
 {comentariosimple} 		{} /*System.out.println("Comentario: "+yytext());*/
+{comentarioMultiple}	{}
 
 {IDENTIFICADOR}			{return new Symbol(sym.IDENT,yyline,yychar,yytext());}
 
