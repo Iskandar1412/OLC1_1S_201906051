@@ -3,14 +3,15 @@
 package Analizadores;
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
-import Project.errors.LexicalError;
+import java.util.ArrayList;
+import Project.errors.Error;
 
 %%
 /* 2. Configuraciones para el analisis (Opciones y Declaraciones) */
 %{
     //Codigo de usuario en sintaxis java
     //Agregar clases, variables, arreglos, objetos etc...
-    public LinkedList<LexicalError> lexicalErrors;
+    public ArrayyList<Error> err = new ArrayList<>();
 %}
 
 //Directivas
@@ -47,7 +48,7 @@ comentarioMultiple = \<\!([^"!>"]|[\r|\f|\s|\t|\n])*\!\>
 STR = [\"][^\"]*[\"]
 LETRA = [a-zA-Z]
 
-IDENTIFICADOR = ({LETRA})?("_"|{LETRA}|{D})
+IDENTIFICADOR = ({LETRA})?(_|{LETRA}|{D})+
 
 
 
@@ -56,20 +57,28 @@ IDENTIFICADOR = ({LETRA})?("_"|{LETRA}|{D})
 /* 3. Reglas Semanticas */
 /*System.out.println("Reconocio PR: "+yytext());*/
 "CONJ" 					{return new Symbol(sym.CONJ,yyline,yychar,yytext());} 
+
 /* System.out.println("Reconocio "+yytext()+" punto y coma"); */
 ";" 					{return new Symbol(sym.PTCOMA,yyline,yychar, yytext());} 
+
 /* System.out.println("Reconocio "+yytext()+" parentesis abre"); */
 "(" 					{return new Symbol(sym.PARIZQ,yyline,yychar, yytext());} 
+
 /* System.out.println("Reconocio "+yytext()+" parentesis cierra"); */
 ")" 					{return new Symbol(sym.PARDER,yyline,yychar, yytext());} 
+
 /* System.out.println("Reconocio "+yytext()+" corchete abre"); */
 "[" 					{return new Symbol(sym.CORIZQ,yyline,yychar, yytext());} 
+
 /* System.out.println("Reconocio "+yytext()+" corchete cierra"); */
 "]" 					{return new Symbol(sym.CORDER,yyline,yychar, yytext());} 
+
 /* System.out.println("Reconocio "+yytext()+" llave abre"); */
 "}" 					{return new Symbol(sym.LLAVDER,yyline,yychar, yytext());} 
+
 /* System.out.println("Reconocio "+yytext()+" llave cierra"); */
 "{" 					{return new Symbol(sym.LLAVIZQ,yyline,yychar, yytext());} 
+
 
 
 "+" 					{return new Symbol(sym.MAS,yyline,yychar, yytext());} 
@@ -87,11 +96,12 @@ IDENTIFICADOR = ({LETRA})?("_"|{LETRA}|{D})
 "?"						{return new Symbol(sym.STARNO,yyline,yychar,yytext());}
 "!"						{return new Symbol(sym.SG_ADMIRACION,yyline,yychar,yytext());}
 "&"						{return new Symbol(sym.YY,yyline,yychar,yytext());}
-"%%"					{return new Symbol(sym.DOBPOR,yyline,yychar,yytext());}
+"%"					{return new Symbol(sym.PORCENTAJE,yyline,yychar,yytext());}
 ":"						{return new Symbol(sym.DOBPT,yyline,yychar,yytext());}
 
 
 \n {yychar=1;}
+
 {BLANCOS} 				{} 
 {comentario} 			{}
 {comentarioMultilinea} 	{}
@@ -107,5 +117,8 @@ IDENTIFICADOR = ({LETRA})?("_"|{LETRA}|{D})
 . {
     //Aqui se debe guardar los valores (yytext(), yyline, yychar ) para posteriormente generar el reporte de errores Léxicos.
     //System.out.println("Este es un error lexico: "+yytext()+ ", en la linea: "+yyline+", en la columna: "+yychar);
-    lexicalErrors.add(new LexicalError(yytext(), yyline, (int) yychar));
+    System.out.println("Error lexico: " + yytext() + ", linea: " + yyline + ", columna: " + yychar);
+    Error aux = new Error("Lexico", yytext(), yyline, yychar);
+    err.add(aux);
+    //lexicalErrors.add(new LexicalError(yytext(), yyline, (int) yychar));
 }
