@@ -11,7 +11,7 @@ import Project.errors.Error;
 %{
     //Codigo de usuario en sintaxis java
     //Agregar clases, variables, arreglos, objetos etc...
-    public ArrayyList<Error> err = new ArrayList<>();
+    public ArrayList<Error> err = new ArrayList<>();
 %}
 
 //Directivas
@@ -96,7 +96,7 @@ IDENTIFICADOR = ({LETRA})?(_|{LETRA}|{D})+
 "?"						{return new Symbol(sym.STARNO,yyline,yychar,yytext());}
 "!"						{return new Symbol(sym.SG_ADMIRACION,yyline,yychar,yytext());}
 "&"						{return new Symbol(sym.YY,yyline,yychar,yytext());}
-"%"					{return new Symbol(sym.PORCENTAJE,yyline,yychar,yytext());}
+"%"					    {return new Symbol(sym.PORCENTAJE,yyline,yychar,yytext());}
 ":"						{return new Symbol(sym.DOBPT,yyline,yychar,yytext());}
 
 

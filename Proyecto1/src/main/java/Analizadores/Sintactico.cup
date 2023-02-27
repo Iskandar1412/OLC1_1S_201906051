@@ -19,7 +19,6 @@ import Project.automatas.Thompson.Nodo;
 import Project.tree.Nodo;
 import Project.tree.Tree;
 
-
 /*------------------------------2. Codigo para el parser, variables, metodos------------------------------*/
 parser code
 {:
@@ -29,14 +28,24 @@ parser code
 	public ArrayList<Thompson> thompson = new ArrayList<>();
 	public ArrayList<Tree> tree = new ArrayList<>();
 	public ArrayList<Follow> follow = new ArrayList<>();
+	public ArrayList<String> car = new ArrayList<>();
+	public ArrayList<Estado> est = new ArrayList<>();
+	public ArrayList<Estado> tab = new ArrayList<>();
+	public ArrayList<State> trans = new ArrayList<>();
+	public ArrayList<Automata> automata = new ArrayList<>();
+	public ArrayList<Aceptacion> val = new ArrayList<>();
+	public int contador = 1;
+	public int cestado = 0;
 
 	public void syntax_error(Symbol s) {
-		if(s.value != null) {
-			errors.add(new SyntaxError(s.value.toString(), s.left, s.right));
-		}
+		errors.add(new SyntaxError(s.value.toString(), s.left, s.right));
+		Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+		err.add(newErr);
 	}
 	public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
 		throw new Exception("Error irrecuperable en la linea: " + s.left + ", columna: " s.right);
+		Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+		err.add(newErr);
 	}
 :}
 
@@ -50,48 +59,63 @@ terminal String MAYOR,COMA,APROX,COMILLA;
 terminal String AND,OR,STARNO,SG_ADMIRACION,YY;
 terminal String IDENT;
 terminal String STRING,ENTERO,DECIMAL;
-terminal String DOBPOR,DOBPT;
+terminal String PORCENTAJE,DOBPT;
 
 
 /*------------------------------4. No terminales------------------------------*/
 non terminal ini;
-non terminal inicio;
-non terminal instrucciones;
-non terminal instruccion;
+non terminal contenido;
+non terminal declaracion;
+non terminal validar;
 non terminal conjunto;
-non terminal conjuntoinst;
-non terminal grupoconjunto;
-
-non terminal numeros;
-non terminal letras;
-non terminal polacaexp;
-non terminal polaco;
-
 non terminal expresion;
-non terminal expresiones;
-non terminal comprobar;
-non terminal finalizar;
-
-non terminal pruebas;
+non terminal ArrayList<Object> otros, e;
+non terminal String binario, unitario, not, grupo, val, sym;
 
 /*non terminal Double expresion;*/
 
 /*------------------------------5. Precedencias------------------------------*/
 
-precedence left MAS,MENOS;
-precedence left POR,DIVIDIDO;
-precedence right UMENOS;
+
 
 /*------------------------------6. Producciones------------------------------*/
 start with ini;
 
-ini::=LLAVIZQ inicio LLAVDER;
-
-inicio::=
-	conjunto expresion DOBPOR pruebas
+ini::=LLAVIZQ contenido LLAVDER
+	| error			{:
+						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+						err.add(newErr);
+					:}
 ;
 
-conjunto::=
-	CONJ DOBPT IDENT:a MENOS MAYOR gupoconjunto
+contenido::=declaracion PORCENTAJE PORCENTAJE validar
+	| error 		{:
+						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+						err.add(newErr);
+					:}
+;
+
+declaracion::=conjunto declaracion
+	| expresion declaracion
 	| conjunto
+	| expresion
+	| error 		{:
+						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+						err.add(newErr);
+					:}
 ;
+
+conjunto::=CONJ DOBPT IDENT:a MENOS MAYOR not:b PTCOMA 		{:
+																ArrayList<String> num = new ArrayList<>();
+																for(int i = 0; i < car.size(); i++) {
+																	num.add(car.get(i));
+																}
+																Conj novo = new Conj(a, num, b);
+																con.add(novo);
+																car.clear();
+															:}
+	| error {:
+				Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+			:}
+;
+
