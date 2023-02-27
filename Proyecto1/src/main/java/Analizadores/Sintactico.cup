@@ -18,6 +18,8 @@ import Project.automatas.Thompson.AutomataT;
 import Project.automatas.Thompson.Nodo;
 import Project.tree.Nodo;
 import Project.tree.Tree;
+import java.util.Collections;
+import java.util.Arrays;
 
 /*------------------------------2. Codigo para el parser, variables, metodos------------------------------*/
 parser code
@@ -57,7 +59,7 @@ terminal String PTCOMA,PARIZQ,PARDER,LLAVIZQ,LLAVDER,CORIZQ,CORDER;
 terminal String MAS,MENOS,POR,DIVIDIDO,UMENOS;
 terminal String MAYOR,COMA,APROX,COMILLA;
 terminal String AND,OR,STARNO,SG_ADMIRACION,YY;
-terminal String IDENT;
+terminal String IDENT,SIMBOLO;
 terminal String STRING,ENTERO,DECIMAL;
 terminal String PORCENTAJE,DOBPT;
 
@@ -105,6 +107,7 @@ declaracion::=conjunto declaracion
 					:}
 ;
 
+/*conjunto que tendra practicamente los identificadores CONJ: asdf->loquesea;*/
 conjunto::=CONJ DOBPT IDENT:a MENOS MAYOR not:b PTCOMA 		{:
 																ArrayList<String> num = new ArrayList<>();
 																for(int i = 0; i < car.size(); i++) {
@@ -119,3 +122,93 @@ conjunto::=CONJ DOBPT IDENT:a MENOS MAYOR not:b PTCOMA 		{:
 			:}
 ;
 
+/*valores para las variables que van a calificar o ehh no me recuerdo como se llama... confirmar? valorar?.... algo asi, comparar*/
+not::=LETRA:a APROX LETRA:b		{:
+									int valu1 = a.toCharArray()[0];
+									int valu2 = b.toCharArray()[0];
+									if(valu1 > valu2) {
+										int item = valu1;
+										valu1 = valu2;
+										valu2 = item;
+									}
+									for(int i = valu1; i <= valu2; i++){
+										car.add(Character.toString(i));
+									}
+									String temp = "[" + a + "-" + b + "]";
+									RESULT = temp;
+								:}
+	| ENTERO:a APROX ENTERO:b 	{:
+									int valu1 = a.toCharArray()[0];
+									int valu2 = b.toCharArray()[0];
+									if(valu1 > valu2) {
+										int item = valu1;
+										valu1 = valu2;
+										valu2 = item;
+									}
+									for(int i = valu1; i <= valu2; i++){
+										car.add(Character.toString(i));
+									}
+									String temp = "[" + a + "-" + b + "]";
+									RESULT = temp;
+								:}
+	| sym:a APROX sym:b		{:
+								int valu1 = a.toCharArray()[0];
+								int valu2 = b.toCharArray()[0];
+								if(valu1 > valu2) {
+									int item = valu1;
+									valu1 = valu2;
+									valu2 = item;
+								}
+								for(int i = valu1; i <= valu2; i++){
+									car.add(Character.toString(i));
+								}
+								String temp = "[" + a + "-" + b + "]";
+								RESULT = temp;
+							:}
+	| grupo:a 	{:
+					String temp = "(" + a + ")";
+					Collections.reverse(car);
+					RESULT = temp;
+				:}
+	| error 	{:
+					Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+					err.add(newErr);
+				:}
+;
+
+val::=LETRA:a 			{: RESULT = a; :}
+	| ENTERO:a 			{: RESULT = a; :}
+	| sym:a   			{: RESULT = a; :}
+	| error  			{:
+							Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+							err.add(newErr);
+						:}
+;
+
+sym::=SIMBOLO:a 		{: RESULT = a; :}
+	| PORCENTAJE:a 		{: RESULT = a; :}
+	| AND:a  			{: RESULT = a; :}
+	| OR:a 				{: RESULT = a; :}
+	| POR:a 			{: RESULT = a; :}
+	| MAS:a 			{: RESULT = a; :}
+	| STARNO:a 			{: RESULT = a; :}
+	| error 			{:
+							Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+							err.add(newErr);
+						:}
+;
+
+grupo::=val:a COMA grupo:b 		{:
+									String not = a + "|" + b;
+									car.add(a);
+									RESULT = not;
+								:}
+	| val:a		{:
+					car.add(a);
+					RESULT = a;
+				:}
+	| error 	{:
+					Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+					err.add(newErr);
+				:}
+;
