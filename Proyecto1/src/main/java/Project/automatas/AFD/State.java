@@ -23,4 +23,43 @@ public class State {
         this.ID = id;
         this.state = sta;
     }
+    
+    public String getdot() {
+        String dot = "digraph G{ \n\trankdir=LR;\n\tnode[shape=record];\n";
+        dot += "a[label=\"{Estado|Transicion}";
+        
+        
+        return dot;
+    }
+    
+    public void write(String path, String content) {
+        FileWriter fichero = null;
+        PrintWriter p = null;
+        try{
+            fichero = new FileWriter(path);
+            p = new PrintWriter(fichero);
+            p.close();
+            fichero.close();
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }finally{
+            if(p != null) {
+                p.close();
+            }
+        }
+    }
+    
+    public void Dot() {
+        try{
+            String path = this.ID + ".txt";
+            String name = this.ID + ".svg";
+            write(path, getdot());
+            ProcessBuilder tosvg;
+            tosvg = new ProcessBuilder("dot", "-Tsvg", "-o", name, path);
+            tosvg.redirectErrorStream(true);
+            tosvg.start();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
