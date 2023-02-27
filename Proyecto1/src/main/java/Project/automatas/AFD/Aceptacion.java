@@ -3,15 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Project.automatas.AFD;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.UUID;
+//import java.io.FileWriter;
+//import java.io.PrintWriter;
+//import java.util.ArrayList;
+//import java.util.UUID;
 /**
  *
  * @author Pacos
  */
 public class Aceptacion {
+    public String Cadena;
+    public Automata automata;
     
+    public Aceptacion(String caden, Automata automaton) {
+        this.Cadena = caden;
+        this.automata = automaton;
+    }
 }
 
