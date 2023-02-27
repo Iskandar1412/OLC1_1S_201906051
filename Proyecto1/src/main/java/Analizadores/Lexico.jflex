@@ -49,6 +49,7 @@ STR = [\"][^\"]*[\"]
 LETRA = [a-zA-Z]
 
 IDENTIFICADOR = ({LETRA})?(_|{LETRA}|{D})+
+SIMBOLO = [!-$]|[&-)]|\/|-|[<->]|@|[\[-\`] 
 
 
 
@@ -99,7 +100,6 @@ IDENTIFICADOR = ({LETRA})?(_|{LETRA}|{D})+
 "%"					    {return new Symbol(sym.PORCENTAJE,yyline,yychar,yytext());}
 ":"						{return new Symbol(sym.DOBPT,yyline,yychar,yytext());}
 
-
 \n {yychar=1;}
 
 {BLANCOS} 				{} 
@@ -109,6 +109,7 @@ IDENTIFICADOR = ({LETRA})?(_|{LETRA}|{D})+
 {comentarioMultiple}	{}
 
 {IDENTIFICADOR}			{return new Symbol(sym.IDENT,yyline,yychar,yytext());}
+{SIMBOLO}               {return new Symbol(sym.SIMBOLO,yyline,yychar,yytext());}
 
 {STR} 					{return new Symbol(sym.STRING,yyline,yychar, yytext());}
 {D} 					{return new Symbol(sym.ENTERO,yyline,yychar, yytext());} 
