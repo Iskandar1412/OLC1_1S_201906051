@@ -12,17 +12,17 @@ import java.util.ArrayList;
  * @author Pacos
  */
 public class Follow {
-    public String Symbol;
-    public String Hoja;
-    public ArrayList<String> Terminal;
+    //public String Symbol;
+    //public String Hoja;
+    //public ArrayList<String> Terminal;
     //public ArrayList<String> NoTerminal;
-    public ArrayList<String> Siguientes;
+    //public ArrayList<String> Siguientes;
     //public int ID;
     
     public Follow() {
-        this.Terminal = new ArrayList<>();
-        this.Hoja = "";
+        //this.Terminal = new ArrayList<>();
+        //this.Hoja = "";
         //this.ID = 0;
-        this.Siguientes = new ArrayList<>();
+        //this.Siguientes = new ArrayList<>();
     }
 }

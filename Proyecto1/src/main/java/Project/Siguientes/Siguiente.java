@@ -15,9 +15,14 @@ public class Siguiente {
     public String Symbol;
     public String Hoja;
     public ArrayList<String> Terminal;
+    //public ArrayList<String> NoTerminal;
+    public ArrayList<String> Siguientes;
+    //public int ID;
     
     public Siguiente() {
         this.Terminal = new ArrayList<>();
         this.Hoja = "";
+        //this.ID = 0;
+        this.Siguientes = new ArrayList<>();
     }
 }
