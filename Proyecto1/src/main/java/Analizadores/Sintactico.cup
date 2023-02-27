@@ -5,14 +5,30 @@ import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
-import Project.errors.SyntaxError;
+import Project.errors.Error;
+import Project.errors.Conj;
+import Project.Siguientes.Follow;
+import Project.Siguientes.Siguiente;
+import Project.automatas.AFD.Aceptacion;
+import Project.automatas.AFD.Automata;
+import Project.automatas.AFD.Estado;
+import Project.automatas.AFD.State;
+import Project.automatas.AFD.Transicion;
+import Project.automatas.Thompson.AutomataT;
+import Project.automatas.Thompson.Nodo;
+import Project.tree.Nodo;
+import Project.tree.Tree;
 
 
 /*------------------------------2. Codigo para el parser, variables, metodos------------------------------*/
 parser code
 {:
 	//objetos, variables, ... sintaxis java
-	public LinkedList<SyntaxError> errors = new LinkedList<>();
+	public ArrayList<Error> err = new ArrayList<>(); //errores del sistema
+	public ArrayList<Conj> con = new ArrayList<>(); //conjuntos que se generen
+	public ArrayList<Thompson> thompson = new ArrayList<>();
+	public ArrayList<Tree> tree = new ArrayList<>();
+	public ArrayList<Follow> follow = new ArrayList<>();
 
 	public void syntax_error(Symbol s) {
 		if(s.value != null) {
