@@ -453,9 +453,10 @@ e::=binario:a e:b e:c 		{:
 										/*---------------------*/
 									:}
 	| otros:a 	{: RESULT = a; :}
-	| error 	{:
-					/*---------------------*/
-				:}
+	| error 		{:
+						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+						err.add(newErr);
+					:}
 ;
 
 otros::=STRING:a 	{:
@@ -470,9 +471,10 @@ otros::=STRING:a 	{:
 	| ENTERO:a 	{:
 					/*---------------------*/
 				:}
-	| error 	{:
-					/*---------------------*/
-				:}
+	| error 		{:
+						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+						err.add(newErr);
+					:}
 ;
 
 binario::=AND:a 	{: RESULT = a; :}
