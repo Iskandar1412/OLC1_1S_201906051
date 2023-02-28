@@ -12,6 +12,52 @@ import java.util.UUID;
  * @author Pacos
  */
 public class AutomataT {
+    public String ID;
+    public ArrayList<Nodo> Nodos;
+    public Nodo Cabecera;
+    public AutomataT(String id, ArrayList<Nodo> nodo, Nodo cabecera){
+        this.ID = id;
+        this.Nodos = nodo;
+        this.Cabecera = cabecera;
+    }
     
+    public String grapho() {
+        String dot = "digraph G{\n" + "\tnode[shape=record];\n";
+        
+        dot += "}\n";
+        
+        return dot;
+    }
+    
+    public void write(String path, String content) {
+        FileWriter fichero = null;
+        PrintWriter p = null;
+        try {
+            fichero = new FileWriter(path);
+            p = new PrintWriter(fichero);
+            p.close();
+            fichero.close();
+        }catch(Exception e) {
+            System.out.println("Error" + e.getMessage());
+        }finally{
+            if(p != null) {
+                p.close();
+            }
+        }
+    }
+    
+    public void Graph() {
+        try {
+            String path = "AFN_" + this.ID + ".txt";
+            String toString = "AFN_" + this.ID + ".png";
+            write(path, grapho());
+            ProcessBuilder todot;
+            todot = new ProcessBuilder("dot", "-Tpng", toString, path);
+            todot.redirectErrorStream(true);
+            todot.start();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
 

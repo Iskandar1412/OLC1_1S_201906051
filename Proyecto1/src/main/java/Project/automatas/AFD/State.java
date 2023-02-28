@@ -51,8 +51,8 @@ public class State {
     
     public void Dot() {
         try{
-            String path = this.ID + ".txt";
-            String name = this.ID + ".svg";
+            String path = "State_" + this.ID + ".txt";
+            String name = "State_" + this.ID + ".svg";
             write(path, getdot());
             ProcessBuilder tosvg;
             tosvg = new ProcessBuilder("dot", "-Tsvg", "-o", name, path);

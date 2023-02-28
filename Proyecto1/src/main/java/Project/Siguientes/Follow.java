@@ -58,8 +58,8 @@ public class Follow {
     
     public void Dot() {
         try{
-            String path = this.ID + ".txt";
-            String name = this.ID + ".svg";
+            String path = "Follow_" + this.ID + ".txt";
+            String name = "Follow_" + this.ID + ".svg";
             write(path, getdot());
             ProcessBuilder tosvg;
             tosvg = new ProcessBuilder("dot", "-Tsvg", "-o", name, path);
