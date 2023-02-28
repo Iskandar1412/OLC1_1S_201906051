@@ -57,12 +57,13 @@ parser code
 terminal String CONJ;
 terminal String PTCOMA,PARIZQ,PARDER,LLAVIZQ,LLAVDER,CORIZQ,CORDER;
 terminal String MAS,MENOS,POR,DIVIDIDO,UMENOS;
+terminal String LETRA;
 terminal String MAYOR,COMA,APROX,COMILLA;
 terminal String AND,OR,STARNO,SG_ADMIRACION,YY;
 terminal String IDENT,SIMBOLO;
 terminal String STRING,ENTERO,DECIMAL;
 terminal String PORCENTAJE,DOBPT;
-
+terminal String SPECIAL;
 
 /*------------------------------4. No terminales------------------------------*/
 non terminal ini;
@@ -72,7 +73,7 @@ non terminal validar;
 non terminal conjunto;
 non terminal expresion;
 non terminal ArrayList<Object> otros, e;
-non terminal String binario, unitario, not, grupo, val, sym;
+non terminal String binario, unario, not, grupo, val, sym;
 
 /*non terminal Double expresion;*/
 
@@ -437,6 +438,67 @@ expresion::=IDENT:a MENOS MAYOR e:b PTCOMA		{:
 													tab = new ArrayList<>();
 												:}
 		| error 	{:
+						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+						err.add(newErr);
+					:}
+;
+
+e::=binario:a e:b e:c 		{:
+								/*---------------------*/
+							:}
+	| unario:a e:b 		{:
+							/*---------------------*/
+						:}
+	| LLAVIZQ IDENT:a LLAVDER 		{:
+										/*---------------------*/
+									:}
+	| otros:a 	{: RESULT = a; :}
+	| error 	{:
+					/*---------------------*/
+				:}
+;
+
+otros::=STRING:a 	{:
+						/*---------------------*/
+					:}
+	| SPECIAL:a 	{:
+						/*---------------------*/
+					:}
+	| LETRA:a 	{:
+					/*---------------------*/
+				:}
+	| ENTERO:a 	{:
+					/*---------------------*/
+				:}
+	| error 	{:
+					/*---------------------*/
+				:}
+;
+
+binario::=AND:a 	{: RESULT = a; :}
+	| OR:a 			{: RESULT = a; :}
+	| error 		{:
+						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+						err.add(newErr);
+					:}
+;
+
+unario::=POR:a 		{: RESULT = a; :}
+	| MAS:a 		{: RESULT = a; :}
+	| STARNO:a 		{: RESULT = a; :}
+	| error 		{:
+						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+						err.add(newErr);
+					:}
+;
+
+validar::=IDENT:a DOBPT STRING:b PTCOMA validar  	{:
+														/*---------------------*/
+													:}
+	| IDENT:a DOBPT STRING:b PTCOMA 	{:
+											/*---------------------*/
+										:}
+	| error 		{:
 						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
 						err.add(newErr);
 					:}

@@ -50,7 +50,7 @@ LETRA = [a-zA-Z]
 
 IDENTIFICADOR = ({LETRA})?(_|{LETRA}|{D})+
 SIMBOLO = [!-$]|[&-)]|\/|-|[<->]|@|[\[-\`] 
-
+SPE = [\\n]|[\\\"]|[\\\']
 
 
 
@@ -111,9 +111,12 @@ SIMBOLO = [!-$]|[&-)]|\/|-|[<->]|@|[\[-\`]
 {IDENTIFICADOR}			{return new Symbol(sym.IDENT,yyline,yychar,yytext());}
 {SIMBOLO}               {return new Symbol(sym.SIMBOLO,yyline,yychar,yytext());}
 
+{LETRA}                 {return new Symbol(sym.LETRA,yyline, yytext());}       
+
 {STR} 					{return new Symbol(sym.STRING,yyline,yychar, yytext());}
 {D} 					{return new Symbol(sym.ENTERO,yyline,yychar, yytext());} 
 {DD} 					{return new Symbol(sym.DECIMAL,yyline,yychar, yytext());} 
+{SPE}                   {return new Symbol(sym.SPECIAL,yyline,yychar, yytext());}
 
 . {
     //Aqui se debe guardar los valores (yytext(), yyline, yychar ) para posteriormente generar el reporte de errores Léxicos.
