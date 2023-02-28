@@ -92,8 +92,8 @@ public class Automata {
     
     public void Dot() {
         try{
-            String path = this.ID + ".txt";
-            String name = this.ID + ".svg";
+            String path = "AFD_" + this.ID + ".txt";
+            String name = "AFD_" + this.ID + ".svg";
             write(path, getdot());
             ProcessBuilder tosvg;
             tosvg = new ProcessBuilder("dot", "-Tsvg", "-o", name, path);

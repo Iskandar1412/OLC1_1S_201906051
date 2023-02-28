@@ -16,7 +16,7 @@ import Project.automatas.AFD.State;
 import Project.automatas.AFD.Transicion;
 import Project.automatas.Thompson.AutomataT;
 import Project.automatas.Thompson.Nodo;
-import Project.tree.Nodo;
+import Project.tree.TreeNode;
 import Project.tree.Tree;
 import java.util.Collections;
 import java.util.Arrays;
@@ -211,4 +211,233 @@ grupo::=val:a COMA grupo:b 		{:
 					Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
 					err.add(newErr);
 				:}
+;
+
+expresion::=IDENT:a MENOS MAYOR e:b PTCOMA		{:
+													Nodo cabecera1 = (Nodo)b.get(0);
+													Nodo salida1 = (Nodo)b.get(1);
+													ArrayList<Nodo> a1 = (ArrayList<Nodo>)b.get(2);
+													Thompson nuevo = new Thompson(a, a1, cabecera1);
+													thompson.add(nuevo);
+													/*-------------------*/
+													TreeNode childish1 = (TreeNode)b.get(3);
+													ArrayList<Siguiente> s1 = (ArrayList<Siguiente>)b.get(4);
+													ArrayList<TreeNode> n1 = (ArrayList<TreeNode>)b.get(5);
+													/*-------------------*/
+													/*Nodods para aceptar o nodos de aceptacion uwu*/
+													TreeNode a11 = new TreeNode();
+													a11.Symbol = "$";
+													a11.Value = "$";
+													a11.Anulable = false;
+													a11.Name = Integer.toString(contador);
+													contador++;
+													a11.Type = "Hijo";
+													a11.first.add(a11.Name);
+													a11.last.add(a11.Name);
+													ArrayList<TreeNode> listaNombre = new ArrayList<>();
+													listaNombre.add(a11);
+													/*------------------------*/
+													TreeNode childish2 = new TreeNode();
+													ArrayList<Siguiente> s2 = new ArrayList<>();
+													ArrayList<TreeNode> n3 = listaNombre;
+													/*------------------------*/
+													TreeNode bin = new TreeNode();
+													bin.Value = ".";
+													bin.Symbol = ".";
+													if(childish1.Anulable == true && childish2.Anulable == true){
+														bin.Anulable = true;
+													}else{
+														bin.Anulable = false;
+													}
+													bin.Type = "Padre";
+													bin.Child1 = childish1;
+													bin.Child2 = childish2;
+													/*-------------------------*/
+													if(childish1.Anulable == true) {
+														for(int i = 0; i < childish1.first.size(); i++){
+															bin.first.add(childish1.first.get(i));
+														}
+														for(int i = 0; i < childish2.first.size(); i++){
+															bin.first.add(childish2-first.get(i));
+														}
+													}else{
+														for(int i = 0; i < childish1.first.size(); i++){
+															bin.first.add(childish1.first.get(i));
+														}
+													}
+													/*-------------------------*/
+													if(childish2.Anulable == true){
+														for(int i = 0; i < childish1.last.size(); i++){
+															bin.last.add(childish1.last.get(i));
+														}
+														for(int i = 0; i < childish2.last.size(); i++){
+															bin.last.add(childish2.last.get(i));
+														}
+													}else{
+														for(int i = 0; i < forecasts1.last.size(); i++){
+															bin.last.add(childish2.last.get(i));
+														}
+													}
+													/*-------------------------*/
+													/*--------Siguientes--------*/
+													ArrayList<Siguiente> sis = new ArrayList<>();
+													for(int i = 0; i < s1.size(); i++){
+														sis.add(s1.get(i));
+													}
+													for(int i = 0; i < s2.size(); i++){
+														sis.add(s2.get(i));
+													}
+													/*-------------------------*/
+													ArrayList<String> ast = childish2.first;
+													for(int i = 0; i < childish1.last.size(); i++){
+														String st = childish1.last.get(i);
+														for(int j = 0; j < st.size(); j++){
+															Siguiente ste = sis.get(j);
+															if(ste.Hoja == st){
+																if(ast.size() == 0){
+																	for(int k = 0; k < ste.size(); k++){
+																		ste.Siguientes.add(ast.get(k));
+																	}
+																}else{
+																	for(int k = 0; k < ast.size(); k++){
+																		if(Arrays.asList(ste.Siguientes).contains(ast.get(k)) == false){
+																			ste.Siguientes.add(ast.get(k));
+																		}
+																	}
+																}
+																break;
+															}
+														}
+													}
+													ArrayList<TreeNode> listanombre = new ArrayList<>();
+													listanombre.add(bin);
+													for(int i = 0; i < n1.size(); i++){
+														listanombre.add(n1.get(i));
+													}
+													for(int i = 0; i < n2.size(); i++){
+														listanombre.add(n2.get(i));
+													}
+													/*-------------------------*/
+													TreeNode cabecera = bin;
+													String nomo = childish2.Name;
+													contador = 1;
+													/*-------------------------*/
+													Tree nuevoa = new Tree(a, listanombre, cabecera);
+													tree.add(nuevoa);
+													Follow nuevof = new Follow(a, sis);
+													follow.add(nuevof);
+													/*-------------------------*/
+													Estado inicial = new Estado();
+													inicial.Name = "S" + Integer.toString(cestado);
+													cestado++;
+													inicial.Next = cabecera.first;
+													/*-------------------------*/
+													est.add(inicial);
+													while(!est.isEmpty()){
+														Estado etemp = est.get(0);
+														ArrayList<Transicion> ttemp = new ArrayList<>();
+														ArrayList<String> stemp = etemp.Next;
+														for(int i = 0; i < stemp.size(); i++){
+															String st = stemp.get(i);
+															for(int j = 0; j < sis.size(); j++){
+																Siguiente ste = sis.get(j);
+																if(ste.hoja == st){
+																	Transicion tt = new Transicion();
+																	tt.car = ste.Terminal;
+																	tt.Sig = ste.Siguientes;
+																	ttemp.add(tt);
+																}
+															}
+															if(st = nomo){
+																etemp.Acept = true;
+															}
+														}
+														/*-------------------------*/
+														for(int i = 0; i < ttemp.size(); i++){
+															Transicion tte = ttemp.get(i);
+															for(int j = 0; j < ttemp.size(); j++){
+																if(i != j){
+																	Transicion ttej = ttemp.get(j);
+																	if(!ttej.rev){
+																		if(tte.car.equals(ttej.car)){
+																			for(int k = 0; k < ttej.car.size(); k++){
+																				tte.car.add(ttejj.car.get(k));
+																			}
+																			ttej.bor = true;
+																		}
+																		tte.rev = true;
+																	}
+																}
+															}
+														}
+														/*-------------------------*/
+														for(int i = 0; i < ttemp.size(); i++){
+															Transicion tte = ttemp.get(i);
+															if(tte.bor){
+																tte = null;
+																ttemp.remove(i);
+															}
+														}
+														/*-------------------------*/
+														for(int i = 0; i < ttemp.size(); i++){
+															int ban = 0;
+															int bant = 0;
+															Transicion tte = ttemp.get(i);
+															/*-------------------------*/
+															for(int j = 0; j < est.size(); j++){
+																ArrayList<String> lse = est.get(j).Next;
+																if(lse.equals(tte.Sig)){
+																	tte.Sig = est.get(j);
+																	ban = 1;
+																	break;
+																}
+															}
+															/*-------------------------*/
+															if(ban == 0){
+																if(tab.isEmpty()){
+																	/*-------------------------*/
+																	Estado net = new Estado();
+																	net.Name = "S" + Integer.toString(cestado);
+																	cestado++;
+																	net.Next = tte.Sig;
+																	tte.Next = net;
+																	est.add(net);
+																}else{
+																	for(int j = 0; j < tab.size(); j++){
+																		ArrayList<String> lse = tab.get(j).Next;
+																		if(lse.equals(tte.Sig)){
+																			tte.Next = tab.get(j);
+																			bant = 1;
+																			break;
+																		}
+																	}
+																	if(bant == 0){
+																		Estado net = new Estado();
+																		net.Name = "S" + Integer.toString(cestado);
+																		cestado++;
+																		net.Next = tte.Sig;
+																		tte.Next = net;
+																		est.add(net);
+																	}
+																}
+															}
+														}
+														/*-------------------------*/
+														etemp.Transition = ttemp;
+														tab.add(etemp);
+														est.remove(0);
+													}
+													cestado = 0;
+													State ntrans = new State(a, tab);
+													trans.add(ntrans);
+													/*-------------------------*/
+													Automata nauto = new Automata(a,tab,inicial);
+													automata.add(nauto);
+													est = new ArrayList<>();
+													tab = new ArrayList<>();
+												:}
+		| error 	{:
+						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
+						err.add(newErr);
+					:}
 ;

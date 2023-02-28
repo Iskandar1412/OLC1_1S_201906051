@@ -13,10 +13,10 @@ import java.util.UUID;
  */
 public class Tree {
     public String ID;
-    public ArrayList<Nodo> Nodos;
-    public Nodo Cabecera;
+    public ArrayList<TreeNode> Nodos;
+    public TreeNode Cabecera;
     
-    public Tree(String id, ArrayList<Nodo> nodos, Nodo cabecera) {
+    public Tree(String id, ArrayList<TreeNode> nodos, TreeNode cabecera) {
         this.ID = id;
         this.Nodos = nodos;
         this.Cabecera = cabecera;
@@ -27,7 +27,7 @@ public class Tree {
         for(int i = 0; i < this.Nodos.size(); i++) {
             //Nodo temp = Nodo;
             
-            Nodo temp = Nodos.get(i);
+            TreeNode temp = Nodos.get(i);
             
             temp.ID = "\t\"" + UUID.randomUUID().toString() + "\"";
             String first = "(" + temp.first.get(0);
@@ -59,7 +59,7 @@ public class Tree {
         dot += "\n";
         
         for(int i = 0; i < this.Nodos.size(); i++){
-            Nodo aux = Nodos.get(i);
+            TreeNode aux = Nodos.get(i);
             if(aux.Child1 != null) {
                 dot += "\t" + aux.ID + "->" + aux.Child1.ID + "[minlen=2];\n";
             }
@@ -92,8 +92,8 @@ public class Tree {
     
     public void Graph() {
         try {
-            String path = this.ID + ".txt";
-            String toString = this.ID + ".png";
+            String path = "Tree_" + this.ID + ".txt";
+            String toString = "Tree_" + this.ID + ".png";
             write(path, grapho());
             ProcessBuilder todot;
             todot = new ProcessBuilder("dot", "-Tpng", toString, path);
