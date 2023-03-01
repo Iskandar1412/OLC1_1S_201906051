@@ -13,18 +13,18 @@ import java.util.ArrayList;
  */
 public class Estado {
     public String ID;
-    public String Name;
-    public ArrayList<Transicion> Transition;
-    public ArrayList<String> Next;
-    public boolean Acept;
+    public String nombre;
+    public ArrayList<Transicion> tr;
+    public ArrayList<String> sig;
+    public boolean aceptar;
     //public int ID;
     //public String Transition;
     public Estado() {
         this.ID = null;
-        this.Name = null;
+        this.nombre = null;
         //this.Name = "";
-        this.Transition = new ArrayList<>();
-        this.Next = new ArrayList<>();
-        this.Acept = false;
+        this.tr = new ArrayList<>();
+        this.sig = new ArrayList<>();
+        this.aceptar = false;
     }
 }

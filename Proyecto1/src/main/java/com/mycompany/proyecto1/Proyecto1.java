@@ -3,7 +3,7 @@
  */
 
 package com.mycompany.proyecto1;
-import Project.errors.Error;
+import Project.errors.Errores;
 
 /**
  *

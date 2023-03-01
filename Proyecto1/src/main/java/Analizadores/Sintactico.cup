@@ -1,507 +1,89 @@
-
 /*------------------------------1. Package e importaciones------------------------------*/
-package Analizadores;
+package Analizadores;	
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
-import Project.errors.Error;
-import Project.errors.Conj;
-import Project.Siguientes.Follow;
-import Project.Siguientes.Siguiente;
-import Project.automatas.AFD.Aceptacion;
-import Project.automatas.AFD.Automata;
-import Project.automatas.AFD.Estado;
-import Project.automatas.AFD.State;
-import Project.automatas.AFD.Transicion;
-import Project.automatas.Thompson.AutomataT;
-import Project.automatas.Thompson.Nodo;
-import Project.tree.TreeNode;
-import Project.tree.Tree;
 import java.util.Collections;
 import java.util.Arrays;
+import Project.errors.Errores;
+import Project.errors.Conjunto;
+import Project.Siguientes.Follows;
+import Project.Siguientes.Siguiente;
+import Project.automatas.AFD.Automata;
+import Project.automatas.AFD.Estado;
+import Project.automatas.AFD.Estados;
+import Project.automatas.AFD.Transicion;
+import Project.automatas.AFD.Validar;
+import Project.automatas.Thompson.NodoT;
+import Project.automatas.Thompson.Thompson;
+import Project.tree.Arbol;
+import Project.tree.NodoA;
 
 /*------------------------------2. Codigo para el parser, variables, metodos------------------------------*/
 parser code
 {:
-	//objetos, variables, ... sintaxis java
-	public ArrayList<Error> err = new ArrayList<>(); //errores del sistema
-	public ArrayList<Conj> con = new ArrayList<>(); //conjuntos que se generen
-	public ArrayList<Thompson> thompson = new ArrayList<>();
-	public ArrayList<Tree> tree = new ArrayList<>();
-	public ArrayList<Follow> follow = new ArrayList<>();
-	public ArrayList<String> car = new ArrayList<>();
-	public ArrayList<Estado> est = new ArrayList<>();
-	public ArrayList<Estado> tab = new ArrayList<>();
-	public ArrayList<State> trans = new ArrayList<>();
-	public ArrayList<Automata> automata = new ArrayList<>();
-	public ArrayList<Aceptacion> val = new ArrayList<>();
-	public int contador = 1;
-	public int cestado = 0;
+    public ArrayList<Errores> a = new ArrayList<>(); //errores del sistema
+    public ArrayList<Conjunto> con = new ArrayList<>();
+    public ArrayList<Thompson> tom = new ArrayList<>();
+    public ArrayList<Arbol> arb = new ArrayList<>();
+    public ArrayList<Follows> fow = new ArrayList<>();
+    public ArrayList<String> car = new ArrayList<>();
+    public ArrayList<Estado> est = new ArrayList<>();
+    public ArrayList<Estado> tab = new ArrayList<>();
+    public ArrayList<Estados> trans = new ArrayList<>();
+    public ArrayList<Automata> auto = new ArrayList<>();
+    public ArrayList<Validar> val = new ArrayList<>();
+    public int contador = 1;
+    public int cestado = 0;
 
-	public void syntax_error(Symbol s) {
-		errors.add(new SyntaxError(s.value.toString(), s.left, s.right));
-		Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-		err.add(newErr);
-	}
-	public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
-		throw new Exception("Error irrecuperable en la linea: " + s.left + ", columna: " s.right);
-		Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-		err.add(newErr);
-	}
+	public void syntax_error(Symbol s){
+        System.out.println("Error Sintactico: "+s.value + ". Localizado en Fila " + (s.right+1) +" y Columna "+(s.left+1));
+        Errores crear = new Errores("Sintactico", s.value.toString(), s.right+1, s.left+1);
+        a.add(crear);
+    }
+    
+	public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+        System.out.println("Error Sintactico no recuperable: "+s.value + ". Localizado en Fila "+ (s.right+1) +" y Columna "+(s.left+1));
+        Errores crear = new Errores("Sintactico", s.value.toString(), s.right+1, s.left+1);
+        a.add(crear);
+    }
 :}
-
 
 /*------------------------------3. Terminales------------------------------*/
 
-terminal String CONJ;
-terminal String PTCOMA,PARIZQ,PARDER,LLAVIZQ,LLAVDER,CORIZQ,CORDER;
-terminal String MAS,MENOS,POR,DIVIDIDO,UMENOS;
-terminal String LETRA;
-terminal String MAYOR,COMA,APROX,COMILLA;
-terminal String AND,OR,STARNO,SG_ADMIRACION,YY;
-terminal String IDENT,SIMBOLO;
-terminal String STRING,ENTERO,DECIMAL;
-terminal String PORCENTAJE,DOBPT;
-terminal String SPECIAL;
+terminal String conjunto;
+terminal String puntocoma,parizq,parder,corizq,corder;
+terminal String apertura,cierre;
+terminal String positiva,menos,kleene,dividido;
+terminal String mayor,coma,guion,sg_comilla;
+terminal String concatenacion,or,cerouno,sg_admiracion,sg_yy;
+terminal String porcentaje,dospuntos;
+terminal String flecha,id,simbolo;
+terminal String letra,cadena,string_s,digito,decimal,especial;
 
 /*------------------------------4. No terminales------------------------------*/
-non terminal ini;
-non terminal contenido;
-non terminal declaracion;
-non terminal validar;
-non terminal conjunto;
-non terminal expresion;
-non terminal ArrayList<Object> otros, e;
-non terminal String binario, unario, not, grupo, val, sym;
 
-/*non terminal Double expresion;*/
+non terminal INI;
+non terminal CONTENIDO,DECLARACION;
+non terminal VALIDAR,CONJUNTO;
+non terminal EXPRESION;
+non terminal ArrayList<Object> OTROS, E;
+non terminal String BINARIO, UNARIO, NOT, GRUPO, VAL, SYM;
 
 /*------------------------------5. Precedencias------------------------------*/
 
 
 
 /*------------------------------6. Producciones------------------------------*/
-start with ini;
 
-ini::=LLAVIZQ contenido LLAVDER
-	| error			{:
-						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-						err.add(newErr);
-					:}
+start with INI;
+
+INI ::= apertura CONTENIDO cierre
+       | error
+       {:
+            Errores crear = new Errores("Sintactico", s.value.toString(), s.right+1, s.left+1);
+            a.add(crear);
+        :}
 ;
 
-contenido::=declaracion PORCENTAJE PORCENTAJE validar
-	| error 		{:
-						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-						err.add(newErr);
-					:}
-;
-
-declaracion::=conjunto declaracion
-	| expresion declaracion
-	| conjunto
-	| expresion
-	| error 		{:
-						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-						err.add(newErr);
-					:}
-;
-
-/*conjunto que tendra practicamente los identificadores CONJ: asdf->loquesea;*/
-conjunto::=CONJ DOBPT IDENT:a MENOS MAYOR not:b PTCOMA 		{:
-																ArrayList<String> num = new ArrayList<>();
-																for(int i = 0; i < car.size(); i++) {
-																	num.add(car.get(i));
-																}
-																Conj novo = new Conj(a, num, b);
-																con.add(novo);
-																car.clear();
-															:}
-	| error {:
-				Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-			:}
-;
-
-/*valores para las variables que van a calificar o ehh no me recuerdo como se llama... confirmar? valorar?.... algo asi, comparar*/
-not::=LETRA:a APROX LETRA:b		{:
-									int valu1 = a.toCharArray()[0];
-									int valu2 = b.toCharArray()[0];
-									if(valu1 > valu2) {
-										int item = valu1;
-										valu1 = valu2;
-										valu2 = item;
-									}
-									for(int i = valu1; i <= valu2; i++){
-										car.add(Character.toString(i));
-									}
-									String temp = "[" + a + "-" + b + "]";
-									RESULT = temp;
-								:}
-	| ENTERO:a APROX ENTERO:b 	{:
-									int valu1 = a.toCharArray()[0];
-									int valu2 = b.toCharArray()[0];
-									if(valu1 > valu2) {
-										int item = valu1;
-										valu1 = valu2;
-										valu2 = item;
-									}
-									for(int i = valu1; i <= valu2; i++){
-										car.add(Character.toString(i));
-									}
-									String temp = "[" + a + "-" + b + "]";
-									RESULT = temp;
-								:}
-	| sym:a APROX sym:b		{:
-								int valu1 = a.toCharArray()[0];
-								int valu2 = b.toCharArray()[0];
-								if(valu1 > valu2) {
-									int item = valu1;
-									valu1 = valu2;
-									valu2 = item;
-								}
-								for(int i = valu1; i <= valu2; i++){
-									car.add(Character.toString(i));
-								}
-								String temp = "[" + a + "-" + b + "]";
-								RESULT = temp;
-							:}
-	| grupo:a 	{:
-					String temp = "(" + a + ")";
-					Collections.reverse(car);
-					RESULT = temp;
-				:}
-	| error 	{:
-					Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-					err.add(newErr);
-				:}
-;
-
-val::=LETRA:a 			{: RESULT = a; :}
-	| ENTERO:a 			{: RESULT = a; :}
-	| sym:a   			{: RESULT = a; :}
-	| error  			{:
-							Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-							err.add(newErr);
-						:}
-;
-
-sym::=SIMBOLO:a 		{: RESULT = a; :}
-	| PORCENTAJE:a 		{: RESULT = a; :}
-	| AND:a  			{: RESULT = a; :}
-	| OR:a 				{: RESULT = a; :}
-	| POR:a 			{: RESULT = a; :}
-	| MAS:a 			{: RESULT = a; :}
-	| STARNO:a 			{: RESULT = a; :}
-	| error 			{:
-							Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-							err.add(newErr);
-						:}
-;
-
-grupo::=val:a COMA grupo:b 		{:
-									String not = a + "|" + b;
-									car.add(a);
-									RESULT = not;
-								:}
-	| val:a		{:
-					car.add(a);
-					RESULT = a;
-				:}
-	| error 	{:
-					Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-					err.add(newErr);
-				:}
-;
-
-expresion::=IDENT:a MENOS MAYOR e:b PTCOMA		{:
-													Nodo cabecera1 = (Nodo)b.get(0);
-													Nodo salida1 = (Nodo)b.get(1);
-													ArrayList<Nodo> a1 = (ArrayList<Nodo>)b.get(2);
-													Thompson nuevo = new Thompson(a, a1, cabecera1);
-													thompson.add(nuevo);
-													/*-------------------*/
-													TreeNode childish1 = (TreeNode)b.get(3);
-													ArrayList<Siguiente> s1 = (ArrayList<Siguiente>)b.get(4);
-													ArrayList<TreeNode> n1 = (ArrayList<TreeNode>)b.get(5);
-													/*-------------------*/
-													/*Nodods para aceptar o nodos de aceptacion uwu*/
-													TreeNode a11 = new TreeNode();
-													a11.Symbol = "$";
-													a11.Value = "$";
-													a11.Anulable = false;
-													a11.Name = Integer.toString(contador);
-													contador++;
-													a11.Type = "Hijo";
-													a11.first.add(a11.Name);
-													a11.last.add(a11.Name);
-													ArrayList<TreeNode> listaNombre = new ArrayList<>();
-													listaNombre.add(a11);
-													/*------------------------*/
-													TreeNode childish2 = new TreeNode();
-													ArrayList<Siguiente> s2 = new ArrayList<>();
-													ArrayList<TreeNode> n3 = listaNombre;
-													/*------------------------*/
-													TreeNode bin = new TreeNode();
-													bin.Value = ".";
-													bin.Symbol = ".";
-													if(childish1.Anulable == true && childish2.Anulable == true){
-														bin.Anulable = true;
-													}else{
-														bin.Anulable = false;
-													}
-													bin.Type = "Padre";
-													bin.Child1 = childish1;
-													bin.Child2 = childish2;
-													/*-------------------------*/
-													if(childish1.Anulable == true) {
-														for(int i = 0; i < childish1.first.size(); i++){
-															bin.first.add(childish1.first.get(i));
-														}
-														for(int i = 0; i < childish2.first.size(); i++){
-															bin.first.add(childish2-first.get(i));
-														}
-													}else{
-														for(int i = 0; i < childish1.first.size(); i++){
-															bin.first.add(childish1.first.get(i));
-														}
-													}
-													/*-------------------------*/
-													if(childish2.Anulable == true){
-														for(int i = 0; i < childish1.last.size(); i++){
-															bin.last.add(childish1.last.get(i));
-														}
-														for(int i = 0; i < childish2.last.size(); i++){
-															bin.last.add(childish2.last.get(i));
-														}
-													}else{
-														for(int i = 0; i < forecasts1.last.size(); i++){
-															bin.last.add(childish2.last.get(i));
-														}
-													}
-													/*-------------------------*/
-													/*--------Siguientes--------*/
-													ArrayList<Siguiente> sis = new ArrayList<>();
-													for(int i = 0; i < s1.size(); i++){
-														sis.add(s1.get(i));
-													}
-													for(int i = 0; i < s2.size(); i++){
-														sis.add(s2.get(i));
-													}
-													/*-------------------------*/
-													ArrayList<String> ast = childish2.first;
-													for(int i = 0; i < childish1.last.size(); i++){
-														String st = childish1.last.get(i);
-														for(int j = 0; j < st.size(); j++){
-															Siguiente ste = sis.get(j);
-															if(ste.Hoja == st){
-																if(ast.size() == 0){
-																	for(int k = 0; k < ste.size(); k++){
-																		ste.Siguientes.add(ast.get(k));
-																	}
-																}else{
-																	for(int k = 0; k < ast.size(); k++){
-																		if(Arrays.asList(ste.Siguientes).contains(ast.get(k)) == false){
-																			ste.Siguientes.add(ast.get(k));
-																		}
-																	}
-																}
-																break;
-															}
-														}
-													}
-													ArrayList<TreeNode> listanombre = new ArrayList<>();
-													listanombre.add(bin);
-													for(int i = 0; i < n1.size(); i++){
-														listanombre.add(n1.get(i));
-													}
-													for(int i = 0; i < n2.size(); i++){
-														listanombre.add(n2.get(i));
-													}
-													/*-------------------------*/
-													TreeNode cabecera = bin;
-													String nomo = childish2.Name;
-													contador = 1;
-													/*-------------------------*/
-													Tree nuevoa = new Tree(a, listanombre, cabecera);
-													tree.add(nuevoa);
-													Follow nuevof = new Follow(a, sis);
-													follow.add(nuevof);
-													/*-------------------------*/
-													Estado inicial = new Estado();
-													inicial.Name = "S" + Integer.toString(cestado);
-													cestado++;
-													inicial.Next = cabecera.first;
-													/*-------------------------*/
-													est.add(inicial);
-													while(!est.isEmpty()){
-														Estado etemp = est.get(0);
-														ArrayList<Transicion> ttemp = new ArrayList<>();
-														ArrayList<String> stemp = etemp.Next;
-														for(int i = 0; i < stemp.size(); i++){
-															String st = stemp.get(i);
-															for(int j = 0; j < sis.size(); j++){
-																Siguiente ste = sis.get(j);
-																if(ste.hoja == st){
-																	Transicion tt = new Transicion();
-																	tt.car = ste.Terminal;
-																	tt.Sig = ste.Siguientes;
-																	ttemp.add(tt);
-																}
-															}
-															if(st = nomo){
-																etemp.Acept = true;
-															}
-														}
-														/*-------------------------*/
-														for(int i = 0; i < ttemp.size(); i++){
-															Transicion tte = ttemp.get(i);
-															for(int j = 0; j < ttemp.size(); j++){
-																if(i != j){
-																	Transicion ttej = ttemp.get(j);
-																	if(!ttej.rev){
-																		if(tte.car.equals(ttej.car)){
-																			for(int k = 0; k < ttej.car.size(); k++){
-																				tte.car.add(ttejj.car.get(k));
-																			}
-																			ttej.bor = true;
-																		}
-																		tte.rev = true;
-																	}
-																}
-															}
-														}
-														/*-------------------------*/
-														for(int i = 0; i < ttemp.size(); i++){
-															Transicion tte = ttemp.get(i);
-															if(tte.bor){
-																tte = null;
-																ttemp.remove(i);
-															}
-														}
-														/*-------------------------*/
-														for(int i = 0; i < ttemp.size(); i++){
-															int ban = 0;
-															int bant = 0;
-															Transicion tte = ttemp.get(i);
-															/*-------------------------*/
-															for(int j = 0; j < est.size(); j++){
-																ArrayList<String> lse = est.get(j).Next;
-																if(lse.equals(tte.Sig)){
-																	tte.Sig = est.get(j);
-																	ban = 1;
-																	break;
-																}
-															}
-															/*-------------------------*/
-															if(ban == 0){
-																if(tab.isEmpty()){
-																	/*-------------------------*/
-																	Estado net = new Estado();
-																	net.Name = "S" + Integer.toString(cestado);
-																	cestado++;
-																	net.Next = tte.Sig;
-																	tte.Next = net;
-																	est.add(net);
-																}else{
-																	for(int j = 0; j < tab.size(); j++){
-																		ArrayList<String> lse = tab.get(j).Next;
-																		if(lse.equals(tte.Sig)){
-																			tte.Next = tab.get(j);
-																			bant = 1;
-																			break;
-																		}
-																	}
-																	if(bant == 0){
-																		Estado net = new Estado();
-																		net.Name = "S" + Integer.toString(cestado);
-																		cestado++;
-																		net.Next = tte.Sig;
-																		tte.Next = net;
-																		est.add(net);
-																	}
-																}
-															}
-														}
-														/*-------------------------*/
-														etemp.Transition = ttemp;
-														tab.add(etemp);
-														est.remove(0);
-													}
-													cestado = 0;
-													State ntrans = new State(a, tab);
-													trans.add(ntrans);
-													/*-------------------------*/
-													Automata nauto = new Automata(a,tab,inicial);
-													automata.add(nauto);
-													est = new ArrayList<>();
-													tab = new ArrayList<>();
-												:}
-		| error 	{:
-						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-						err.add(newErr);
-					:}
-;
-
-e::=binario:a e:b e:c 		{:
-								/*---------------------*/
-							:}
-	| unario:a e:b 		{:
-							/*---------------------*/
-						:}
-	| LLAVIZQ IDENT:a LLAVDER 		{:
-										/*---------------------*/
-									:}
-	| otros:a 	{: RESULT = a; :}
-	| error 		{:
-						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-						err.add(newErr);
-					:}
-;
-
-otros::=STRING:a 	{:
-						/*---------------------*/
-					:}
-	| SPECIAL:a 	{:
-						/*---------------------*/
-					:}
-	| LETRA:a 	{:
-					/*---------------------*/
-				:}
-	| ENTERO:a 	{:
-					/*---------------------*/
-				:}
-	| error 		{:
-						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-						err.add(newErr);
-					:}
-;
-
-binario::=AND:a 	{: RESULT = a; :}
-	| OR:a 			{: RESULT = a; :}
-	| error 		{:
-						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-						err.add(newErr);
-					:}
-;
-
-unario::=POR:a 		{: RESULT = a; :}
-	| MAS:a 		{: RESULT = a; :}
-	| STARNO:a 		{: RESULT = a; :}
-	| error 		{:
-						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-						err.add(newErr);
-					:}
-;
-
-validar::=IDENT:a DOBPT STRING:b PTCOMA validar  	{:
-														/*---------------------*/
-													:}
-	| IDENT:a DOBPT STRING:b PTCOMA 	{:
-											/*---------------------*/
-										:}
-	| error 		{:
-						Error newErr = new Error("Sintactico", s.value.toString(), s.right+1, s.left+1);
-						err.add(newErr);
-					:}
-;
