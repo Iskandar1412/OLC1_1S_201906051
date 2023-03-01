@@ -13,12 +13,12 @@ import java.util.UUID;
  */
 public class Automata {
     public String ID;
-    public ArrayList<Estado> state;
+    public ArrayList<Estado> est;
     public Estado cabecera;
     
     public Automata(String id, ArrayList<Estado> stat, Estado head) {
         this.ID = id;
-        this.state = stat;
+        this.est = stat;
         this.cabecera = head;
     }
     
@@ -37,17 +37,17 @@ public class Automata {
                    i = i + 1;
                 }
             }
-            for(int j = 0; j < transition.Transition.size(); j++) {
-                Transicion tr = transition.Transition.get(j);
+            for(int j = 0; j < transition.tr.size(); j++) {
+                Transicion tr = transition.tr.get(j);
                 if(tr.car.contains(temp)) {
-                    transition = tr.Next;
+                    transition = tr.next;
                     ban = 1;
                     break;
                 }
             }
             if(i == (entrada.length() - 1)) {
                 if(ban == 1) {
-                    if(transition.Acept) {
+                    if(transition.aceptar) {
                         val = true;
                     }
                 }else{

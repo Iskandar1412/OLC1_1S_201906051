@@ -12,17 +12,17 @@ import java.util.ArrayList;
  * @author Pacos
  */
 public class Siguiente {
-    public String Symbol;
-    public String Hoja;
-    public ArrayList<String> Terminal;
+    public String simbolo;
+    public String hoja;
+    public ArrayList<String> terminal;
     //public ArrayList<String> NoTerminal;
-    public ArrayList<String> Siguientes;
+    public ArrayList<String> LS;
     //public int ID;
     
     public Siguiente() {
-        this.Terminal = new ArrayList<>();
-        this.Hoja = "";
+        this.terminal = new ArrayList<>();
+        this.hoja = "";
         //this.ID = 0;
-        this.Siguientes = new ArrayList<>();
+        this.LS = new ArrayList<>();
     }
 }

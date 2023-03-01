@@ -12,17 +12,17 @@ import java.util.ArrayList;
  * @author Pacos
  */
 public class Transicion {
-    public Estado Next;
+    public Estado next;
     public ArrayList<String> car;
-    public ArrayList<String> Sig;
-    public boolean bor;
+    public ArrayList<String> sig;
+    public boolean borrar;
     public boolean rev;
     
     public Transicion() {
-        this.Next = null;
+        this.next = null;
         this.car = new ArrayList<>();
-        this.Sig = new ArrayList<>();
-        this.bor = false;
+        this.sig = new ArrayList<>();
+        this.borrar = false;
         this.rev = false;
     }
 }
