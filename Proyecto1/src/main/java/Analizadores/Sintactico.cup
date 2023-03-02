@@ -6,36 +6,18 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Collections;
 import java.util.Arrays;
+import Project.Automatas.AFN;
+import Project.Automatas.Automata;
+import Project.Automatas.Estado;
+import Project.Automatas.Transicion;
+import Project.Automatas.Type;
 import Project.errors.Errores;
-import Project.errors.Conjunto;
-import Project.Siguientes.Follows;
-import Project.Siguientes.Siguiente;
-import Project.automatas.AFD.Automata;
-import Project.automatas.AFD.Estado;
-import Project.automatas.AFD.Estados;
-import Project.automatas.AFD.Transicion;
-import Project.automatas.AFD.Validar;
-import Project.automatas.Thompson.NodoT;
-import Project.automatas.Thompson.Thompson;
-import Project.tree.Arbol;
-import Project.tree.NodoA;
+import Project.Token.Tokens;
 
 /*------------------------------2. Codigo para el parser, variables, metodos------------------------------*/
 parser code
 {:
-    public ArrayList<Errores> a = new ArrayList<>(); //errores del sistema
-    public ArrayList<Conjunto> con = new ArrayList<>();
-    public ArrayList<Thompson> tom = new ArrayList<>();
-    public ArrayList<Arbol> arb = new ArrayList<>();
-    public ArrayList<Follows> fow = new ArrayList<>();
-    public ArrayList<String> car = new ArrayList<>();
-    public ArrayList<Estado> est = new ArrayList<>();
-    public ArrayList<Estado> tab = new ArrayList<>();
-    public ArrayList<Estados> trans = new ArrayList<>();
-    public ArrayList<Automata> auto = new ArrayList<>();
-    public ArrayList<Validar> val = new ArrayList<>();
-    public int contador = 1;
-    public int cestado = 0;
+    
 
 	public void syntax_error(Symbol s){
         System.out.println("Error Sintactico: "+s.value + ". Localizado en Fila " + (s.right+1) +" y Columna "+(s.left+1));
@@ -52,24 +34,18 @@ parser code
 
 /*------------------------------3. Terminales------------------------------*/
 
-terminal String conjunto;
-terminal String puntocoma,parizq,parder,corizq,corder;
-terminal String apertura,cierre;
-terminal String positiva,menos,kleene,dividido;
-terminal String mayor,coma,guion,sg_comilla;
-terminal String concatenacion,or,cerouno,sg_admiracion,sg_yy;
-terminal String porcentaje,dospuntos;
-terminal String flecha,id,simbolo;
-terminal String letra,cadena,string_s,digito,decimal,especial;
+terminal letra;
+terminal numero;
+terminal llave_abierta,llave_cerrada;
+terminal dos_puntos,punto_coma;
+terminal flecha,porcentaje,virgilla;
+terminal coma,punto,or,asterisco,mas,interrogacion;
+terminal fin_linea,signo_comilla,signo_doblecomilla;
+terminal rango,espacio,conj,id,parte_identificador;
 
 /*------------------------------4. No terminales------------------------------*/
 
-non terminal INI;
-non terminal CONTENIDO,DECLARACION;
-non terminal VALIDAR,CONJUNTO;
-non terminal EXPRESION;
-non terminal ArrayList<Object> OTROS, E;
-non terminal String BINARIO, UNARIO, NOT, GRUPO, VAL, SYM;
+
 
 /*------------------------------5. Precedencias------------------------------*/
 
@@ -77,13 +53,5 @@ non terminal String BINARIO, UNARIO, NOT, GRUPO, VAL, SYM;
 
 /*------------------------------6. Producciones------------------------------*/
 
-start with INI;
 
-INI ::= apertura CONTENIDO cierre
-       | error
-       {:
-            Errores crear = new Errores("Sintactico", s.value.toString(), s.right+1, s.left+1);
-            a.add(crear);
-        :}
-;
 
