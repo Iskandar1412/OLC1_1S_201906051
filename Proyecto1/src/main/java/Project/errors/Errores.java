@@ -8,6 +8,7 @@ package Project.errors;
  *
  * @author Pacos
  */
+
 public class Errores {
     public String tipo;
     public String lexema;
