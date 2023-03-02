@@ -26,4 +26,8 @@ public class Transicion<T> {
     public Estado getFinality() { return finality; };
     public void setSymbol(T symbol) { this.Symbol = symbol; };
     public T getSyymbol() { return Symbol; };
+    
+    @Override
+    public String toString() { return "(" + inicial.getID() + "-" + Symbol + "-" + finality.getID() + ")"; };
+    public String dot() { return (this.inicial + "->" + this.finality + "[label=\"" + this.Symbol + "\"];"); };
 }

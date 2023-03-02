@@ -43,7 +43,11 @@ public class Automata {
     public String getLenguaje() { return lenguaje; };
     public void addRegex(int llave, String valor) { this.regex[llave] = valor; };
     public void crearSimbolo(List<String> elemento) {
-        
+        for(String valor: elemento) {
+            if(!(valor.equals("|") || valor.equals(".") || valor.equals("*") || valor.equals("epsilon"))) {
+                this.simbolos.add(valor);
+            }
+        }
     }
     
 }
