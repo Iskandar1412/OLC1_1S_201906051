@@ -18,7 +18,6 @@ import Project.Token.Tokens;
 
 //Directivas
 %class Lexico
-%cupsym Simbolos
 %public 
 %cup
 %char
@@ -69,8 +68,12 @@ rango = [!-/]|[:-@]|[\[-`]|[\{-\}]
 espacio = "\" \""
 conj = ["c"|"C"]["o"|"O"]["n"|"N"]["j"|"J"]
 
+/*identificadores a usar*/
+id = {LETTER}({LETTER}|{DIGIT}|"_")* 
+cosa = [^"\\\""]* "\\\""
+parte_identificador = "\"" {cosa}* [^"\""]* {cosa}* "\""
 
-%state ESTADOCADENA
+
 %%
 /* 3. Reglas Semanticas */
 
@@ -79,15 +82,35 @@ conj = ["c"|"C"]["o"|"O"]["n"|"N"]["j"|"J"]
 \n {yychar=1;}
 
 <YYINITIAL> {
-    
+    <letra>                 { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.letra,yyline,yychar,yytext()); }
+    <numero>                { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.numero,yyline,yychar,yytext()); }
+    <comentario_simple>     { System.out.println("Comentario Simple: " + yytext() + ", linea: " + yyline + ", columna: " + yychar); Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); }
+    <comentario_multiple>   { System.out.println("Comentario Multiple: " + yytext() + ", linea: " + yyline + ", columna: " + yychar); Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); }
+    <llave_abierta>         { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.llave_abierta,yyline,yychar,yytext()); }
+    <llave_cerrada>         { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.llave_cerrada,yyline,yychar,yytext()); }
+    <dos_puntos>            { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.dos_puntos,yyline,yychar,yytext()); }
+    <punto_coma>            { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.punto_coma,yyline,yychar,yytext()); }
+    <flecha>                { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.flecha,yyline,yychar,yytext()); }
+    <porcentaje>            { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.porcentaje,yyline,yychar,yytext()); }
+    <virgilla>              { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.virgilla,yyline,yychar,yytext()); }
+    <coma>                  { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.coma,yyline,yychar,yytext()); }
+    <punto>                 { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.punto,yyline,yychar,yytext()); }
+    <or>                    { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.or,yyline,yychar,yytext()); }
+    <asterisco>             { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.asterisco,yyline,yychar,yytext()); }
+    <mas>                   { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.mas,yyline,yychar,yytext()); }
+    <interrogacion>         { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.interrogacion,yyline,yychar,yytext()); }
+    <fin_linea>             { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.fin_linea,yyline,yychar,yytext()); }
+    <signo_comilla>         { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.signo_comilla,yyline,yychar,yytext()); }
+    <signo_doblecomilla>    { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.signo_doblecomilla,yyline,yychar,yytext()); }
+    <rango>                 { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.rango,yyline,yychar,yytext()); }
+    <espacio>               { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.espacio,yyline,yychar,yytext()); }
+    <conj>                  { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.conj,yyline,yychar,yytext()); }
+    <id>                    { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.id,yyline,yychar,yytext()); }
+    <parte_identificador>   { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.parte_identificador,yyline,yychar,yytext()); }
 }
 
-{BLANCOS} 				{} 
-{BLANCOS2}              {}
-{comentario} 			{}
-{comentariosimple} 		{} /*System.out.println("Comentario: "+yytext());*/
-{comentarioMultiple}	{}
-
+{BLANCOS} 				    {} 
+{BLANCOS2}                  {}
 
 . {
     //Aqui se debe guardar los valores (yytext(), yyline, yychar ) para posteriormente generar el reporte de errores Léxicos.
