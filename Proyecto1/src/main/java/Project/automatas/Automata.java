@@ -6,28 +6,44 @@ package Project.Automatas;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Stack;
-import java.util.Queue;
 /**
  *
  * @author Pacos
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class Automata<T> {
+public class Automata {
+    private Estado inicial;
+    private final ArrayList<Estado> aceptacion;
+    private final ArrayList<Estado> estados;
+    private HashSet simbolos;
+    private int tipo;
+    private String[] regex;
+    private String lenguaje;
     
-    private HashSet Symbols;
-    private int Automata_t;
-    private String[] Regex;
-    private String Lenguaje;
     public Automata(){
-        this.Symbols = new HashSet();
-        this.Regex = new String[3];
+        this.aceptacion = new ArrayList<>();
+        this.estados = new ArrayList<>();
+        this.simbolos = new HashSet();
+        this.regex = new String[3];
     }
     
-    
-    public void setRegex(String[] regex) { this.Regex = regex; };
-    public String[] getRegex() { return Regex; };
-    public void setSymbols(HashSet symbol) { this.Symbols = symbol; };
-    public HashSet getSymbols() { return Symbols; };
+    public void setInicial(Estado inicial) { this.inicial = inicial; };
+    public Estado getInicial() { return inicial; };
+    public void addAceptacion(Estado acept) { this.aceptacion.add(acept); };
+    public ArrayList<Estado> getAceptacion() { return aceptacion; };
+    public void addEstados(Estado estado) { this.estados.add(estado); };
+    public ArrayList<Estado> getEstados() { return estados; };
+    public void setSimbolos(HashSet symbol) { this.simbolos = symbol; };
+    public HashSet getSimbolos() { return simbolos; };
+    public void setTipo(int type) { this.tipo = type; };
+    public int getTipo(int type) { return tipo; };
+    public void setRegex(String[] reg) { this.regex = reg; };
+    public String[] getRegex() { return regex; };
+    public void setLenguaje(String leng) { this.lenguaje = leng; };
+    public String getLenguaje() { return lenguaje; };
+    public void addRegex(int llave, String valor) { this.regex[llave] = valor; };
+    public void crearSimbolo(List<String> elemento) {
+        
+    }
     
 }
