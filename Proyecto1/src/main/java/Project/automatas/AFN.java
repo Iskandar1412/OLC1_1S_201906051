@@ -35,4 +35,41 @@ public class AFN<T> {
         
         return dot;
     }
+    
+    public String TipoDado(Type contenido) {
+        String dot = "";
+        
+        return dot;
+    }
+    
+    public Automata concatenar(Automata a1, Automata a2) {
+        Automata automata = new Automata();
+        int contador = 0;
+        
+        
+        return automata;
+    }
+    
+    public Automata generacion(String simbolo) {
+        Automata automata = new Automata();
+        
+        return automata;
+    }
+    
+    public Automata cerradura(Automata a1) {
+        Automata automata = new Automata();
+        
+        return automata;
+    }
+    
+    public Automata unir(Automata a1, Automata a2) {
+        Automata automata = new Automata();
+        
+        return automata;
+    }
+    
+    public Automata getDot() {
+        return this.AFN;
+    }
+    
 }
