@@ -13,13 +13,14 @@ import java.util.Queue;
 /**
  *
  * @author Pacos
+ * @param <T>
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class AFN<T> {
     private Automata AFN;
     private List<String> Elements;
-    public AFN(List<String> Elements){
-        this.Elements = Elements;
+    public AFN(List<String> element){
+        this.Elements = element;
     }
     
     public void Generar() {
