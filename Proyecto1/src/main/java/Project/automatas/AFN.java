@@ -16,9 +16,23 @@ import java.util.Queue;
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class AFN<T> {
-    
+    private Automata AFN;
     private List<String> Elements;
     public AFN(List<String> Elements){
         this.Elements = Elements;
+    }
+    
+    public void Generar() {
+        try {
+            
+        }catch(Exception e){
+            System.out.println("Error Automata no Generado: " + e.getMessage() );
+        }
+    }
+    
+    public String genDOT() {
+        String dot  = "";
+        
+        return dot;
     }
 }
