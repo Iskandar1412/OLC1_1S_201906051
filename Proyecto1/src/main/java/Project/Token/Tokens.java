@@ -14,8 +14,8 @@ public class Tokens {
     public int fila;
     public Tokens(String lexema, int row, int col) {
         this.lexema = lexema;
-        this.fila = row+1;
-        this.columna = col+1;
+        this.fila = row;
+        this.columna = col;
     }
     
     public String mostrarToken() {
