@@ -69,7 +69,7 @@ espacio = "\" \""
 conj = ["c"|"C"]["o"|"O"]["n"|"N"]["j"|"J"]
 
 /*identificadores a usar*/
-id = {LETTER}({LETTER}|{DIGIT}|"_")* 
+id = {letra}({letra}|{digito}|"_")* 
 cosa = [^"\\\""]* "\\\""
 parte_identificador = "\"" {cosa}* [^"\""]* {cosa}* "\""
 
