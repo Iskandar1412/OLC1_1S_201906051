@@ -1,51 +1,87 @@
 /*------------------------------1. Package e importaciones------------------------------*/
-package Analizadores;	
-import java_cup.runtime.*;
-import java.util.ArrayList;
-import java.util.List;
+package analizadores;
+import java_cup.runtime.Symbol;
 import java.util.LinkedList;
-import java.util.Collections;
-import java.util.Arrays;
-import Project.Automatas.AFN;
-import Project.Automatas.Automata;
-import Project.Automatas.Estado;
-import Project.Automatas.Transicion;
-import Project.Automatas.Type;
-import Project.errors.Errores;
-import Project.Token.Tokens;
+import Project.Reportes.*;
+import Project.Token.*;
+import Project.Error.*;
+import Project.Automata.*;
+import Project.Archivos.*;
 
 /*------------------------------2. Codigo para el parser, variables, metodos------------------------------*/
 parser code
 {:
-    
+    public  LinkedList<Error_LS> errores = new LinkedList<Error_LS>(); 
+    public  LinkedList<tokens> TokensList  = new LinkedList<tokens>();
+    public  LinkedList<ER> Lista_ER  = new LinkedList<ER>();
+    public  LinkedList<Conjunto> Lista_Conjunto  = new LinkedList<Conjunto>();
+    public  LinkedList<Cadenas> Lista_Cadena  = new LinkedList<Cadenas>();
+    Cadenas CadenasTemp;
+    ER temp;
+    Conjunto ConjTemp;
+    String TempConjText = "";
+    String TempConjName = "";
+    String TempConjType = "";
+    String TempConjVar2 = "";
+    String TempConjVar1 = "";
+    String TempNameEr = "";
 
-	public void syntax_error(Symbol s){
-        System.out.println("Error Sintactico: "+s.value + ". Localizado en Fila " + (s.right+1) +" y Columna "+(s.left+1));
-        Errores crear = new Errores("Sintactico", s.value.toString(), s.right+1, s.left+1);
-        a.add(crear);
+    public void syntax_error(Symbol s) {        
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;
+        System.out.println("Error Sintactico Recuperado {");
+        System.out.println("\tLexema: " + lexema + ", Fila: " + fila + ", Columna: " + columna);
+        System.out.println("}");
+        Error_LS tmp = new Error_LS("Sintactico",lexema,"Caracter no esperado",fila,columna);
+        errores.add(tmp);
     }
-    
-	public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
-        System.out.println("Error Sintactico no recuperable: "+s.value + ". Localizado en Fila "+ (s.right+1) +" y Columna "+(s.left+1));
-        Errores crear = new Errores("Sintactico", s.value.toString(), s.right+1, s.left+1);
-        a.add(crear);
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {        
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;
+        System.out.println("Error Sintactico No Recuperado {");
+        System.out.println("\tLexema: " + lexema + ", Fila: " + fila + ", Columna: " + columna);
+        System.out.println("}");
+        Error_LS tmp = new Error_LS("Sintactico",lexema, "Caracter no esperado, No se pudo recuperar",fila,columna);
+        errores.add(tmp);
     }
 :}
 
 /*------------------------------3. Terminales------------------------------*/
 
-terminal letra;
 terminal numero;
 terminal llave_abierta,llave_cerrada;
-terminal dos_puntos,punto_coma;
-terminal flecha,porcentaje,virgilla;
-terminal coma,punto,or,asterisco,mas,interrogacion;
-terminal fin_linea,signo_comilla,signo_doblecomilla;
-terminal rango,espacio,conj,id,parte_identificador;
+terminal dos_puntos,punto_coma,s_flecha;
+terminal s_porcentaje,virgilla,coma,punto;
+terminal or,asterisco,s_mas,s_interrogacion;
+terminal fin_linea,s_comilla,doble_comilla;
+terminal range,espacio,conj_sym,ident,s_frase,letra;
 
 /*------------------------------4. No terminales------------------------------*/
 
+non terminal INICIO;
+non terminal STARTS;
+non terminal CONTENIDO;
+non terminal CONJUNTO;
+non terminal CONTENIDOR;
+non terminal ER;
+non terminal DEFCONJ;
+non terminal SEPCOMAS;
+non terminal RANGO;
+non terminal DATOSEP;
+non terminal SEPCOMASR;
+non terminal DATORANGO;
+non terminal DEFER;
+non terminal OP;
+non terminal REFCONJ;
+non terminal CADENAS;
+non terminal CADENASR;
+non terminal NAMECOBJ;
 
+
+start with INICIO;
 
 /*------------------------------5. Precedencias------------------------------*/
 
@@ -53,5 +89,133 @@ terminal rango,espacio,conj,id,parte_identificador;
 
 /*------------------------------6. Producciones------------------------------*/
 
+INICIO::= STARTS                {: /**/ :}
+;
 
+/*{ contenido*/
+STARTS::= llave_abierta CONTENIDO           {: /**/ :}
+;
+
+/**/
+CONTENIDO::= CONJUNTO CONTENIDOR            {: /*CONJ contenido*/ :}
+    | ER CONTENIDOR                         {: /*EXPREG contenido*/ :}
+;
+
+/*conj: nombrecontenido -> definicion*/
+CONJUNTO ::= conj_sym dos_puntos NAMECOBJ:a s_flecha DEFCONJ     {: 
+                                                                    TempConjName =(String) a;
+                                                                    ConjTemp = new Conjunto(TempConjType,(String) a,TempConjVar1,TempConjVar2,TempConjText);
+                                                                    Lista_Conjunto.add(ConjTemp);
+                                                                    TempConjText = "";
+                                                                    TempConjVar1="";
+                                                                    TempConjVar2="";
+                                                                :}
+;
+
+/*a,b,c,d a,c,d o 1~9*/
+DEFCONJ ::= SEPCOMAS    {: TempConjType="comas"; :}
+    | RANGO             {: TempConjType="rango"; :}
+;
+
+/*a,c,d*/
+SEPCOMAS ::= DATOSEP:a SEPCOMASR    {: TempConjText += a + ","; :}
+;
+
+DATOSEP ::= numero:a        {: RESULT = a; :}  
+    | letra:a               {: RESULT = a; :}  
+    | range:a               {: RESULT = a; :}   
+    | asterisco:a           {: RESULT = a; :}   
+    | s_mas:a               {: RESULT = a; :}   
+    | coma:a                {: RESULT = a; :}   
+    | punto:a               {: RESULT = a; :}    
+    | dos_puntos:a          {: RESULT = a; :}    
+    | punto_coma:a          {: RESULT = a; :}   
+    | s_interrogacion:a     {: RESULT = a; :}    
+    | llave_abierta:a       {: RESULT = a; :}    
+    | or:a                  {: RESULT = a; :}    
+    | llave_cerrada:a       {: RESULT = a; :}   
+    | doble_comilla:a       {: RESULT = a; :}   
+    | s_comilla:a           {: RESULT = a; :}
+    | fin_linea:a           {: RESULT = a; :}
+    | s_frase:a             {: RESULT = a; :}
+;
+
+SEPCOMASR ::= coma SEPCOMAS         {: /**/ :}
+    | punto_coma                    {: /**/ :}
+;
+
+RANGO ::= DATORANGO:a virgilla DATORANGO:b punto_coma   {: 
+                                                            TempConjVar1 =(String) a;
+                                                            TempConjVar2 =(String) b;
+                                                        :}
+;
+
+DATORANGO ::= numero:a          {: RESULT = a; :}
+    | letra:a                   {: RESULT = a; :}
+    | range:a                   {: RESULT = a; :} 
+    | espacio:a                 {: RESULT = a; :}
+    | asterisco:a               {: RESULT = a; :} 
+    | s_mas:a                   {: RESULT = a; :} 
+    | coma:a                    {: RESULT = a; :}
+    | punto:a                   {: RESULT = a; :}
+    | dos_puntos:a              {: RESULT = a; :}
+    | punto_coma:a              {: RESULT = a; :}
+    | s_interrogacion:a         {: RESULT = a; :}
+    | llave_abierta:a           {: RESULT = a; :} 
+    | or:a                      {: RESULT = a; :} 
+    | llave_cerrada:a           {: RESULT = a; :}
+    | doble_comilla:a           {: RESULT = a; :}
+    | s_comilla:a               {: RESULT = a; :} 
+    | fin_linea:a               {: RESULT = a; :}
+;
+
+/*NombreExpresionRegular -> contenidoER*/
+ER ::= ident:a s_flecha DEFER       {: 
+                                        temp.name = (String) a;
+                                        Lista_ER.add(temp);
+                                    :}
+;
+
+DEFER ::= OP:a                          {: temp.insert((String)a,"OP",false); :}
+    | REFCONJ:a                         {: temp.insert((String)a,"REFCONJ",true); :}
+    | s_frase:a DEFER                   {: temp.insert((String)a,"s_frase",true); :}
+    | espacio:a DEFER                   {: temp.insert((String)a,"espacio",true); :}
+    | fin_linea:a DEFER                 {: temp.insert((String)a,"fin_linea",true); :}
+    | s_comilla:a DEFER                 {: temp.insert((String)a,"s_comilla",true); :}
+    | doble_comilla:a DEFER             {: temp.insert((String)a,"doble_comilla",true); :}
+    | punto_coma:a                      {: temp = new ER(); :}
+;
+
+OP ::= or:a DEFER                   {: RESULT = a; :}
+    | asterisco:a DEFER             {: RESULT = a; :}
+    | s_mas:a DEFER                 {: RESULT = a; :}
+    | s_interrogacion:a DEFER       {: RESULT = a; :}
+    | punto:a DEFER                 {: RESULT = a; :}
+;
+
+REFCONJ ::= llave_abierta NAMECOBJ:a llave_cerrada DEFER     {: RESULT = a; :}
+;
+
+NAMECOBJ::= ident:a         {: RESULT = a; :}
+            | letra:a       {: RESULT = a; :}
+;
+
+CONTENIDOR ::= s_porcentaje CADENASR    {: /**/ :}
+    | CONTENIDO                         {: /**/ :}
+;
+
+CADENAS ::= s_porcentaje CADENASR
+    |ident:a dos_puntos s_frase:b punto_coma CADENASR       {: 
+                                                                String temptext = (String) b;
+                                                                temptext = temptext.substring(0,0) + temptext.substring(0+1);
+                                                                temptext = temptext.substring(0,temptext.length()-1);
+                                                                temptext = temptext.replace("\\\"","\"");
+                                                                CadenasTemp = new Cadenas((String) a , temptext);
+                                                                Lista_Cadena.add(CadenasTemp);
+                                                            :}
+;
+
+CADENASR ::= llave_cerrada      {: /**/ :}
+     | CADENAS                  {: /**/ :}
+;
 

@@ -1,122 +1,111 @@
-
 /* 1. Package e importaciones */
-package Analizadores;
-import java_cup.runtime.Symbol;
+package analizadores;
+import java_cup.runtime.*;
 import java.util.LinkedList;
-import java.util.ArrayList;
-import Project.errors.Errores;
-import Project.Token.Tokens;
+import Project.Error.Error_LS;
+import Project.Token.tokens;
 
 %%
 /* 2. Configuraciones para el analisis (Opciones y Declaraciones) */
 %{
     //Codigo de usuario en sintaxis java
     //Agregar clases, variables, arreglos, objetos etc...
-    public ArrayList<Errores> error = new ArrayList<>();
-    public ArrayList<Tokens> tokens = new ArrayList<>();
+    //public LinkedList<String> val = new LinkedList<String>();
+    public  LinkedList<Error_LS> errores  = new LinkedList<Error_LS>();
+    public  LinkedList<tokens> TokensList  = new LinkedList<tokens>();
 %}
 
-//Directivas
-%class Lexico
-%public 
+//Directivas 
+%class Lexico                                                 
+%public
 %cup
+%cupsym Simbolos
 %char
 %column
 %full
 %line
 %ignorecase
-%unicode
-
-//Inicializar el contador de columna y fila con 1
-%init{ 
-    yyline = 1; 
-    yychar = 1; 
-%init}
 
 //Expresiones regulares
 
-BLANCOS = [ \r\t]+
-BLANCOS2 = [ \t\r\n\f]+
+//esppacios
+espacios_muchos = [ \t\r\n\f]+
 
-comentario_simple = "//"[^"\n"]*
-comentario_multiple = "<!" [^"!>"]* "!>"
-
+//letras & digitos
 letra = [a-zA-Z]
 digito = [0-9]
 numero = {digito}+
+s_flecha = -(\s)*>
 
-/*Pal Proyecto*/
+//comentarios
+comentario_simple = "//" [^"\n"]* 
+comentario_multiple = "<!" [^"!>"]* "!>"
+
+//Pal Proyecto
 llave_abierta = "{"
 llave_cerrada = "}"
-corchete_abierto = "["
-corchete_cerrado = "]"
 dos_puntos = ":"
 punto_coma = ";"
-flecha = "->"
-porcentaje = "%%"
-virgilla = "~"
-coma = ","
+
+s_porcentaje = "%%"
+virgilla	 = "~"
+coma	 = ","
 punto = "."
 or = "|"
 asterisco = "*"
-mas = "+"
-interrogacion = "?"
+s_mas = "+"
+s_interrogacion = "?"
 fin_linea = "\"\\n\""
-signo_comilla = "\"\\\'\""
-signo_doblecomilla = "\"\\\"\""
-rango = [!-/]|[:-@]|[\[-`]|[\{-\}]
+s_comilla = "\"\\\'\""
+doble_comilla = "\"\\\"\""
+range = [!-/] | [:-@] | [\[-`] | [\{-\}]
 espacio = "\" \""
-conj = ["c"|"C"]["o"|"O"]["n"|"N"]["j"|"J"]
-
-/*identificadores a usar*/
-id = {letra}({letra}|{digito}|"_")* 
-cosa = [^"\\\""]* "\\\""
-parte_identificador = "\"" {cosa}* [^"\""]* {cosa}* "\""
+conj_sym = ["c"|"C"]["o"|"O"]["n"|"N"]["j"|"J"]
+ident = {letra}({letra}|{digito}|"_")*
+string_dat = [^"\\\""]* "\\\""
+s_frase = "\"" {string_dat}* [^"\""]*  {string_dat}* "\""
 
 
+%state ESTADOCADENA
 %%
 /* 3. Reglas Semanticas */
 
-
-
-\n {yychar=1;}
-
-<YYINITIAL> {
-    <letra>                 { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.letra,yyline,yychar,yytext()); }
-    <numero>                { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.numero,yyline,yychar,yytext()); }
-    <comentario_simple>     { System.out.println("Comentario Simple: " + yytext() + ", linea: " + yyline + ", columna: " + yychar); Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); }
-    <comentario_multiple>   { System.out.println("Comentario Multiple: " + yytext() + ", linea: " + yyline + ", columna: " + yychar); Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); }
-    <llave_abierta>         { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.llave_abierta,yyline,yychar,yytext()); }
-    <llave_cerrada>         { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.llave_cerrada,yyline,yychar,yytext()); }
-    <dos_puntos>            { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.dos_puntos,yyline,yychar,yytext()); }
-    <punto_coma>            { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.punto_coma,yyline,yychar,yytext()); }
-    <flecha>                { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.flecha,yyline,yychar,yytext()); }
-    <porcentaje>            { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.porcentaje,yyline,yychar,yytext()); }
-    <virgilla>              { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.virgilla,yyline,yychar,yytext()); }
-    <coma>                  { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.coma,yyline,yychar,yytext()); }
-    <punto>                 { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.punto,yyline,yychar,yytext()); }
-    <or>                    { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.or,yyline,yychar,yytext()); }
-    <asterisco>             { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.asterisco,yyline,yychar,yytext()); }
-    <mas>                   { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.mas,yyline,yychar,yytext()); }
-    <interrogacion>         { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.interrogacion,yyline,yychar,yytext()); }
-    <fin_linea>             { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.fin_linea,yyline,yychar,yytext()); }
-    <signo_comilla>         { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.signo_comilla,yyline,yychar,yytext()); }
-    <signo_doblecomilla>    { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.signo_doblecomilla,yyline,yychar,yytext()); }
-    <rango>                 { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.rango,yyline,yychar,yytext()); }
-    <espacio>               { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.espacio,yyline,yychar,yytext()); }
-    <conj>                  { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.conj,yyline,yychar,yytext()); }
-    <id>                    { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.id,yyline,yychar,yytext()); }
-    <parte_identificador>   { Tokens token_nuevo = new Tokens(yytext(),yyline,yychar); tokens.add(token_nuevo); return new Symbol(sym.parte_identificador,yyline,yychar,yytext()); }
+<YYINITIAL>{
+    {letra}                 { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.letra, yycolumn, yyline, yytext()); }
+    {numero}                { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.numero, yycolumn, yyline, yytext()); }   
+    {comentario_simple}     { /*System.out.println("Comentario Simple: "+ yytext());*/ tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); }
+    {comentario_multiple}   { /*System.out.println("Comentario Multiple: "+ yytext());*/ tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); }
+    {llave_abierta}         { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.llave_abierta, yycolumn, yyline, yytext()); }
+    {llave_cerrada}         { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.llave_cerrada, yycolumn, yyline, yytext()); }
+    {dos_puntos}            { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.dos_puntos, yycolumn, yyline, yytext()); }
+    {punto_coma}            { tokens tmp= new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.punto_coma, yycolumn, yyline, yytext()); }
+    {s_flecha}              { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.s_flecha, yycolumn, yyline, yytext()); }
+    {s_porcentaje}          { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.s_porcentaje, yycolumn, yyline, yytext()); }
+    {virgilla}              { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.virgilla, yycolumn, yyline, yytext()); }
+    {coma}                  { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.coma, yycolumn, yyline, yytext()); }
+    {punto}                 { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.punto, yycolumn, yyline, yytext()); }
+    {or}                    { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.or, yycolumn, yyline, yytext()); }
+    {asterisco}             { return new Symbol(sym.asterisco, yycolumn, yyline, yytext()); }
+    {s_mas}                 { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.s_mas, yycolumn, yyline, yytext()); }
+    {s_interrogacion}       { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.s_interrogacion, yycolumn, yyline, yytext()); }
+    {fin_linea}             { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.fin_linea, yycolumn, yyline, yytext()); }
+    {s_comilla}             { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.s_comilla, yycolumn, yyline, yytext()); }
+    {doble_comilla}         { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.doble_comilla, yycolumn, yyline, yytext()); }
+    {range}                 { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.range, yycolumn, yyline, yytext()); }
+    {espacio}               { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.espacio, yycolumn, yyline, yytext()); }
+    {conj_sym}              { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.conj_sym, yycolumn, yyline, yytext()); }
+    {ident}                 { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.ident, yycolumn, yyline, yytext()); }
+    {s_frase}               { tokens tmp = new tokens(yytext(), yyline, yycolumn); TokensList.add(tmp); return new Symbol(sym.s_frase, yycolumn, yyline, yytext()); }
 }
 
-{BLANCOS} 				    {} 
-{BLANCOS2}                  {}
 
-. {
-    //Aqui se debe guardar los valores (yytext(), yyline, yychar ) para posteriormente generar el reporte de errores Léxicos.
-    //System.out.println("Este es un error lexico: "+yytext()+ ", en la linea: "+yyline+", en la columna: "+yychar);
-    System.out.println("Error Lexico: " + yytext() + ", linea: " + yyline + ", columna: " + yychar);
-    Errores aux = new Errores("Lexico", yytext(), yyline, yychar);
-    error.add(aux);
-    //lexicalErrors.add(new LexicalError(yytext(), yyline, (int) yychar));
-}
+{espacios_muchos} { }
+
+.   {
+        //Aqui se debe guardar los valores (yytext(), yyline, yychar ) para posteriormente generar el reporte de errores Léxicos.
+        //System.out.println("Este es un error lexico: "+yytext()+ ", en la linea: "+yyline+", en la columna: "+yychar);
+        Error_LS tmp = new Error_LS("Lexico", yytext(),"Caracter no encontrado", yyline, yycolumn);
+        System.out.println("Error Lexico { \n\tLexema: "+yytext() + ", Linea: " + yyline + ", Columna: " + yycolumn + "\n}");
+        errores.add(tmp);
+        //lexicalErrors.add(new LexicalError(yytext(), yyline, (int) yychar));
+    }

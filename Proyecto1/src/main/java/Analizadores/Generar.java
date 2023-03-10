@@ -2,19 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Analizadores;
-
+package analizadores;
 /**
  *
  * @author Pacos
  */
-public class Generate {
+public class Generar {
     public static void main(String[] args){
         try{
-            String ruta = "src/main/java/Analizadores/";
-            String[] opcFlex = {ruta +  "Lexico.jflex", "-d", ruta};
+            String ruta = "src/main/java/analizadores/";
+            String[] opcFlex = {ruta +  "lexico.jflex", "-d", ruta};
             jflex.Main.generate(opcFlex);
-            String[] opcCup = {"-destdir", ruta, "-parser", "Sintactico", ruta + "Sintactico.cup"};
+            String[] opcCup = {"-destdir", ruta, "-parser", "Sintactico", ruta + "sintactico.cup"};
             java_cup.Main.main(opcCup);
         }catch(Exception e){
 
