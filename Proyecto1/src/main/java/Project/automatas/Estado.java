@@ -1,34 +1,31 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Project.Automatas;
-import java.util.ArrayList;
+package Project.Automata;
 /**
  *
  * @author Pacos
- * @param <T>
  */
-@SuppressWarnings({"rawtypes"})
+import java.util.ArrayList;
+@SuppressWarnings({ "rawtypes" })
 public class Estado<T> {
-    
     private T id;
-    private ArrayList<Transicion> transiciones = new ArrayList<>();
+    private ArrayList<Transition> transiciones = new ArrayList<>();
     
-    public Estado(T id, ArrayList<Transicion> transicion){
+    public Estado(T id, ArrayList<Transition> transiciones) {
         this.id = id;
-        this.transiciones = transicion;
+        this.transiciones = transiciones;
     }
+
+    public Estado(T id) {this.id = id;}
     
-    public Estado(T id) {
-        this.id = id;
-    }
+    public void setId(T id) {this.id = id;}
+    public T getId() { return id;}
     
-    public void setID(T id) { this.id = id; };
-    public T getID() { return id; };
-    public void addTransicion(Transicion trans) { this.transiciones.add(trans); };
-    public ArrayList<Transicion> getTransicion() { return transiciones; };
+    public void setTransiciones(Transition tran) {this.transiciones.add(tran);}
+    public ArrayList<Transition> getTransiciones() {return transiciones; }
     
     @Override
-    public String toString() { return this.id.toString(); };
+    public String toString(){ return this.id.toString(); }  
+    
 }

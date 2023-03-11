@@ -1,33 +1,67 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Project.Automatas;
-
+package Project.Automata;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Pacos
  */
-@SuppressWarnings({"rawtypes"})
-public class Transicion<T> {
-    
-    private Estado inicial;
-    private Estado finality;
-    private T Symbol;
-    public Transicion(Estado inicial, Estado _final, T symbol){
-        this.inicial = inicial;
-        this.finality = _final;
-        this.Symbol = symbol;
+public class Transicion {
+    Transicion_Nodo primero;
+    public Transicion() { this.primero = null; }
+
+    public void insert(String info,String tipo,Integer Hoja) {
+        Transicion_Nodo new_node = new Transicion_Nodo(info,tipo,Hoja);
+        if (isNone()) { this.primero = new_node; }
+        else {
+            Transicion_Nodo actual = this.primero;
+            while (actual.next != null) { actual = actual.next; }
+            actual.next = new_node;
+        }
+    }
+
+    public void showList() {
+        if (isNone() == false) {
+            Transicion_Nodo actual = this.primero;
+            while (actual != null) {
+                //System.out.println(actual.info + " Hoja: " + actual.Hoja + " tipo: " + actual.tipo + " sig: " + actual.siguientes);
+                actual = actual.next;
+            }
+        }
+    }
+
+    public void Search(Object data) {
+        if (isNone() == false) {
+            Transicion_Nodo actual = this.primero;
+            while (actual != null && actual.info != data) {
+                actual = actual.next;
+                if (actual == null) {
+                    System.out.println("No se encontro el dato: " + data);
+                    break;
+                }
+            }
+            if (actual != null && actual.info == data) { System.out.println("Dato encontrado: " + data); }
+        }
     }
     
-    public void setInicial(Estado inicial) { this.inicial = inicial; };
-    public Estado getInicial() { return inicial; };
-    public void setFinality(Estado _final) { this.finality = _final; };
-    public Estado getFinality() { return finality; };
-    public void setSymbol(T symbol) { this.Symbol = symbol; };
-    public T getSyymbol() { return Symbol; };
+    public void InsertarSIguiente(Integer HojaBusqueda,Integer siguiente) {
+        if (isNone() == false) {
+            Transicion_Nodo actual = this.primero;
+            while (actual != null && actual.Hoja != HojaBusqueda) {
+                actual = actual.next;
+                if (actual == null) {
+                    System.out.println("No se encontro el dato: " + HojaBusqueda);
+                    break;
+                }
+            }
+            if (actual != null && actual.Hoja == HojaBusqueda) {
+                actual.siguientes.add(siguiente);
+                System.out.println("Dato encontrado: " + HojaBusqueda);
+            }
+        }
+    }
     
-    @Override
-    public String toString() { return "(" + inicial.getID() + "-" + Symbol + "-" + finality.getID() + ")"; };
-    public String dot() { return (this.inicial + "->" + this.finality + "[label=\"" + this.Symbol + "\"];"); };
+    public Boolean isNone() { return this.primero == null; }
 }
