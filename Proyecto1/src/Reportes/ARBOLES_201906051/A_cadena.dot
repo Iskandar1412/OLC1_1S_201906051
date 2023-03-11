@@ -1,0 +1,38 @@
+digraph structs {
+
+node[shape=Mrecord color=gray fontcolor="#f78a05"];
+label ="cadena"
+edge[color="#d19928"];
+struct1706407810[label="{{[1]|<here>.|[8]}|N.A}"];
+    struct1706407810->struct1770120964
+struct1770120964[label="{{[1]|<here>.|[7]}|N.A}"];
+    struct1770120964->struct1529445959
+struct1529445959[label="{{[1]|<here>\\'|[1]}|N.A}"];
+    struct1770120964->struct2078564424
+struct2078564424[label="{{[2, 3, 4, 5, 6]|<here>.|[7]}|N.A}"];
+    struct2078564424->struct866500881
+struct866500881[label="{{[2, 3, 4, 5, 6]|<here>+|[2, 3, 4, 5, 6]}|N.A}"];
+    struct866500881->struct1442494886
+struct1442494886[label="{{[2, 3, 4, 5, 6]|<here>\||[2, 3, 4, 5, 6]}|N.A}"];
+    struct1442494886->struct1169243672
+struct1169243672[label="{{[2, 3, 4, 5]|<here>\||[2, 3, 4, 5]}|N.A}"];
+    struct1169243672->struct487583942
+struct487583942[label="{{[2, 3, 4]|<here>\||[2, 3, 4]}|N.A}"];
+    struct487583942->struct12523327
+struct12523327[label="{{[2, 3]|<here>\||[2, 3]}|N.A}"];
+    struct12523327->struct8956167
+struct8956167[label="{{[2]|<here>\\n|[2]}|N.A}"];
+    struct12523327->struct1275401968
+struct1275401968[label="{{[3]|<here>minus|[3]}|N.A}"];
+    struct487583942->struct787367542
+struct787367542[label="{{[4]|<here>mayus|[4]}|N.A}"];
+    struct1169243672->struct1443936891
+struct1443936891[label="{{[5]|<here>digito|[5]}|N.A}"];
+    struct1442494886->struct328589615
+struct328589615[label="{{[6]|<here>\" \"|[6]}|N.A}"];
+    struct2078564424->struct2009319227
+struct2009319227[label="{{[7]|<here>\\'|[7]}|N.A}"];
+    struct1706407810->struct734196291
+struct734196291[label="{{[8]|<here>$|[8]}|N.A}"];
+
+}

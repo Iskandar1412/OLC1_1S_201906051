@@ -715,7 +715,10 @@ public class Siguientes {
                     break;
                 }
             } else if (i.tipo == "s_comilla") {
-                if (letter.equals("'")) {
+                //System.out.println("SSSSSSSSSSS");
+                //System.out.println(i.tipo);
+                if (letter.equals("\'")) {
+                    //System.out.println("Wuuuuuuuuuujuuuuuuuuuuuuu");
                     NuevaAsignacion(actual.Aceptacion, actual, letter, letterSig);
                     continuar = false;
                     break;

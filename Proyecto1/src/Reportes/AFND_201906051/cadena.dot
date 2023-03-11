@@ -1,0 +1,64 @@
+digraph finite_state_machine{
+	rankdir=LR;
+	label="cadena";
+	node[fontname="Helvetica,Arial,sans-serif"];
+	edge[fontname="Helvetica,Arial,sans-serif" color="#9c9332"];
+	node[shape = doublecircle, color = "#f78a05" fillcolor="#f78a05" style =filled fontcolor=white]; 41;
+	node [shape = circle, color = "#d19928" fillcolor="#d19928" style =filled fontcolor=white];
+	flechainicio[style=invis fontsize="0"];
+
+	flechainicio->0[label="inicio" fontcolor="#f78a05"];
+
+	0 -> 1 [label="\'" fontcolor="#f78a05"];
+	1 -> 2 [label="ε" fontcolor="#f78a05"];
+	2 -> 5 [label="ε" fontcolor="#f78a05"];
+	2 -> 3 [label="ε" fontcolor="#f78a05"];
+	3 -> 4 [label=" " fontcolor="#f78a05"];
+	4 -> 19 [label="ε" fontcolor="#f78a05"];
+	5 -> 8 [label="ε" fontcolor="#f78a05"];
+	5 -> 6 [label="ε" fontcolor="#f78a05"];
+	6 -> 7 [label="digito" fontcolor="#f78a05"];
+	7 -> 18 [label="ε" fontcolor="#f78a05"];
+	8 -> 11 [label="ε" fontcolor="#f78a05"];
+	8 -> 9 [label="ε" fontcolor="#f78a05"];
+	9 -> 10 [label="mayus" fontcolor="#f78a05"];
+	10 -> 17 [label="ε" fontcolor="#f78a05"];
+	11 -> 14 [label="ε" fontcolor="#f78a05"];
+	11 -> 12 [label="ε" fontcolor="#f78a05"];
+	12 -> 13 [label="minus" fontcolor="#f78a05"];
+	13 -> 16 [label="ε" fontcolor="#f78a05"];
+	14 -> 15 [label="\n" fontcolor="#f78a05"];
+	15 -> 16 [label="ε" fontcolor="#f78a05"];
+	16 -> 17 [label="ε" fontcolor="#f78a05"];
+	17 -> 18 [label="ε" fontcolor="#f78a05"];
+	18 -> 19 [label="ε" fontcolor="#f78a05"];
+	19 -> 20 [label="ε" fontcolor="#f78a05"];
+	20 -> 21 [label="ε" fontcolor="#f78a05"];
+	20 -> 39 [label="ε" fontcolor="#f78a05"];
+	21 -> 24 [label="ε" fontcolor="#f78a05"];
+	21 -> 22 [label="ε" fontcolor="#f78a05"];
+	22 -> 23 [label=" " fontcolor="#f78a05"];
+	23 -> 38 [label="ε" fontcolor="#f78a05"];
+	24 -> 27 [label="ε" fontcolor="#f78a05"];
+	24 -> 25 [label="ε" fontcolor="#f78a05"];
+	25 -> 26 [label="digito" fontcolor="#f78a05"];
+	26 -> 37 [label="ε" fontcolor="#f78a05"];
+	27 -> 30 [label="ε" fontcolor="#f78a05"];
+	27 -> 28 [label="ε" fontcolor="#f78a05"];
+	28 -> 29 [label="mayus" fontcolor="#f78a05"];
+	29 -> 36 [label="ε" fontcolor="#f78a05"];
+	30 -> 33 [label="ε" fontcolor="#f78a05"];
+	30 -> 31 [label="ε" fontcolor="#f78a05"];
+	31 -> 32 [label="minus" fontcolor="#f78a05"];
+	32 -> 35 [label="ε" fontcolor="#f78a05"];
+	33 -> 34 [label="\n" fontcolor="#f78a05"];
+	34 -> 35 [label="ε" fontcolor="#f78a05"];
+	35 -> 36 [label="ε" fontcolor="#f78a05"];
+	36 -> 37 [label="ε" fontcolor="#f78a05"];
+	37 -> 38 [label="ε" fontcolor="#f78a05"];
+	38 -> 21 [label="ε" fontcolor="#f78a05"];
+	38 -> 39 [label="ε" fontcolor="#f78a05"];
+	39 -> 40 [label="ε" fontcolor="#f78a05"];
+	40 -> 41 [label="\'" fontcolor="#f78a05"];
+
+}
