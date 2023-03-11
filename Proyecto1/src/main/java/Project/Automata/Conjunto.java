@@ -54,6 +54,7 @@ public class Conjunto {
 
     public void validarRango(String letter) {
         if (ValidarCadena) {
+            //System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLL");
             char character = letter.charAt(0);
             int numberLetter = (int) character;
             if(numberLetter>=this.CharVar1 && numberLetter<= this.CharVar2) { validado = true; }
@@ -62,13 +63,16 @@ public class Conjunto {
 
     public void validarComas(String letter) {
         for (String i : letras) {
+            //System.out.println("ASDFDASDF");
             if(i.equals("\"\\\"\"")){
                 if ("\\\"".equals(letter)) {
                     validado = true;
                     break;
                 }
             }else if(i.equals("\"\\'\"")){
+                //System.out.println("FFFFFFFFFFFFFFFFFFFFF");
                 if ("\\'".equals(letter)) {
+                    //System.out.println("HHHHHHHHHHHHHHHHHHHH");
                     validado = true;
                     break;
                 }
