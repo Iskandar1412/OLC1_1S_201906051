@@ -1,25 +1,26 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Project.Token;
 /**
  *
  * @author Pacos
  */
-
-public class Tokens {
-    public String lexema;
-    public int columna;
-    public int fila;
-    public Tokens(String lexema, int row, int col) {
-        this.lexema = lexema;
-        this.fila = row;
-        this.columna = col;
+public class tokens {
+    String tipo, lexema, descripcion;
+    int linea, columna;
+	
+    public tokens(String lexema , int linea, int columna ) {
+        this.lexema=lexema;
+        this.linea=linea+1;
+        this.columna = columna+1;
     }
-    
-    public String mostrarToken() {
-        String mostrar = "Token: {" + this.lexema + ", linea: " + this.fila + ", columna: " + this.columna + "}\n";
-        return mostrar;
+
+    public String show() {
+        String data = "";
+        data += "\nlexema:" + lexema;
+        data += "\nlinea:" + String.valueOf(linea);
+        data += "\ncolumna:" + String.valueOf(columna);
+        return data;
     }
 }
