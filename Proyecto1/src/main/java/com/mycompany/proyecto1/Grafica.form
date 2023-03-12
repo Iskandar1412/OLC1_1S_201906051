@@ -258,6 +258,9 @@
         <Component class="javax.swing.JTextArea" name="Texto_Ing">
           <Properties>
             <Property name="columns" type="int" value="20"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="14" style="3"/>
+            </Property>
             <Property name="rows" type="int" value="5"/>
           </Properties>
         </Component>

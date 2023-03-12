@@ -1,12 +1,22 @@
 [
   {
     "Resultado": "Cadena Valida",
-    "Expresion_Regular": "frase",
-    "Valor": "COMPI1 sale con 100"
+    "Expresion_Regular": "decimales",
+    "Valor": "1505.55"
   },
   {
     "Resultado": "Cadena Invalida",
-    "Expresion_Regular": "cadena",
-    "Valor": "\\\u0027cadena entre comilla simple\\\u0027"
+    "Expresion_Regular": "decimales",
+    "Valor": "301.59"
+  },
+  {
+    "Resultado": "Cadena Invalida",
+    "Expresion_Regular": "identificador",
+    "Valor": "ComPi1"
+  },
+  {
+    "Resultado": "Cadena Valida",
+    "Expresion_Regular": "identificador",
+    "Valor": "soy_un_id_1"
   }
 ]

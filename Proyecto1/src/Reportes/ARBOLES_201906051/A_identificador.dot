@@ -1,0 +1,26 @@
+digraph structs {
+
+node[shape=Mrecord color=gray fontcolor="#f78a05"];
+label ="identificador"
+edge[color="#d19928"];
+struct391726130[label="{{[1]|<here>.|[5]}|N.A}"];
+    struct391726130->struct715698682
+struct715698682[label="{{[1]|<here>.|[1, 2, 3, 4]}|N.A}"];
+    struct715698682->struct2066610398
+struct2066610398[label="{{[1]|<here>abecedarioMinus|[1]}|N.A}"];
+    struct715698682->struct1438913611
+struct1438913611[label="{{[2, 3, 4]|<here>*|[2, 3, 4]}|A}"];
+    struct1438913611->struct2067485444
+struct2067485444[label="{{[2, 3, 4]|<here>\||[2, 3, 4]}|N.A}"];
+    struct2067485444->struct1019435743
+struct1019435743[label="{{[2]|<here>\"_\"|[2]}|N.A}"];
+    struct2067485444->struct683458193
+struct683458193[label="{{[3, 4]|<here>\||[3, 4]}|N.A}"];
+    struct683458193->struct1571783041
+struct1571783041[label="{{[3]|<here>abecedarioMinus|[3]}|N.A}"];
+    struct683458193->struct2091731523
+struct2091731523[label="{{[4]|<here>digito|[4]}|N.A}"];
+    struct391726130->struct1520366251
+struct1520366251[label="{{[5]|<here>$|[5]}|N.A}"];
+
+}

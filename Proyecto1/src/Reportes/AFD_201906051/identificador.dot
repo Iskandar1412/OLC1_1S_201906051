@@ -3,14 +3,12 @@ digraph finite_state_machine {
 	edge[fontname="Helvetica,Arial,sans-serif" color="#9c9332"]
 	rankdir=LR;
 	node[shape = doublecircle, color = "#f78a05" fillcolor="#f78a05" style =filled fontcolor=white];
-3;
+1;
 	node[shape = circle, color = "#d19928" fillcolor="#d19928" style =filled fontcolor=white];
 
 	flechainicio [style=invis fontsize="0"];
 	flechainicio -> 0 [label="inicio" fontcolor="#f78a05"];
-	0->1[label = "\'" fontcolor="#f78a05"];
-1->2[label = "\\n,\" \",digito,mayus,minus" fontcolor="#f78a05"];
-2->2[label = "\\n,\" \",digito,mayus,minus" fontcolor="#f78a05"];
-2->3[label = "\'" fontcolor="#f78a05"];
-	label= "cadena"
+	0->1[label = "abecedarioMinus" fontcolor="#f78a05"];
+1->1[label = "\"_\",digito,abecedarioMinus" fontcolor="#f78a05"];
+	label= "identificador"
 }

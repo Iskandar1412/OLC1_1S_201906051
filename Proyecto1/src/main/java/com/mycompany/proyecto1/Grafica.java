@@ -143,6 +143,7 @@ public class Grafica extends javax.swing.JFrame {
         jLabel1.setText("Texto A Escribir (Opcional)");
 
         Texto_Ing.setColumns(20);
+        Texto_Ing.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
         Texto_Ing.setRows(5);
         jScrollPane1.setViewportView(Texto_Ing);
 

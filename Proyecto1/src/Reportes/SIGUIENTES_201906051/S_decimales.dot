@@ -1,0 +1,11 @@
+digraph structs {
+
+	node [shape=Mrecord color=gray fontcolor="#d97e16"];
+label ="Siguientes (decimales)";
+struct1 [label=" { Valor | Hoja| Siguietes } | 
+{ digito| 1 | [1, 2]}|
+{ \".\"| 2 | [3]}|
+{ digito| 3 | [3, 4]}|
+{ $| 4 | []}
+"];
+ }
