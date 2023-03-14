@@ -40,9 +40,9 @@ Se pudo determinar que la implementación de las estructuras y el almacenamiento
 Utiliza las siguientes expresiones regulares para obtener los parámetros a la hora de leer el archivo, obteniendo los errores
 léxicos que tenga el archivo.
 ```
-&nbsp;
+
 ![](../Assets/Proyecto1/lexico.png)
-&nbsp;
+
 #### Análisis Sintáctico
 ```
 Se encarga de obtener los errores sintácticos y mediante una gramática regular cada en cada producción obtener los datos
@@ -50,21 +50,25 @@ requeridos.
 
 Se analizarán las cadenas y separarán los tokens para verificarlos posteriormente.
 ```
-&nbsp;
+
 ![](../Assets/Proyecto1/sintactico.png)
 ![](../Assets/Proyecto1/sintactico01.png)
 ![](../Assets/Proyecto1/sintactico02.png)
 ![](../Assets/Proyecto1/sintactico03.png)
 ![](../Assets/Proyecto1/sintactico04.png)
-&nbsp;
+
+</br>
 
 #### Codigo Java
 ```
 Obtendrá los tokens ingresados, formará los arboles y tablas y analizará o mostrará si la cadena es valida o no es valida.
 ```
-&nbsp;
+</br>
+
 ![](../Assets/Proyecto1/proyecto1.png)
-&nbsp;
+
+</br>
+
 ```
 Por tener varias clases en java se dará un recorrido breve por cada uno:
 ```
@@ -72,26 +76,27 @@ Por tener varias clases en java se dará un recorrido breve por cada uno:
 - Las clases AFN, Conjunto, Siguientes, Struct & ER se encargan de recopilar la información y hacer los grafos que obtendrá de las otras clases respectivas.
 - La clase Reportes se encarga de hacer el archivo HTML de los errores.
 - La clase Proyecto1 solo corre la clase Grafica, que es la que tiene el modo gráfico.
-&nbsp;
+
+</br>
+
 ![](../Assets/Proyecto1/graf.png)
-&nbsp;
+
+</br>
+
 >Gráfica del Proyecto
-&nbsp;
+
 ![](../Assets/Proyecto1/grafica.png)
-&nbsp;
+
+</br>
+
 ```
 Consta de 2 pestañas, 'File' y 'Generate & Analize', tambien tiene 2 combobox para la búsqueda de las imagenes y mostrarlas.
 ```
 #### File
->Nuevo: Crea un nuevo archivo con extención olc.
-&nbsp;
->Open: Abre un menu desplegable en la carpeta de archivos para abrir archivos de extención olc. 
-&nbsp;
->Save: Guarda el achivo con extención olc.
-&nbsp;
->Save As: Guarda un nuevo archivo con extención olc.
-&nbsp;
->Exit: Sale del programa.
-&nbsp;
+>- Nuevo: Crea un nuevo archivo con extención olc.
+>- Open: Abre un menu desplegable en la carpeta de archivos para abrir archivos de extención olc. 
+>- Save: Guarda el achivo con extención olc.
+>- Save As: Guarda un nuevo archivo con extención olc.
+>- Exit: Sale del programa.
 ---
 ## Manual de Usuario
