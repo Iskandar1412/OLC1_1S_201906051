@@ -7,4 +7,4 @@
 >- [Manual de Usuario (MD)](../)
 >- [Manual Tecnico (PDF)](../Manuales/Proyecto%202/)
 >- [Manual Usuario (PDF)](../Manuales/Proyecto%202/)
->- [Librerías (Dependencias JAR)](../)
+>- [Librerías](../)
