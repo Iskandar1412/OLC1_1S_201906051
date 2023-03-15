@@ -1,0 +1,26 @@
+digraph finite_state_machine {
+	node[fontname="Helvetica,Arial,sans-serif"]
+	edge[fontname="Helvetica,Arial,sans-serif" color="#9c9332"]
+	rankdir=LR;
+	node[shape = doublecircle, color = "#f78a05" fillcolor="#f78a05" style =filled fontcolor=white];
+11;
+	node[shape = circle, color = "#d19928" fillcolor="#d19928" style =filled fontcolor=white];
+
+	flechainicio [style=invis fontsize="0"];
+	flechainicio -> 0 [label="inicio" fontcolor="#f78a05"];
+	0->1[label = "\"h\"" fontcolor="#f78a05"];
+1->2[label = "\"t\"" fontcolor="#f78a05"];
+2->3[label = "\"t\"" fontcolor="#f78a05"];
+3->4[label = "\"p\"" fontcolor="#f78a05"];
+4->5[label = "\"s\"" fontcolor="#f78a05"];
+5->6[label = "\":\"" fontcolor="#f78a05"];
+6->7[label = "\"/\"" fontcolor="#f78a05"];
+7->8[label = "\"/\"" fontcolor="#f78a05"];
+8->9[label = "minuscula" fontcolor="#f78a05"];
+9->9[label = "minuscula" fontcolor="#f78a05"];
+9->10[label = "\".\"" fontcolor="#f78a05"];
+10->11[label = "minuscula" fontcolor="#f78a05"];
+11->11[label = "minuscula" fontcolor="#f78a05"];
+4->6[label = "\":\"" fontcolor="#f78a05"];
+	label= "url"
+}

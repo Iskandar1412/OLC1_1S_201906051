@@ -1,22 +1,12 @@
 [
   {
     "Resultado": "Cadena Valida",
-    "Expresion_Regular": "decimales",
-    "Valor": "1505.55"
-  },
-  {
-    "Resultado": "Cadena Invalida",
-    "Expresion_Regular": "decimales",
-    "Valor": "301.59"
-  },
-  {
-    "Resultado": "Cadena Invalida",
-    "Expresion_Regular": "identificador",
-    "Valor": "ComPi1"
+    "Expresion_Regular": "correoElectronico",
+    "Valor": "lachalana666@ingusac.com"
   },
   {
     "Resultado": "Cadena Valida",
-    "Expresion_Regular": "identificador",
-    "Valor": "soy_un_id_1"
+    "Expresion_Regular": "url",
+    "Valor": "https://facebook.com"
   }
 ]

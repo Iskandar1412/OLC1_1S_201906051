@@ -1,0 +1,159 @@
+digraph G {
+color=white;
+edge[fontname="Helvetica,Arial,sans-serif"];
+node[shape=box];
+subgraph cluster1 {
+
+node[color=gray];
+label = "Tabla Transiciones (url)"
+node[color=gray];
+a0[fontcolor=red fontsize="18"];
+a0 [label=<
+<TABLE border="0" cellspacing="5" cellpadding="5">
+<TR>
+<TD border="1"><font color="#ff7b00">Estados\Terminales</font></TD>
+<TD border="1" ><font color="#18cc84">"h"</font></TD>
+<TD border="1" ><font color="#18cc84">"t"</font></TD>
+<TD border="1" ><font color="#18cc84">"p"</font></TD>
+<TD border="1" ><font color="#18cc84">"s"</font></TD>
+<TD border="1" ><font color="#18cc84">":"</font></TD>
+<TD border="1" ><font color="#18cc84">"/"</font></TD>
+<TD border="1" ><font color="#18cc84">minuscula</font></TD>
+<TD border="1" ><font color="#18cc84">"."</font></TD>
+</TR>
+<TR>
+<TD border="1" ><font color="#18cc84">0 S0</font></TD>
+<TD border="1" ><font color="#18abcc"> S1</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+</TR>
+  <TR>
+<TD border="1" ><font color="#18cc84">S1</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> S2</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+</TR>
+  <TR>
+<TD border="1" ><font color="#18cc84">S2</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> S3</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+</TR>
+  <TR>
+<TD border="1" ><font color="#18cc84">S3</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> S4</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+</TR>
+  <TR>
+<TD border="1" ><font color="#18cc84">S4</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> S5</font></TD>
+<TD border="1" ><font color="#18abcc"> S6</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+</TR>
+  <TR>
+<TD border="1" ><font color="#18cc84">S5</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> S6</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+</TR>
+  <TR>
+<TD border="1" ><font color="#18cc84">S6</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> S7</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+</TR>
+  <TR>
+<TD border="1" ><font color="#18cc84">S7</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> S8</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+</TR>
+  <TR>
+<TD border="1" ><font color="#18cc84">S8</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> S9</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+</TR>
+  <TR>
+<TD border="1" ><font color="#18cc84">S9</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> S9</font></TD>
+<TD border="1" ><font color="#18abcc"> S10</font></TD>
+</TR>
+  <TR>
+<TD border="1" ><font color="#18cc84">S10</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> S11</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+</TR>
+  <TR>
+<TD border="1" ><font color="#18cc84">$  S11</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+<TD border="1" ><font color="#18abcc"> S11</font></TD>
+<TD border="1" ><font color="#18abcc"> -- </font></TD>
+</TR>
+
+</TABLE>>];
+}
+}

@@ -1,0 +1,51 @@
+digraph finite_state_machine{
+	rankdir=LR;
+	label="url";
+	node[fontname="Helvetica,Arial,sans-serif"];
+	edge[fontname="Helvetica,Arial,sans-serif" color="#9c9332"];
+	node[shape = doublecircle, color = "#f78a05" fillcolor="#f78a05" style =filled fontcolor=white]; 33;
+	node [shape = circle, color = "#d19928" fillcolor="#d19928" style =filled fontcolor=white];
+	flechainicio[style=invis fontsize="0"];
+
+	flechainicio->0[label="inicio" fontcolor="#f78a05"];
+
+	0 -> 1 [label="h" fontcolor="#f78a05"];
+	1 -> 2 [label="ε" fontcolor="#f78a05"];
+	2 -> 3 [label="t" fontcolor="#f78a05"];
+	3 -> 4 [label="ε" fontcolor="#f78a05"];
+	4 -> 5 [label="t" fontcolor="#f78a05"];
+	5 -> 6 [label="ε" fontcolor="#f78a05"];
+	6 -> 7 [label="p" fontcolor="#f78a05"];
+	7 -> 8 [label="ε" fontcolor="#f78a05"];
+	8 -> 11 [label="ε" fontcolor="#f78a05"];
+	8 -> 9 [label="ε" fontcolor="#f78a05"];
+	9 -> 10 [label="ε" fontcolor="#f78a05"];
+	10 -> 13 [label="ε" fontcolor="#f78a05"];
+	11 -> 12 [label="s" fontcolor="#f78a05"];
+	12 -> 13 [label="ε" fontcolor="#f78a05"];
+	13 -> 14 [label="ε" fontcolor="#f78a05"];
+	14 -> 15 [label=":" fontcolor="#f78a05"];
+	15 -> 16 [label="ε" fontcolor="#f78a05"];
+	16 -> 17 [label="/" fontcolor="#f78a05"];
+	17 -> 18 [label="ε" fontcolor="#f78a05"];
+	18 -> 19 [label="/" fontcolor="#f78a05"];
+	19 -> 20 [label="ε" fontcolor="#f78a05"];
+	20 -> 21 [label="minuscula" fontcolor="#f78a05"];
+	21 -> 22 [label="ε" fontcolor="#f78a05"];
+	22 -> 23 [label="ε" fontcolor="#f78a05"];
+	22 -> 25 [label="ε" fontcolor="#f78a05"];
+	23 -> 24 [label="minuscula" fontcolor="#f78a05"];
+	24 -> 23 [label="ε" fontcolor="#f78a05"];
+	24 -> 25 [label="ε" fontcolor="#f78a05"];
+	25 -> 26 [label="ε" fontcolor="#f78a05"];
+	26 -> 27 [label="." fontcolor="#f78a05"];
+	27 -> 28 [label="ε" fontcolor="#f78a05"];
+	28 -> 29 [label="minuscula" fontcolor="#f78a05"];
+	29 -> 30 [label="ε" fontcolor="#f78a05"];
+	30 -> 31 [label="ε" fontcolor="#f78a05"];
+	30 -> 33 [label="ε" fontcolor="#f78a05"];
+	31 -> 32 [label="minuscula" fontcolor="#f78a05"];
+	32 -> 31 [label="ε" fontcolor="#f78a05"];
+	32 -> 33 [label="ε" fontcolor="#f78a05"];
+
+}

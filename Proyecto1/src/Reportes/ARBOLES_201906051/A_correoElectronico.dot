@@ -1,0 +1,64 @@
+digraph structs {
+
+node[shape=Mrecord color=gray fontcolor="#f78a05"];
+label ="correoElectronico"
+edge[color="#d19928"];
+struct17438731[label="{{[1, 2]|<here>.|[14]}|N.A}"];
+    struct17438731->struct1295522078
+struct1295522078[label="{{[1, 2]|<here>.|[13]}|N.A}"];
+    struct1295522078->struct1203161279
+struct1203161279[label="{{[1, 2]|<here>\||[1, 2]}|N.A}"];
+    struct1203161279->struct1042110114
+struct1042110114[label="{{[1]|<here>minuscula|[1]}|N.A}"];
+    struct1203161279->struct1657154448
+struct1657154448[label="{{[2]|<here>mayuscula|[2]}|N.A}"];
+    struct1295522078->struct1064087465
+struct1064087465[label="{{[3, 4, 5, 6]|<here>.|[13]}|N.A}"];
+    struct1064087465->struct1315859403
+struct1315859403[label="{{[3, 4, 5, 6]|<here>+|[3, 4, 5, 6]}|N.A}"];
+    struct1315859403->struct445816034
+struct445816034[label="{{[3, 4, 5, 6]|<here>\||[3, 4, 5, 6]}|N.A}"];
+    struct445816034->struct1230749323
+struct1230749323[label="{{[3, 4, 5]|<here>\||[3, 4, 5]}|N.A}"];
+    struct1230749323->struct319836654
+struct319836654[label="{{[3, 4]|<here>\||[3, 4]}|N.A}"];
+    struct319836654->struct782057588
+struct782057588[label="{{[3]|<here>simbolos|[3]}|N.A}"];
+    struct319836654->struct551992521
+struct551992521[label="{{[4]|<here>minuscula|[4]}|N.A}"];
+    struct1230749323->struct878571960
+struct878571960[label="{{[5]|<here>mayuscula|[5]}|N.A}"];
+    struct445816034->struct634604028
+struct634604028[label="{{[6]|<here>numero|[6]}|N.A}"];
+    struct1064087465->struct1636381650
+struct1636381650[label="{{[7]|<here>.|[13]}|N.A}"];
+    struct1636381650->struct1956436958
+struct1956436958[label="{{[7]|<here>\"@\"|[7]}|N.A}"];
+    struct1636381650->struct798434500
+struct798434500[label="{{[8, 9]|<here>.|[13]}|N.A}"];
+    struct798434500->struct280237155
+struct280237155[label="{{[8, 9]|<here>+|[8, 9]}|N.A}"];
+    struct280237155->struct940290564
+struct940290564[label="{{[8, 9]|<here>\||[8, 9]}|N.A}"];
+    struct940290564->struct710663408
+struct710663408[label="{{[8]|<here>minuscula|[8]}|N.A}"];
+    struct940290564->struct1014787195
+struct1014787195[label="{{[9]|<here>mayuscula|[9]}|N.A}"];
+    struct798434500->struct207315099
+struct207315099[label="{{[10]|<here>.|[13]}|N.A}"];
+    struct207315099->struct1772451974
+struct1772451974[label="{{[10]|<here>\".\"|[10]}|N.A}"];
+    struct207315099->struct502105374
+struct502105374[label="{{[11]|<here>.|[13]}|N.A}"];
+    struct502105374->struct1118645612
+struct1118645612[label="{{[11]|<here>\"c\"|[11]}|N.A}"];
+    struct502105374->struct363184666
+struct363184666[label="{{[12]|<here>.|[13]}|N.A}"];
+    struct363184666->struct1460070752
+struct1460070752[label="{{[12]|<here>\"o\"|[12]}|N.A}"];
+    struct363184666->struct649217003
+struct649217003[label="{{[13]|<here>\"m\"|[13]}|N.A}"];
+    struct17438731->struct224386076
+struct224386076[label="{{[14]|<here>$|[14]}|N.A}"];
+
+}

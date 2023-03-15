@@ -1,0 +1,58 @@
+digraph structs {
+
+node[shape=Mrecord color=gray fontcolor="#f78a05"];
+label ="url"
+edge[color="#d19928"];
+struct1956338157[label="{{[1]|<here>.|[12]}|N.A}"];
+    struct1956338157->struct439419974
+struct439419974[label="{{[1]|<here>.|[11]}|N.A}"];
+    struct439419974->struct1720606101
+struct1720606101[label="{{[1]|<here>\"h\"|[1]}|N.A}"];
+    struct439419974->struct1134987810
+struct1134987810[label="{{[2]|<here>.|[11]}|N.A}"];
+    struct1134987810->struct1843193738
+struct1843193738[label="{{[2]|<here>\"t\"|[2]}|N.A}"];
+    struct1134987810->struct2136853827
+struct2136853827[label="{{[3]|<here>.|[11]}|N.A}"];
+    struct2136853827->struct1797998024
+struct1797998024[label="{{[3]|<here>\"t\"|[3]}|N.A}"];
+    struct2136853827->struct480982293
+struct480982293[label="{{[4]|<here>.|[11]}|N.A}"];
+    struct480982293->struct381776317
+struct381776317[label="{{[4]|<here>\"p\"|[4]}|N.A}"];
+    struct480982293->struct132616691
+struct132616691[label="{{[5, 6]|<here>.|[11]}|N.A}"];
+    struct132616691->struct911446466
+struct911446466[label="{{[5]|<here>?|[5]}|A}"];
+    struct911446466->struct1939151232
+struct1939151232[label="{{[5]|<here>\"s\"|[5]}|N.A}"];
+    struct132616691->struct1858388694
+struct1858388694[label="{{[6]|<here>.|[11]}|N.A}"];
+    struct1858388694->struct1436004084
+struct1436004084[label="{{[6]|<here>\":\"|[6]}|N.A}"];
+    struct1858388694->struct2137061381
+struct2137061381[label="{{[7]|<here>.|[11]}|N.A}"];
+    struct2137061381->struct618837872
+struct618837872[label="{{[7]|<here>\"/\"|[7]}|N.A}"];
+    struct2137061381->struct1819804488
+struct1819804488[label="{{[8]|<here>.|[11]}|N.A}"];
+    struct1819804488->struct74510397
+struct74510397[label="{{[8]|<here>\"/\"|[8]}|N.A}"];
+    struct1819804488->struct2091417702
+struct2091417702[label="{{[9]|<here>.|[11]}|N.A}"];
+    struct2091417702->struct1296097716
+struct1296097716[label="{{[9]|<here>+|[9]}|N.A}"];
+    struct1296097716->struct1628363031
+struct1628363031[label="{{[9]|<here>minuscula|[9]}|N.A}"];
+    struct2091417702->struct1652304915
+struct1652304915[label="{{[10]|<here>.|[11]}|N.A}"];
+    struct1652304915->struct1525627786
+struct1525627786[label="{{[10]|<here>\".\"|[10]}|N.A}"];
+    struct1652304915->struct275266594
+struct275266594[label="{{[11]|<here>+|[11]}|N.A}"];
+    struct275266594->struct121211225
+struct121211225[label="{{[11]|<here>minuscula|[11]}|N.A}"];
+    struct1956338157->struct77996313
+struct77996313[label="{{[12]|<here>$|[12]}|N.A}"];
+
+}
