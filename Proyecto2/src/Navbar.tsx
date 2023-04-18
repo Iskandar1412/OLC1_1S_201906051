@@ -1,6 +1,6 @@
-import React from 'react'
-//import Nav from './Nav';
-//import Navigate from './Navigate';
+import React from 'react';
+// import Nav from './Nav';
+// import Navigate from './Navigate';
 const Navbar = () => {
   return (
     <>
