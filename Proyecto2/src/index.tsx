@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './assets/index.css'
-import './assets/toglebar.js'
+
 import reportWebVitals from './reportWebVitals';
 //rafce --> para poner las funciones automática
 //git init

@@ -3,16 +3,14 @@ import React from 'react';
 //import React, { Fragment, useState } from 'react';
 //import logo from './logo.svg';
 //import './App.css';
-//import Nav from './components/./Nav/Nav';
+
+
 import Navbar from './Navbar';
 
-//import 'https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css'
 
 import 'https://use.fontawesome.com/releases/v6.1.0/js/all.js'
 import 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'
-//import 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'
-//import 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'
-//import 'https://cdn.jsdelivr.net/npm/simple-datatables@lates'
+
 import Home from './pages/Home';
 import About from './pages/About';
 import Inicio from './pages/Inicio';
@@ -32,10 +30,11 @@ function App(): JSX.Element {
         component = <Inicio />
         break
   }
+
   return (
     <>
     <nav className='sb-topnav navbar navbar-expand navbar-dark bg-dark'>
-      <a className='navbar-brand ps-3' href="/">Proyecto 2 - 201906051</a>
+      <a className='navbar-brand ps-3' href="/">Proyecto 2</a>
       <button className='btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0' id='sidebarToggle'><i className='fas fa-bars'></i></button>
       <form className='d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0'>
           <div className='input-group'>
@@ -59,7 +58,6 @@ function App(): JSX.Element {
       <Navbar />
       {component}
     </div>
-    
     </>
   );
 }

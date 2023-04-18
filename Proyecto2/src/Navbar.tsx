@@ -21,11 +21,15 @@ const Navbar = () => {
                         </a>
                         <div className='collapse' id='collapseLayouts' aria-labelledby='headingOne' data-bs-parent='#sidenavAccordion'>
                             <nav className='sb-sidenav-menu-nested nav'>
-                                <a className='nav-link' href="/Inicio">Inicio</a>
+                                <a className='nav-link' href="/Inicio">Compiler</a>
                                 <a className='nav-link' href="/About">About</a>
                             </nav>
                         </div>
                     </div>
+                </div>
+                <div className='sb-sidenav-footer'>
+                    <div className="small">Created by:</div>
+                    Iskandar1412
                 </div>
             </nav>
         </div>
