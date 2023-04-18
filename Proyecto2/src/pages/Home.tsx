@@ -12,7 +12,13 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
 };*/
 function HomePage(): JSX.Element {
     return (
-        <nav />
+        <>
+        <div id='layoutSidenav_content'>
+            <main>
+                home page
+            </main>
+        </div>
+        </>
     );
 }
 

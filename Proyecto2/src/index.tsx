@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './assets/index.css';
 import App from './App';
+import './assets/index.css'
+import './assets/toglebar.js'
 import reportWebVitals from './reportWebVitals';
-
-
+//rafce --> para poner las funciones automática
+//git init
+//git add . --> agregar todo
+//git status
+//
 
 const root = ReactDOM.createRoot(
   document.getElementById('sb-nav-fixed') as HTMLElement

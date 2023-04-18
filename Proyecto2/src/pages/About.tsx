@@ -4,9 +4,13 @@ export interface IAboutPageProps {};
 
 const AboutPage: React.FunctionComponent<IAboutPageProps> = (props) => {
     return (
-        <div>
-            <p>this is the about page</p>
+        <>
+        <div id='layoutSidenav_content'>
+            <main>
+                aaa
+            </main>
         </div>
+        </>
     );
 };
 
