@@ -3,14 +3,9 @@ import React from 'react';
 //import React, { Fragment, useState } from 'react';
 //import logo from './logo.svg';
 //import './App.css';
-
-
 import Navbar from './Navbar';
-
-
 import 'https://use.fontawesome.com/releases/v6.1.0/js/all.js'
 import 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'
-
 import Home from './pages/Home';
 import About from './pages/About';
 import Inicio from './pages/Inicio';
@@ -22,13 +17,13 @@ function App(): JSX.Element {
     switch(window.location.pathname){
       case "/":
         component = <Home />
-        break
+        break;
       case "/About":
         component = <About />
-        break
+        break;
       case "/Inicio":
         component = <Inicio />
-        break
+        break;
   }
 
   return (
@@ -60,6 +55,6 @@ function App(): JSX.Element {
     </div>
     </>
   );
-}
+};
 
 export default App;
