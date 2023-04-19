@@ -2,6 +2,9 @@ import React, { Fragment, useState } from 'react'
 
 import { SectionIdEnum } from '../types';
 import { IntroSection } from '../sections';
+import { ErroresSection } from '../sections';
+import { TablaSection } from '../sections';
+import { ASTSection } from '../sections';
 import { SectionContainer, MainLayout } from '../components';
 
 
@@ -12,15 +15,15 @@ const sections = [
   },
   {
     sectionId: SectionIdEnum.errores,
-    component: <IntroSection />,
+    component: <ErroresSection />,
   },
   {
     sectionId: SectionIdEnum.ast,
-    component: <IntroSection />,
+    component: <ASTSection />,
   },
   {
     sectionId: SectionIdEnum.tabla,
-    component: <IntroSection />,
+    component: <TablaSection />,
   },
 ];
 
@@ -30,7 +33,7 @@ const Inicio: React.FC = () => {
     <div id='layoutSidenav_content'>
         <main>
           <MainLayout>
-          
+
             {sections.map(({component, sectionId}) => {
               return <SectionContainer sectionId={sectionId} key={sectionId}>
                 {component}

@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import React from "react";
 import logo from "../a2.jpg"
 
@@ -14,7 +13,6 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
 function HomePage(): JSX.Element {
     return (
         <>
-        
         <div id='layoutSidenav_content'>
             <main>
                 <div className="container-fluid px-4">

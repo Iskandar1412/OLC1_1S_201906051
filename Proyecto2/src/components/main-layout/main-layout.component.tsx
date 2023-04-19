@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppBar, Toolbar, Box, Typography, useMediaQuery, useTheme, } from '@mui/material';
+import { Toolbar, Box, Typography, useMediaQuery, useTheme, } from '@mui/material';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { SectionIdEnum } from '../../types';
 import { Navigation } from './navigation/navigation.component';

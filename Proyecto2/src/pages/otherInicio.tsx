@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const otherInicio = () => {
   return (
@@ -6,4 +6,4 @@ const otherInicio = () => {
   )
 }
 
-export default otherInicio
+export default otherInicio;
