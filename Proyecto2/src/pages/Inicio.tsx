@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment, useState } from 'react'
 
 import { SectionIdEnum } from '../types';
 import { IntroSection } from '../sections';
@@ -30,7 +30,7 @@ const Inicio: React.FC = () => {
     <div id='layoutSidenav_content'>
         <main>
           <MainLayout>
-
+          
             {sections.map(({component, sectionId}) => {
               return <SectionContainer sectionId={sectionId} key={sectionId}>
                 {component}
