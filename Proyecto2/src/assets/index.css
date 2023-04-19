@@ -11709,3 +11709,38 @@ body {
     margin-left: 15%;
     width: 70%;
 }
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.all_unset {
+  all: unset;
+  color: gray;
+}
+
+.margen {
+  width: 85%;
+  height: 30px;
+}
+
+.imagembr {
+  margin-left: 20px;
+}
+
+.nav2 {
+  margin-top: -60px;
+  width: 87vw;
+  z-index: 3000;
+  position: fixed;
+}
+
+.dispinic {
+  width: 35vw;
+}
+
+.dsp {
+  width: 65vw;
+}

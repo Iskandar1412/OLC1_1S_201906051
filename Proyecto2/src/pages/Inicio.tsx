@@ -1,7 +1,8 @@
 import React from 'react'
+
 import { SectionIdEnum } from '../types';
 import { IntroSection } from '../sections';
-import { SectionContainer } from '../components';
+import { SectionContainer, MainLayout } from '../components';
 
 
 const sections = [
@@ -10,29 +11,32 @@ const sections = [
     component: <IntroSection />
   },
   {
-    sectionId: SectionIdEnum.about,
+    sectionId: SectionIdEnum.errores,
     component: <IntroSection />,
   },
   {
-    sectionId: SectionIdEnum.skills,
+    sectionId: SectionIdEnum.ast,
     component: <IntroSection />,
   },
   {
-    sectionId: SectionIdEnum.projects,
+    sectionId: SectionIdEnum.tabla,
     component: <IntroSection />,
   },
 ];
 
-const Inicio = () => {
+const Inicio: React.FC = () => {
   return (
     <>
     <div id='layoutSidenav_content'>
         <main>
+          <MainLayout>
+
             {sections.map(({component, sectionId}) => {
               return <SectionContainer sectionId={sectionId} key={sectionId}>
                 {component}
               </SectionContainer>;
             })}
+          </MainLayout>
         </main>
     </div>
     </>

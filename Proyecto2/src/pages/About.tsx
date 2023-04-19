@@ -44,7 +44,7 @@ const AboutPage: React.FunctionComponent<IAboutPageProps> = (props) => {
                             <div className="card bg-danger text-white mb-4">
                                 <div className="card-body">Repositorio Github</div>
                                 <div className="card-footer d-flex align-items-center justify-content-between">
-                                    <a className="small text-white stretched-link" target="blank" href="https://github.com/Iskandar1412">View Details</a>
+                                    <a className="small text-white stretched-link" target="blank" href="https://github.com/Iskandar1412">View Repository</a>
                                     <div className="small text-white"><i className="fas fa-angle-right"></i></div>
                                 </div>
                             </div>

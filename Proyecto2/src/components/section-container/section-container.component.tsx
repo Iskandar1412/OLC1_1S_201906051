@@ -1,4 +1,5 @@
 import React from 'react'
+import { Box, Container } from '@mui/material';
 import { SectionIdEnum } from '../../types';
 
 export type SectionContainerProps = {
@@ -10,11 +11,9 @@ export type SectionContainerProps = {
 export const SectionContainer: React.FC<SectionContainerProps> = ({ children, sectionId }) => {
     return (
         <div id={sectionId} key={sectionId}>
-            <main>
-                <div>
-                    {children}
-                </div>
-            </main>
+            <Container>
+                <Box minHeight='100vh'>{children}</Box>
+            </Container>
         </div>
     );
 };
