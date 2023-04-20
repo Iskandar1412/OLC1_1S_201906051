@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 //import 'bootswatch/dist/lux/bootstrap.min.css';
 
 interface Tab {
@@ -11,7 +11,9 @@ export const IntroSection: React.FC = () => {
   const [tabs, setTabs] = useState<Tab[]>([]);
   const [activeTab, setActiveTab] = useState<number | null>(null);
 
-  
+  //--------------------------------------------
+  const [numLines, setNumLines] = useState<string[]>(["1"]);
+  //--------------------------------------------
 
   const handleTabClick = (id: number) => {
     setActiveTab(id);
@@ -39,7 +41,32 @@ export const IntroSection: React.FC = () => {
   };
 
   //-------------------------------------
-  
+  function handleTextareaKeyUp(
+    event: React.KeyboardEvent<HTMLTextAreaElement>
+  ): void {
+    const numberOfLines = event.currentTarget.value.split("\n").length;
+    setNumLines((prevNumLines) => {
+      const newNumLines = Array(numberOfLines)
+        .fill(null)
+        .map((_, index) => String(index + 1));
+      return newNumLines;
+    });
+  }
+
+  function handleTextareaKeyDown(
+    event: React.KeyboardEvent<HTMLTextAreaElement>
+  ): void {
+    if (event.key === "Tab") {
+      const { selectionStart, selectionEnd, value } = event.currentTarget;
+      event.currentTarget.value =
+        value.substring(0, selectionStart) +
+        "\t" +
+        value.substring(selectionEnd);
+      event.currentTarget.selectionStart = event.currentTarget.selectionEnd =
+        selectionStart + 1;
+      event.preventDefault();
+    }
+  }
   //-------------------------------
 
   return (
@@ -71,7 +98,14 @@ export const IntroSection: React.FC = () => {
             <>
               <div className="content-text">
                 <div className="editor">
-                  <div className="line-numbers"><span></span></div>
+                  <div className="line-numbers">
+                    {numLines.map((num, index) => (
+                      <span key={index}>
+                        {num}
+                        <br />
+                      </span>
+                    ))}
+                  </div>
                   <textarea
                     className="text-area"
                     value={tabs.find((tab) => tab.id === activeTab)?.value1}
@@ -85,16 +119,26 @@ export const IntroSection: React.FC = () => {
                         value1: e.target.value,
                       };
                       setTabs(newTabs);
-                      
                     }}
+                    onKeyUp={handleTextareaKeyUp}
+                    onKeyDown={handleTextareaKeyDown}
                   ></textarea>
                 </div>
                 <div className="editor">
-                  <div className="line-numbers"><span></span></div>
+                  <div className="line-numbers">
+                  {numLines.map((num, index) => (
+                      <span key={index}>
+                        {num}
+                        <br />
+                      </span>
+                    ))}
+                  </div>
                   <textarea
                     className="text-area"
                     value={tabs.find((tab) => tab.id === activeTab)?.value2}
                     readOnly
+                    onKeyUp={handleTextareaKeyUp}
+                    onKeyDown={handleTextareaKeyDown}
                   ></textarea>
                 </div>
               </div>

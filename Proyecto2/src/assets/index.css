@@ -11795,27 +11795,30 @@ body {
 .editor{
   width: 100%;
   gap: 10px;
-  text-align: left;
-  line-height: 21px;
+  justify-content: space-evenly;
+  line-height: 2vh;
   display: inline-flex;
 }
 
 .line-numbers {
-
+  width: 7%;
+  text-align: right;
+  color: white;
 }
 
 .text-area {
-  width: 90%;
-  line-height: 21px;
-  height: 70vh;
-  margin-left: 5%;
+  width: 85%;
+  line-height: 2vh;
+  min-height: 72vh;
+  margin-left: 0;
   resize: none;
   margin-bottom: 7px;
   margin-right: 0;
   border-radius: 5px;
   color: #212529;
-  outline: none;
   overflow-y: hidden;
+  border: 0;
+  padding: 0;
 }
 
 .tab.active {
