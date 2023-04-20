@@ -11792,10 +11792,23 @@ body {
   width: 100%;
 }
 
+.editor{
+  width: 100%;
+  gap: 10px;
+  text-align: left;
+  line-height: 21px;
+  display: inline-flex;
+}
+
+.line-numbers {
+
+}
+
 .text-area {
-  width: 45%;
+  width: 90%;
+  line-height: 21px;
   height: 70vh;
-  margin-left: 3%;
+  margin-left: 5%;
   resize: none;
   margin-bottom: 7px;
   margin-right: 0;

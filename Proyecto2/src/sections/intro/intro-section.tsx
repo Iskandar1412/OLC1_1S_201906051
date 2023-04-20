@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 //import 'bootswatch/dist/lux/bootstrap.min.css';
 
 interface Tab {
@@ -10,6 +10,8 @@ interface Tab {
 export const IntroSection: React.FC = () => {
   const [tabs, setTabs] = useState<Tab[]>([]);
   const [activeTab, setActiveTab] = useState<number | null>(null);
+
+  
 
   const handleTabClick = (id: number) => {
     setActiveTab(id);
@@ -36,8 +38,9 @@ export const IntroSection: React.FC = () => {
     setTabs(newTabs);
   };
 
-  const textArea = document.querySelector("textarea");
-  const lineNumbers = document.querySelector(".line-numbers");
+  //-------------------------------------
+  
+  //-------------------------------
 
   return (
     <>
@@ -66,28 +69,34 @@ export const IntroSection: React.FC = () => {
         <div className="tab-content">
           {activeTab !== null && (
             <>
-              <div className="line-numbers">
-                <textarea
-                  className="text-area"
-                  value={tabs.find((tab) => tab.id === activeTab)?.value1}
-                  onChange={(e) => {
-                    const newTabs = [...tabs];
-                    const tabIndex = newTabs.findIndex(
-                      (tab) => tab.id === activeTab
-                    );
-                    newTabs[tabIndex] = {
-                      ...newTabs[tabIndex],
-                      value1: e.target.value,
-                    };
-                    setTabs(newTabs);
-                  }}
-                />
-
-                <textarea
-                  className="text-area"
-                  value={tabs.find((tab) => tab.id === activeTab)?.value2}
-                  readOnly
-                />
+              <div className="content-text">
+                <div className="editor">
+                  <div className="line-numbers"><span></span></div>
+                  <textarea
+                    className="text-area"
+                    value={tabs.find((tab) => tab.id === activeTab)?.value1}
+                    onChange={(e) => {
+                      const newTabs = [...tabs];
+                      const tabIndex = newTabs.findIndex(
+                        (tab) => tab.id === activeTab
+                      );
+                      newTabs[tabIndex] = {
+                        ...newTabs[tabIndex],
+                        value1: e.target.value,
+                      };
+                      setTabs(newTabs);
+                      
+                    }}
+                  ></textarea>
+                </div>
+                <div className="editor">
+                  <div className="line-numbers"><span></span></div>
+                  <textarea
+                    className="text-area"
+                    value={tabs.find((tab) => tab.id === activeTab)?.value2}
+                    readOnly
+                  ></textarea>
+                </div>
               </div>
               <div className="content-button">
                 <button className="open-file">Open File</button>
