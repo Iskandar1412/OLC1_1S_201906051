@@ -11,6 +11,10 @@ export const IntroSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number | null>(null);
 
   //--------------------------------------------
+<<<<<<< HEAD
+=======
+  
+>>>>>>> Otrosajustes
   //--------------------------------------------
 
   const handleTabClick = (id: number) => {
@@ -56,6 +60,21 @@ export const IntroSection: React.FC = () => {
     });
     fileInput.click();
   };
+<<<<<<< HEAD
+=======
+  //-------------------------------
+  const handleSaveFile = async () => {
+    const content = tabs.find((tab) => tab.id === activeTab)?.value1;
+    if (!content) return;
+    const blob = new Blob([content], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "ArchivoProy.tw";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+>>>>>>> Otrosajustes
   //-------------------------------
 
   return (
@@ -126,7 +145,9 @@ export const IntroSection: React.FC = () => {
                 >
                   Analyze
                 </button>
-                <button className="save-file">Save File</button>
+                <button className="save-file" onClick={handleSaveFile}>
+                  Save File
+                </button>
               </div>
             </>
           )}
