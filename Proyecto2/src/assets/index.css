@@ -11800,12 +11800,6 @@ body {
   display: inline-flex;
 }
 
-.line-numbers {
-  width: 7%;
-  text-align: right;
-  color: white;
-}
-
 .text-area {
   width: 85%;
   line-height: 2vh;
@@ -11816,7 +11810,6 @@ body {
   margin-right: 0;
   border-radius: 5px;
   color: #212529;
-  overflow-y: hidden;
   border: 0;
   padding: 0;
 }

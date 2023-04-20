@@ -9,8 +9,11 @@
 >- [Manual Usuario (PDF)](../Manuales/Proyecto%202/)
 >- [Librerías](../)
 
-npm i
-npm i bootswatch
+> npm i
+> npm i bootswatch
+> npm install file-saver --save
+> npm i --save-dev @types/file-saver
+> npm install --save-dev electron
 
 # Getting Started with Create React App
 

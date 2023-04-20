@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-//import 'bootswatch/dist/lux/bootstrap.min.css';
+import React, { useState } from "react";
 
 interface Tab {
   id: number;
@@ -12,7 +11,7 @@ export const IntroSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number | null>(null);
 
   //--------------------------------------------
-  const [numLines, setNumLines] = useState<string[]>(["1"]);
+  
   //--------------------------------------------
 
   const handleTabClick = (id: number) => {
@@ -41,32 +40,35 @@ export const IntroSection: React.FC = () => {
   };
 
   //-------------------------------------
-  function handleTextareaKeyUp(
-    event: React.KeyboardEvent<HTMLTextAreaElement>
-  ): void {
-    const numberOfLines = event.currentTarget.value.split("\n").length;
-    setNumLines((prevNumLines) => {
-      const newNumLines = Array(numberOfLines)
-        .fill(null)
-        .map((_, index) => String(index + 1));
-      return newNumLines;
+  const handleOpenFile = async () => {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".tw";
+    fileInput.addEventListener("change", async (event) => {
+      const target = event.target as HTMLInputElement;
+      const file = target.files?.[0];
+      if (file) {
+        const fileText = await file.text();
+        const newTabs = [...tabs];
+        const tabIndex = newTabs.findIndex((tab) => tab.id === activeTab);
+        newTabs[tabIndex] = { ...newTabs[tabIndex], value1: fileText };
+        setTabs(newTabs);
+      }
     });
-  }
-
-  function handleTextareaKeyDown(
-    event: React.KeyboardEvent<HTMLTextAreaElement>
-  ): void {
-    if (event.key === "Tab") {
-      const { selectionStart, selectionEnd, value } = event.currentTarget;
-      event.currentTarget.value =
-        value.substring(0, selectionStart) +
-        "\t" +
-        value.substring(selectionEnd);
-      event.currentTarget.selectionStart = event.currentTarget.selectionEnd =
-        selectionStart + 1;
-      event.preventDefault();
-    }
-  }
+    fileInput.click();
+  };
+  //-------------------------------
+  const handleSaveFile = async () => {
+    const content = tabs.find((tab) => tab.id === activeTab)?.value1;
+    if (!content) return;
+    const blob = new Blob([content], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "ArchivoProy.tw";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
   //-------------------------------
 
   return (
@@ -98,14 +100,6 @@ export const IntroSection: React.FC = () => {
             <>
               <div className="content-text">
                 <div className="editor">
-                  <div className="line-numbers">
-                    {numLines.map((num, index) => (
-                      <span key={index}>
-                        {num}
-                        <br />
-                      </span>
-                    ))}
-                  </div>
                   <textarea
                     className="text-area"
                     value={tabs.find((tab) => tab.id === activeTab)?.value1}
@@ -120,37 +114,34 @@ export const IntroSection: React.FC = () => {
                       };
                       setTabs(newTabs);
                     }}
-                    onKeyUp={handleTextareaKeyUp}
-                    onKeyDown={handleTextareaKeyDown}
                   ></textarea>
                 </div>
                 <div className="editor">
-                  <div className="line-numbers">
-                  {numLines.map((num, index) => (
-                      <span key={index}>
-                        {num}
-                        <br />
-                      </span>
-                    ))}
-                  </div>
                   <textarea
                     className="text-area"
                     value={tabs.find((tab) => tab.id === activeTab)?.value2}
                     readOnly
-                    onKeyUp={handleTextareaKeyUp}
-                    onKeyDown={handleTextareaKeyDown}
                   ></textarea>
                 </div>
               </div>
               <div className="content-button">
-                <button className="open-file">Open File</button>
+                <button
+                  className="open-file"
+                  onClick={() => {
+                    handleOpenFile();
+                  }}
+                >
+                  Open File
+                </button>
                 <button
                   className="acept-analyze"
                   onClick={() => handleCopyValue(activeTab)}
                 >
                   Analyze
                 </button>
-                <button className="save-file">Save File</button>
+                <button className="save-file" onClick={handleSaveFile}>
+                  Save File
+                </button>
               </div>
             </>
           )}

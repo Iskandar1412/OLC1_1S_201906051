@@ -7,7 +7,7 @@ export const ErroresSection: React.FC = () => {
 
   return (
     <>
-    <div>Fase2</div>
+    <h2 className="title-compiler">Tabla de Errores</h2>
     </>
   );
 };
