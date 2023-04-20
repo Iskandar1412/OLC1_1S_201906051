@@ -11,9 +11,9 @@ export type SectionContainerProps = {
 export const SectionContainer: React.FC<SectionContainerProps> = ({ children, sectionId }) => {
     return (
         <div id={sectionId} key={sectionId}>
-            <Container>
+            <div>
                 <Box minHeight='100vh'>{children}</Box>
-            </Container>
+            </div>
         </div>
     );
 };

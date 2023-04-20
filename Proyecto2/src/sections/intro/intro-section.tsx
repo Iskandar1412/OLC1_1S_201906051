@@ -1,75 +1,108 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 //import 'bootswatch/dist/lux/bootstrap.min.css';
 
-type FormElement = React.FormEvent<HTMLFormElement>;
-interface ITask {
-    name: string;
-    done: boolean;
+interface Tab {
+  id: number;
+  value1: string;
+  value2: string;
 }
 
 export const IntroSection: React.FC = () => {
-    const [ newTask, setNewTask] = useState<string>('');
-    const [ tasks, setTasks ] = useState<ITask[]>([]);
-    const handleSubmit = (e: FormElement) => {
-        e.preventDefault();
-        addTask(newTask);
-        //console.log(newTask);
-        //console.log(tasks);
-        setNewTask('');
-        taskInput.current?.focus();
-    }
-    
-    const taskInput = useRef<HTMLInputElement>(null);
+  const [tabs, setTabs] = useState<Tab[]>([]);
+  const [activeTab, setActiveTab] = useState<number | null>(null);
 
-    const toogleDoneTask = (i: number) => {
-        const newTasks: ITask[] = [...tasks];
-        newTasks[i].done = !newTasks[i].done;
-        setTasks(newTasks);
-    }
+  const handleTabClick = (id: number) => {
+    setActiveTab(id);
+  };
 
-    const removeTask = (i: number) => {
-        const newTasks: ITask[] = [...tasks];
-        newTasks.splice(i, 1);
-        setTasks(newTasks);
-    }
-    
-    const addTask = (name:string) => {
-        const newTasks = [...tasks, {name: name, done: false}]
-        setTasks(newTasks);
-    }
+  const handleAddTab = () => {
+    const newId = tabs.length === 0 ? 1 : tabs[tabs.length - 1].id + 1;
+    const newTab: Tab = { id: newId, value1: "", value2: "" };
+    setTabs([...tabs, newTab]);
+    setActiveTab(newId);
+  };
 
-    return (
-        <>
-        <div className="container p-4">
-            <div className="row">
-                <div className="col-md-6 offset-md-3">
-                    <div className="card">
-                        <div className="card-body">
-                            <form onSubmit={handleSubmit}>
-                                <input type="text" onChange={e => setNewTask(e.target.value)} value={newTask} className="form-control" ref={taskInput} autoFocus />
-                                <button className="btn btn-success btn-bloc mt-2">save</button>
-                            </form>
-                            {
-                                tasks.map((t: ITask, i: number) => (
-                                    <div className="card card-body mt-2" key={i}>
-                                        <h2 style={{textDecoration: t.done ? 'line-through' : ''}}>{t.name}</h2>
-                                        <div>
-                                            <button className="btn btn-secondary" onClick={() => toogleDoneTask(i)}>
-                                                {t.done ? '✓' : '𝒙'}
-                                            </button>
-                                            <button className="btn btn-danger" onClick={() => removeTask(i)}>
-                                            🗑
-                                            </button>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                </div>
+  const handleDeleteTab = (id: number) => {
+    const newTabs = tabs.filter((tab) => tab.id !== id);
+    setTabs(newTabs);
+    setActiveTab(newTabs.length === 0 ? null : newTabs[0].id);
+  };
+
+  const handleCopyValue = (id: number) => {
+    const newTabs = [...tabs];
+    const tabIndex = newTabs.findIndex((tab) => tab.id === id);
+    const value1 = newTabs[tabIndex].value1;
+    newTabs[tabIndex] = { ...newTabs[tabIndex], value2: value1 };
+    setTabs(newTabs);
+  };
+
+  const textArea = document.querySelector("textarea");
+  const lineNumbers = document.querySelector(".line-numbers");
+
+  return (
+    <>
+      <h2 className="title-compiler">Analizador</h2>
+      <div className="tabs-section">
+        <div className="tabs-container">
+          {tabs.map((tab) => (
+            <div
+              key={tab.id}
+              className={`tab ${activeTab === tab.id ? "active" : ""}`}
+              onClick={() => handleTabClick(tab.id)}
+            >
+              P{tab.id}
+              <button
+                className="delete-tab"
+                onClick={() => handleDeleteTab(tab.id)}
+              >
+                𝒙
+              </button>
             </div>
+          ))}
+          <button className="add-tab" onClick={handleAddTab}>
+            +
+          </button>
         </div>
-        </>
-    );
-}
+        <div className="tab-content">
+          {activeTab !== null && (
+            <>
+              <div className="line-numbers">
+                <textarea
+                  className="text-area"
+                  value={tabs.find((tab) => tab.id === activeTab)?.value1}
+                  onChange={(e) => {
+                    const newTabs = [...tabs];
+                    const tabIndex = newTabs.findIndex(
+                      (tab) => tab.id === activeTab
+                    );
+                    newTabs[tabIndex] = {
+                      ...newTabs[tabIndex],
+                      value1: e.target.value,
+                    };
+                    setTabs(newTabs);
+                  }}
+                />
 
+                <textarea
+                  className="text-area"
+                  value={tabs.find((tab) => tab.id === activeTab)?.value2}
+                  readOnly
+                />
+              </div>
+              <div className="content-button">
+                <button className="open-file">Open File</button>
+                <button
+                  className="acept-analyze"
+                  onClick={() => handleCopyValue(activeTab)}
+                >
+                  Analyze
+                </button>
+                <button className="save-file">Save File</button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
