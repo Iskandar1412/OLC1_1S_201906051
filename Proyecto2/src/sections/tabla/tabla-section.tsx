@@ -2,6 +2,8 @@ import React from "react";
 
 export const TablaSection: React.FC = () => {
     return (
-        <div>Tabla</div>
+        <>
+        <h2 className="title-compiler">Tabla de Símbolos</h2>
+        </>
     );
 }

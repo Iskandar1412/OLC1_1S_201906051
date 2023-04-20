@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-//import 'bootswatch/dist/lux/bootstrap.min.css';
+import React, { useState } from "react";
 
 interface Tab {
   id: number;
@@ -11,7 +10,8 @@ export const IntroSection: React.FC = () => {
   const [tabs, setTabs] = useState<Tab[]>([]);
   const [activeTab, setActiveTab] = useState<number | null>(null);
 
-  
+  //--------------------------------------------
+  //--------------------------------------------
 
   const handleTabClick = (id: number) => {
     setActiveTab(id);
@@ -39,7 +39,23 @@ export const IntroSection: React.FC = () => {
   };
 
   //-------------------------------------
-  
+  const handleOpenFile = async () => {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".tw";
+    fileInput.addEventListener("change", async (event) => {
+      const target = event.target as HTMLInputElement;
+      const file = target.files?.[0];
+      if (file) {
+        const fileText = await file.text();
+        const newTabs = [...tabs];
+        const tabIndex = newTabs.findIndex((tab) => tab.id === activeTab);
+        newTabs[tabIndex] = { ...newTabs[tabIndex], value1: fileText };
+        setTabs(newTabs);
+      }
+    });
+    fileInput.click();
+  };
   //-------------------------------
 
   return (
@@ -71,7 +87,6 @@ export const IntroSection: React.FC = () => {
             <>
               <div className="content-text">
                 <div className="editor">
-                  <div className="line-numbers"><span></span></div>
                   <textarea
                     className="text-area"
                     value={tabs.find((tab) => tab.id === activeTab)?.value1}
@@ -85,12 +100,10 @@ export const IntroSection: React.FC = () => {
                         value1: e.target.value,
                       };
                       setTabs(newTabs);
-                      
                     }}
                   ></textarea>
                 </div>
                 <div className="editor">
-                  <div className="line-numbers"><span></span></div>
                   <textarea
                     className="text-area"
                     value={tabs.find((tab) => tab.id === activeTab)?.value2}
@@ -99,7 +112,14 @@ export const IntroSection: React.FC = () => {
                 </div>
               </div>
               <div className="content-button">
-                <button className="open-file">Open File</button>
+                <button
+                  className="open-file"
+                  onClick={() => {
+                    handleOpenFile();
+                  }}
+                >
+                  Open File
+                </button>
                 <button
                   className="acept-analyze"
                   onClick={() => handleCopyValue(activeTab)}
