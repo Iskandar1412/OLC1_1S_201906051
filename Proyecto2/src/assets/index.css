@@ -11784,6 +11784,10 @@ body {
   margin-bottom: 2px;
 }
 
+.tab-content {
+  height: 78vh;
+}
+
 .content-button {
   display: flex;
   margin-top: 12px;
@@ -11803,7 +11807,7 @@ body {
 .text-area {
   width: 85%;
   line-height: 2vh;
-  min-height: 72vh;
+  height: 70vh;
   margin-left: 0;
   resize: none;
   margin-bottom: 7px;

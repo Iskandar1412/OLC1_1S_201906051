@@ -1,4 +1,12 @@
+%{
+  // Declaración de código JavaScript
+
+%}
+
 %lex
+// Declaración de reglas de gramática BNF
+// Las reglas se definen en el siguiente formato:
+// rule: production1 production2 { action }
 /*declaramos caso insensitivo*/
 %options case-insensitive
 %x string
@@ -13,3 +21,6 @@
 "break"                                     return 'sen_break'
 "continue"                                  return 'sen_continue'
 "return"                                    return 'sen_return'
+
+
+// Declaración de acciones semánticas en JavaScript
