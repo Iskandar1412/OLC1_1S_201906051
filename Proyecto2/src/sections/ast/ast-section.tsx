@@ -1,7 +1,7 @@
 import React from "react";
-
+import logo from "../../Forma 1.png"
 export const ASTSection: React.FC = () => {
     return (
-        <h2 className="title-compiler">Arbol AST</h2>
-    );
+        <img src={logo} className="Logo-As" alt="logo" />
+      );
 }

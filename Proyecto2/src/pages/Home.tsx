@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../a2.jpg"
+import logo from "../Forma 1.png"
 
 
 /*

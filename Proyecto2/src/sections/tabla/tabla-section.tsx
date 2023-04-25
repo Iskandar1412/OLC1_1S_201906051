@@ -1,9 +1,8 @@
 import React from "react";
+import logo from "../../Forma 1.png"
 
 export const TablaSection: React.FC = () => {
     return (
-        <>
-        <h2 className="title-compiler">Tabla de Símbolos</h2>
-        </>
+        <img src={logo} className="Logo-As" alt="logo" />
     );
 }

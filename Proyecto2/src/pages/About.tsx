@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../a2.jpg"
+import logo from "../Iskandar1.png"
 export interface IAboutPageProps {};
 
 const AboutPage: React.FunctionComponent<IAboutPageProps> = (props) => {
