@@ -16,15 +16,15 @@ const navigationItems = [
     },
     {
         text: "Errores",
-        to: SectionIdEnum.errores,
+        to: SectionIdEnum.intro,//errores
     },
     {
         text: "AST",
-        to: SectionIdEnum.ast,
+        to: SectionIdEnum.intro,//ast
     },
     {
         text: "Tabla Simbolos",
-        to: SectionIdEnum.tabla,
+        to: SectionIdEnum.intro,//tabla
     },
 ];
 

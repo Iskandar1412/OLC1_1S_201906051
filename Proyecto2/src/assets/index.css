@@ -12022,3 +12022,8 @@ input:checked + label {
   height: 82vh;
   background-color: #212529;
 }
+
+.Logo-Asv2 {
+  width: 40px;
+  margin-right: 10px;
+}

@@ -5,5 +5,21 @@ const { TablaSimbolos } = require('../interpreter/tabla_simbolos/TablaSimbolos.j
 
 export class Operador {
     constructor() { }
+
+    ejecutar(root) {
+        var Resultado1 = null;
+        var Resultado2 = null;
+        var Resultado3 = null;
+
+        switch(root.name) {
+            case "EXP":
+                console.log('EXP');
+                break;
+            
+            default:
+                break;
+        }
+
+    }
     
 }

@@ -3,7 +3,7 @@ import { Toolbar, Box, Typography, useMediaQuery, useTheme, } from '@mui/materia
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { SectionIdEnum } from '../../types';
 import { Navigation } from './navigation/navigation.component';
-import Logo from '../../logos.png'
+import Logo from '../../Log.png'
 
 export type MainLayoutProps = {
     children: React.ReactNode;
