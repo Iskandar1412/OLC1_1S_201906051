@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+//import Graphviz from "graphviz-react";
+//import ReactZoomPanPinch from 'react-zoom-pan-pinch';
+
 
 interface Tab {
   id: number;
@@ -9,9 +12,10 @@ interface Tab {
 export const IntroSection: React.FC = () => {
   const [tabs, setTabs] = useState<Tab[]>([]);
   const [activeTab, setActiveTab] = useState<number | null>(null);
-
+  
   //--------------------------------------------
-
+  // para graphos
+  
   //--------------------------------------------
 
   const handleTabClick = (id: number) => {
@@ -70,24 +74,38 @@ export const IntroSection: React.FC = () => {
     URL.revokeObjectURL(url);
   };
   //-------------------------------
+  //-------------------------------
+  const dot = `digraph {
+    A -> B;
+    B -> C;
+    C -> D;
+  }`;
+  //-------------------------------
 
   return (
     <>
       <main className="container-w">
         <input id="tab1" type="radio" name="tabs" defaultChecked />
-        <label htmlFor="tab1" className="label-type">Analyzer</label>
+        <label htmlFor="tab1" className="label-type">
+          Analyzer
+        </label>
 
         <input id="tab2" type="radio" name="tabs" />
-        <label htmlFor="tab2" className="label-type">Errores</label>
+        <label htmlFor="tab2" className="label-type">
+          Errores
+        </label>
 
         <input id="tab3" type="radio" name="tabs" />
-        <label htmlFor="tab3" className="label-type">Árbol AST</label>
+        <label htmlFor="tab3" className="label-type">
+          Árbol AST
+        </label>
 
         <input id="tab4" type="radio" name="tabs" />
-        <label htmlFor="tab4" className="label-type">Tabla de Símbolos</label>
+        <label htmlFor="tab4" className="label-type">
+          Tabla de Símbolos
+        </label>
 
         <section id="content1" className="tabs-contentype">
-
           <div className="tabs-section">
             <div className="tabs-container">
               {tabs.map((tab) => (
@@ -161,23 +179,21 @@ export const IntroSection: React.FC = () => {
               )}
             </div>
           </div>
-          
         </section>
 
         <section id="content2" className="tabs-contentype">
-          <div id="seccion-errores">
-
-          </div>
-          
+          <div id="seccion-errores"></div>
         </section>
 
         <section id="content3" className="tabs-contentype">
-        <div id="seccion-ast"></div>
+          <div id="seccion-ast">
+            
+            
+          </div>
         </section>
 
         <section id="content4" className="tabs-contentype">
           <div id="seccion-tabla"></div>
-          
         </section>
       </main>
     </>

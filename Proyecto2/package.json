@@ -20,8 +20,11 @@
     "react": "^18.2.0",
     "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.5",
+    "react-graphviz": "^0.7.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
+    "react-zoom-pan-pinch": "^3.0.7",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
