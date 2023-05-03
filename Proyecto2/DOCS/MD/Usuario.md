@@ -1,4 +1,4 @@
-# Proyecto 2
+# Proyecto 2 
 ## Manual de Usuario
 ### Introducción
 <p style="text-align: justify;">
