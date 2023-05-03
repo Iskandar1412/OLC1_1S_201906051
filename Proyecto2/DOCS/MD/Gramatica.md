@@ -3,14 +3,12 @@
 ### Introducción
 <p style="text-align: justify;">
 
-ini
-
+ini<br/>
 &nbsp;&nbsp;    : ENTRADA EOF  
 &nbsp;&nbsp;    | error EOF   
 ;
 
 ENTRADA
-
     : ENTRADA ENTCERO                   
     | ENTCERO                           
 ;
