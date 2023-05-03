@@ -132,10 +132,9 @@ Se exportarán clases las cuales servirán para su posterior uso:
 
 </br>
 
-#### Funciones del Progarama
+#### Funciones del Programa
 
 - Consta de 3 botones, básicos para el análisis, guardado y abrir archivos..
-
 
 </br>
 
