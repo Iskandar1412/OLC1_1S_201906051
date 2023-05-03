@@ -4,11 +4,13 @@
 <p style="text-align: justify;">
 
 ini
-&nbsp;    : ENTRADA EOF  
-&nbsp;    | error EOF   
+
+&nbsp;&nbsp;    : ENTRADA EOF  
+&nbsp;&nbsp;    | error EOF   
 ;
 
 ENTRADA
+
     : ENTRADA ENTCERO                   
     | ENTCERO                           
 ;
