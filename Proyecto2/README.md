@@ -5,9 +5,10 @@
 
 >- [Manual Tecnico (MD)](./)
 >- [Manual de Usuario (MD)](../)
+>- [Gramáticas (MD)]()
 >- [Manual Tecnico (PDF)](./DOCS/Manual%20Tecnico%20-%20Proyecto%202.pdf)
 >- [Manual Usuario (PDF)](./DOCS/Manual%20Usuario%20-%20Proyecto%202.pdf)
->- [Gramáticas](./DOCS/Gramatica%20-%20Proyecto%202.pdf)
+>- [Gramáticas (PDF)](./DOCS/Gramatica%20-%20Proyecto%202.pdf)
 >- [Inciso Proyecto](./DOCS/%5BOLC1%5DProyecto2_1S2023.pdf)
 --------
 >- npm i
