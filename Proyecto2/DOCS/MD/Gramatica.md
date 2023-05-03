@@ -1,6 +1,6 @@
 # Proyecto 1
 ## Gramática
-### Introducción
+------------------------------------------------
 <p style="text-align: justify;">
 
 ini<br/>
