@@ -6,12 +6,13 @@
 ini<br/>
 &nbsp;&nbsp;    : ENTRADA EOF  
 &nbsp;&nbsp;    | error EOF   
-;
+;<br/><br/>
 
 ENTRADA<br/>
 &nbsp;&nbsp;    : ENTRADA ENTCERO                   
 &nbsp;&nbsp;    | ENTCERO                           
-;
+;<br/><br/>
+
 ENTCERO<br/>
 &nbsp;&nbsp;    : FUNCIONBODY     
 &nbsp;&nbsp;    | METODOBODY     
@@ -19,7 +20,7 @@ ENTCERO<br/>
 &nbsp;&nbsp;    | DEC_VAR         
 &nbsp;&nbsp;    | DEC_VECT        
 &nbsp;&nbsp;    | DEC_LIST       
-;
+;<br/><br/>
 
 FUNCIONBODY<br/>
 &nbsp;&nbsp;    : TIPO id pabre pcierra labre INSTRUCCION lcierra                  
@@ -37,7 +38,7 @@ FUNCIONBODY<br/>
 &nbsp;&nbsp;    | TIPO error lcierra                                                  
 &nbsp;&nbsp;    | TIPO_VECT error lcierra                                        
 &nbsp;&nbsp;    | TIPO_LIST error lcierra                                            
-;
+;<br/><br/>
 
 METODOBODY<br/>
 &nbsp;&nbsp;    : prvoid id pabre pcierra labre INSTRUCCION lcierra                   
@@ -45,30 +46,30 @@ METODOBODY<br/>
 &nbsp;&nbsp;    | prvoid id pabre LISTAPARAMETROS pcierra labre INSTRUCCION lcierra      
 &nbsp;&nbsp;    | prvoid id pabre LISTAPARAMETROS pcierra labre lcierra                  
 &nbsp;&nbsp;    | prvoid error lcierra                                           
-;
+;<br/><br/>
 
 
 EXECBODY<br/>
 &nbsp;&nbsp;    : premain id pabre pcierra ptcoma                     
 &nbsp;&nbsp;    | premain id pabre LISTAVALORES pcierra ptcoma           
 &nbsp;&nbsp;    | premain error ptcoma                                 
-;
+;<br/><br/>
 
 LISTAPARAMETROS<br/>
 &nbsp;&nbsp;    : LISTAPARAMETROS coma PARAMETROS  
 &nbsp;&nbsp;    | PARAMETROS                    
-;
+;<br/><br/>
 
 PARAMETROS<br/>
 &nbsp;&nbsp;    : TIPO_VECT id   
 &nbsp;&nbsp;    | TIPO_LIST id     
 &nbsp;&nbsp;    | TIPO id         
-;
+;<br/><br/>
 
 INSTRUCCION<br/>
 &nbsp;&nbsp;    : INSTRUCCION INSCERO      
 &nbsp;&nbsp;    | INSCERO                
-;
+;<br/><br/>
 
 INSCERO<br/>
 &nbsp;&nbsp;    : DEC_VAR                 
@@ -81,80 +82,80 @@ INSCERO<br/>
 &nbsp;&nbsp;    | FPRINT                 
 &nbsp;&nbsp;    | error ptcoma           
 &nbsp;&nbsp;    | error lcierra            
-;
+;<br/><br/>
 
 SENTENCIATRANSFERENCIA<br/>
 &nbsp;&nbsp;    : prbreak ptcoma              
 &nbsp;&nbsp;    | prreturn EXPRESION ptcoma     
 &nbsp;&nbsp;    | prcontinue ptcoma          
 &nbsp;&nbsp;    | prreturn ptcoma            
-;
+;<br/><br/>
 
 SENTENCIACICLO<br/>
 &nbsp;&nbsp;    : WHILE       
 &nbsp;&nbsp;    | FOR        
 &nbsp;&nbsp;    | DOWHILE      
-;
+;<br/><br/>
 
 WHILE<br/>
 &nbsp;&nbsp;    : prwhile pabre EXPRESION pcierra labre INSTRUCCION lcierra    
 &nbsp;&nbsp;    | prwhile pabre EXPRESION pcierra labre lcierra             
 &nbsp;&nbsp;    | prwhile error lcierra                                 
-;
+;<br/><br/>
 
 FOR<br/>
 &nbsp;&nbsp;    : prfor pabre DEC_VAR EXPRESION ptcoma ACTUALIZACION pcierra labre INSTRUCCION lcierra    
 &nbsp;&nbsp;    | prfor pabre DEC_VAR EXPRESION ptcoma ACTUALIZACION pcierra labre lcierra                 
 &nbsp;&nbsp;    | prfor error lcierra                                          
-;
+;<br/><br/>
 
 ACTUALIZACION<br/>
 &nbsp;&nbsp;    : id igual EXPRESION 
 &nbsp;&nbsp;    | id incremento 
 &nbsp;&nbsp;    | id decremento 
-;
+;<br/><br/>
 
 DOWHILE<br/>
 &nbsp;&nbsp;    : prdo labre INSTRUCCION lcierra prwhile pabre EXPRESION pcierra ptcoma    
 &nbsp;&nbsp;    | prdo labre lcierra prwhile pabre EXPRESION pcierra ptcoma            
 &nbsp;&nbsp;    | prdo error ptcoma                                        
-;
+;<br/><br/>
 
 SENTENCIACONTROL<br/>
 &nbsp;&nbsp;    : CONTROLIF    
 &nbsp;&nbsp;    | SWITCH       
-;
+;<br/><br/>
 
 CONTROLIF<br/>
 &nbsp;&nbsp;    : IF                   
 &nbsp;&nbsp;    | IFELSE               
 &nbsp;&nbsp;    | ELSEIF               
 &nbsp;&nbsp;    | prif error lcierra    
-;
+;<br/><br/>
 
 IF<br/>
 &nbsp;&nbsp;    : prif pabre EXPRESION pcierra labre INSTRUCCION lcierra   
 &nbsp;&nbsp;    | prif pabre EXPRESION pcierra labre lcierra        
-;
+;<br/><br/>
 
 IFELSE<br/>
 &nbsp;&nbsp;    : prif pabre EXPRESION pcierra labre INSTRUCCION lcierra prelse labre INSTRUCCION lcierra   
 &nbsp;&nbsp;    | prif pabre EXPRESION pcierra labre lcierra prelse labre INSTRUCCION lcierra              
 &nbsp;&nbsp;    | prif pabre EXPRESION pcierra labre INSTRUCCION lcierra prelse labre lcierra               
 &nbsp;&nbsp;    | prif pabre EXPRESION pcierra labre lcierra prelse labre lcierra                    
-;
+;<br/><br/>
 
 ELSEIF<br/>
 &nbsp;&nbsp;    : prif pabre EXPRESION pcierra labre INSTRUCCION lcierra prelse CONTROLIF   
 &nbsp;&nbsp;    | prif pabre EXPRESION pcierra labre lcierra prelse CONTROLIF     
-;
+;<br/><br/>
 
 SWITCH<br/>
 &nbsp;&nbsp;    : prswitch pabre EXPRESION pcierra labre CASESLIST DEFAULT lcierra    
 &nbsp;&nbsp;    | prswitch pabre EXPRESION pcierra labre CASESLIST lcierra         
 &nbsp;&nbsp;    | prswitch pabre EXPRESION pcierra labre DEFAULT lcierra           
 &nbsp;&nbsp;    | prswitch error lcierra                     
-;
+;<br/><br/>
 
 CASESLIST<br/>
 &nbsp;&nbsp;    : CASESLIST prcase EXPRESION dospuntos INSTRUCCION     
@@ -162,12 +163,12 @@ CASESLIST<br/>
 &nbsp;&nbsp;    | prcase EXPRESION dospuntos INSTRUCCION            
 &nbsp;&nbsp;    | prcase EXPRESION dospuntos                            
 &nbsp;&nbsp;    | prcase error dospuntos                             
-;
+;<br/><br/>
 
 DEFAULT<br/>
 &nbsp;&nbsp;    : prdefault dospuntos INSTRUCCION        
 &nbsp;&nbsp;    | prdefault dospuntos                    
-;
+;<br/><br/>
 
 DEC_VAR<br/>
 &nbsp;&nbsp;    : TIPO id igual EXPRESION ptcoma   
@@ -176,7 +177,7 @@ DEC_VAR<br/>
 &nbsp;&nbsp;    | id incremento ptcoma        
 &nbsp;&nbsp;    | id decremento ptcoma            
 &nbsp;&nbsp;    | TIPO error ptcoma             
-;
+;<br/><br/>
 
 DEC_VECT<br/>
 &nbsp;&nbsp;    : TIPO_VECT id igual prnew TIPO cabre EXPRESION ccierra ptcoma       
@@ -184,11 +185,11 @@ DEC_VECT<br/>
 &nbsp;&nbsp;    | id cabre EXPRESION ccierra igual EXPRESION ptcoma         
 &nbsp;&nbsp;    | TIPO_VECT id igual EXPRESION ptcoma                   
 &nbsp;&nbsp;    | TIPO_VECT error ptcoma                                       
-;
+;<br/><br/>
 
 VALORES<br/>
 &nbsp;&nbsp;    : EXPRESION 
-;
+;<br/><br/>
 
 DEC_LIST<br/>
 &nbsp;&nbsp;    : TIPO_LIST id igual prnew prlist menor TIPO mayor ptcoma            
@@ -196,19 +197,19 @@ DEC_LIST<br/>
 &nbsp;&nbsp;    | id cabre cabre EXPRESION ccierra ccierra igual EXPRESION ptcoma      
 &nbsp;&nbsp;    | TIPO_LIST id igual EXPRESION ptcoma                     
 &nbsp;&nbsp;    | TIPO_LIST error ptcoma                      
-;
+;<br/><br/>
 
 TIPO_VECT<br/>
 &nbsp;&nbsp;    : TIPO cabre ccierra     
-;
+;<br/><br/>
 
 TIPO_LIST<br/>
 &nbsp;&nbsp;    : prlist menor TIPO mayor   
-;
+;<br/><br/>
 
 TIPO<br/>
 &nbsp;&nbsp;    : TIPODATO    
-;
+;<br/><br/>
 
 TIPODATO<br/>
 &nbsp;&nbsp;    : prstring      
@@ -216,25 +217,25 @@ TIPODATO<br/>
 &nbsp;&nbsp;    | prdouble    
 &nbsp;&nbsp;    | prchar       
 &nbsp;&nbsp;    | prboolean   
-;
+;<br/><br/>
 
 FTOSTRING<br/>
 &nbsp;&nbsp;    : prtoString pabre EXPRESION pcierra       
-;
+;<br/><br/>
 
 LLAMADA<br/>
 &nbsp;&nbsp;    : id pabre LISTAVALORES pcierra     
 &nbsp;&nbsp;    | id pabre pcierra                 
-;
+;<br/><br/>
 
 LISTAVALORES<br/>
 &nbsp;&nbsp;    : LISTAVALORES coma VALORES 
 &nbsp;&nbsp;    | VALORES                   
-;
+;<br/><br/>
 
 CASTEO<br/>
 &nbsp;&nbsp;    : pabre TIPO pcierra EXPRESION 
-;
+;<br/><br/>
 
 EXPRESION<br/>
 &nbsp;&nbsp;    : EXPRESION suma EXPRESION              
@@ -266,11 +267,11 @@ EXPRESION<br/>
 &nbsp;&nbsp;    | TERNARIO                                
 &nbsp;&nbsp;    | LLAMADA                                  
 &nbsp;&nbsp;    | FUNCIONESRESERVADAS                          
-;
+;<br/><br/>
 
 TERNARIO<br/>
 &nbsp;&nbsp;    : EXPRESION interrogacion EXPRESION dospuntos EXPRESION 
-;
+;<br/><br/>
 
 FUNCIONESRESERVADAS<br/>
 &nbsp;&nbsp;    : FTOLOWER        
@@ -281,37 +282,37 @@ FUNCIONESRESERVADAS<br/>
 &nbsp;&nbsp;    | FTYPEOF           
 &nbsp;&nbsp;    | FTOSTRING        
 &nbsp;&nbsp;    | FTOCHARARRAY      
-;
+;<br/><br/>
 
 FPRINT<br/>
 &nbsp;&nbsp;    : prprint pabre EXPRESION pcierra ptcoma    
 &nbsp;&nbsp;    | prprint pabre pcierra ptcoma            
 &nbsp;&nbsp;    | prprint error ptcoma                     
-;
+;<br/><br/>
 
 FTOLOWER<br/>
 &nbsp;&nbsp;    : prtoLower pabre EXPRESION pcierra       
-;
+;<br/><br/>
 
 FTOUPPER<br/>
 &nbsp;&nbsp;    : prtoUpper pabre EXPRESION pcierra        
-;
+;<br/><br/>
 
 FTOCHARARRAY<br/>
 &nbsp;&nbsp;    : prtoCharArray pabre EXPRESION pcierra     
-;
+;<br/><br/>
 
 FLENGTH<br/>
 &nbsp;&nbsp;    : prlength pabre EXPRESION pcierra         
-;
+;<br/><br/>
 
 FTRUNCATE<br/>
 &nbsp;&nbsp;    : prtruncate pabre EXPRESION pcierra      
-;
+;<br/><br/>
 
 FROUND<br/>
 &nbsp;&nbsp;    : prround pabre EXPRESION pcierra        
-;
+;<br/><br/>
 
 FTYPEOF<br/>
 &nbsp;&nbsp;    : prtypeof pabre EXPRESION pcierra        
