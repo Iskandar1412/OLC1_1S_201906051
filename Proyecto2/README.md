@@ -3,12 +3,12 @@
 |Juan Urbina| 201906051| 03/05/2023 |
 ## Manuales
 
->- [Manual Tecnico (MD)](./)
->- [Manual de Usuario (MD)](../)
->- [Gramáticas (MD)]()
->- [Manual Tecnico (PDF)](./DOCS/Manual%20Tecnico%20-%20Proyecto%202.pdf)
->- [Manual Usuario (PDF)](./DOCS/Manual%20Usuario%20-%20Proyecto%202.pdf)
->- [Gramáticas (PDF)](./DOCS/Gramatica%20-%20Proyecto%202.pdf)
+>- [Manual Tecnico (MD)](./DOCS/MD/Tecnico.md)
+>- [Manual de Usuario (MD)](./DOCS/MD/Usuario.md)
+>- [Gramáticas (MD)](./DOCS/MD/Gramatica.md)
+>- [Manual Tecnico (PDF)](./DOCS/PDF/Manual%20Tecnico%20-%20Proyecto%202.pdf)
+>- [Manual Usuario (PDF)](./DOCS/PDF/Manual%20Usuario%20-%20Proyecto%202.pdf)
+>- [Gramáticas (PDF)](./DOCS/PDF/Gramatica%20-%20Proyecto%202.pdf)
 >- [Inciso Proyecto](./DOCS/%5BOLC1%5DProyecto2_1S2023.pdf)
 --------
 >- npm i
