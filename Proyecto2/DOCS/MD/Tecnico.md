@@ -1,4 +1,4 @@
-# Proyecto 1
+# Proyecto 2
 ## Manual Técnico
 ### Introducción
 <p style="text-align: justify;">

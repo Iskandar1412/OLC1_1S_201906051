@@ -1,33 +1,57 @@
-# Proyecto 1
+# Proyecto 2
 ## Manual de Usuario
 ### Introducción
 <p style="text-align: justify;">
-Dentro del primer proyecto del laboratorio de Organización de Lenguajes & Compiladores 1 se mostrará el modo en el que funciona el programa mediante una interfaz gráfica y sus subfunciones.
+Dentro del último proyecto del laboratorio de Organización de Lenguajes & Compiladores 1 se mostrará el modo en el que funciona el programa mediante una interfaz gráfica y sus subfunciones.
 
-Se empleo el lenguaje de programación Java para la creación de la interfaz gráfica del programa en el que tiene diferentes funciones en el mismo para lo que es el análisis, la generación y otros más para su respectivo funcionamiento; se utilizo un software para la graficación de los arboles y tablas.
+Se empleo el lenguaje de JavaSript para la creación de la interfaz gráfica del programa en el que tiene diferentes funciones en el mismo para lo que es el análisis, la generación y otros más para su respectivo funcionamiento; se utilizó un software para obtener tablas y graficar el árbol AST.
 
-Se pudo determinar que la implementación de las estructuras y el almacenamiento y/o arreglo de la información obtenida en cada una de ellas no mostro ningún problema durante su ejecución.</p>
+Se pudo determinar que la implementación de las estructuras y el almacenamiento y/o arreglo de la información obtenida en cada una de ellas no mostro ningún problema durante su ejecución.
+</p>
 
 
 ### Requisitos del Sistema
 
 
+
 >- **_Sistema Operativo:_** Windows 7 o superior
 >- **_CPU:_** Intel Pentium D o AMD Athlon 64 (K8) 2.6GHz. (Requisitos Mínimo)
 >- **_RAM:_** 600MB
->- **_Lenguaje Utilizado:_** Java
->- **_IDE:_** NetBeans 16
->- **_JDK:_** 19.0 (Open JDK)
->- **_Versión Java:_** 19.0
-
-### Requisitos En el Proyecto (Dependencias Proyecto hecho en MAVEN)
+>- **_Lenguaje Utilizado:_** JavaScript
+>- **_IDE:_** Visual Studio Code
+>- **_USO de Framework:_** React
 
 
->- **_Versión CUP:_** 11-b
->- **_Versión CUP-Runtime:_** 11-b
->- **_Versión Gson:_** 2.8.9
->- **_Versión JFlex:_** 1.9.0
->- **_Versión json-simple:_** 1.1.1
+### Requisitos del en el Proyecto (Dependencias Proyecto, React)
+
+
+>- **_"@emotion/react":_** "^11.10.4",
+>- **_"@emotion/styled":_** "^11.10.4",
+>- **_"@mui/icons-material":_** "^5.10.3",
+>- **_"@mui/material":_** "^5.10.3",
+>- **_"@testing-library/jest-dom":_** "^5.16.5",
+>- **_"@testing-library/react":_** "^13.4.0",
+>- **_"@testing-library/user-event":_** "^13.5.0",
+>- **_"@types/jest":_** "^27.5.2",
+>- **_"@types/node":_** "^16.18.23",
+>- **_"@types/react":_** "^18.0.35",
+>- **_"@types/react-dom":_** "^18.0.11",
+>- **_"bootswatch":_** "^5.2.3",
+>- **_"d3":_** "^7.8.4",
+>- **_"d3-selection":_** "^3.0.0",
+>- **_"file-saver":_** "^2.0.5",
+>- **_"fs":_** "^0.0.1-security",
+>- **_"graphviz-react":_** "^1.2.5",
+>- **_"jison":_** "^0.4.18",
+>- **_"react":_** "^18.2.0",
+>- **_"react-dom":_** "^18.2.0",
+>- **_"react-draggable":_** "^4.4.5",
+>- **_"react-graphviz":_** "^0.7.0",
+>- **_"react-router-dom":_** "^6.10.0",
+>- **_"react-scripts":_** "5.0.1",
+>- **_"react-zoom-pan-pinch":_** "^3.0.7",
+>- **_"web-vitals":_** "^2.1.4",
+>- **_"webpack":_** "^5.81.0"
 
 ### Funcionamiento del programa
 
@@ -35,115 +59,68 @@ Se pudo determinar que la implementación de las estructuras y el almacenamiento
 
 </br>
 
-El programa al correr lee el directorio de reportes, para ver si hay imágenes de anteriores veces que se haya utilizado y generado gráficas de las expresiones regulares y en caso de que no estén vacías las carpetas las agrega al menú de expresiones regulares para visualizarlas.
+El programa al correr el servidor, abriendo el servidor local en donde se va a ejecutar el código para el uso de la aplicación
 
-![](../Assets/Proyecto1/Manual%20Usuario/Inicio.png)
-Programa Abierto cuando tiene archivos de imágenes anteriores.
+![](../../../Assets/Proyecto2/Usuario/U01.png)
+Programa Abierto.
 
-</br>
-
-![](../Assets/Proyecto1/Manual%20Usuario/Inicio2.png)
-Programa Abierto cuando no tiene archivos de imágenes anteriores.
+![](../../../Assets/Proyecto2/Usuario/U02.png)
 
 </br>
 
 >Abrir Fichero
 
-A la hora de querer abrir un fichero, abre una carpeta en el directorio de "Archivos" en el que estarán los archivos de prueba que se usarán (todos los archivos que abre son de extensión "olc").
+A la hora de querer abrir un fichero, con el botón de Open File abriendo el explorador de archivos (todos los archivos que abre son de extensión "tw").
 
-![](../Assets/Proyecto1/Manual%20Usuario/abrir.png)
+![](../../../Assets/Proyecto2/Usuario/U03.png)
 
 </br>
 
 Una vez abierto el archivo lo muestra en la pantalla de texto lo que tiene el archivo.
 
-![](../Assets/Proyecto1/Manual%20Usuario/abrir2.png)
+![](../../../Assets/Proyecto2/Usuario/U04.png)
 
 </br>
 
 >Guardar Archivo
 
-En caso de querer cambiar el archivo y guardarlo se pueden agregar más líneas (en caso de que uno requiera o quiera agregar más y se utiliza la opción de guardar "Save"), mostrando en consola que se guardó el archivo.
+En caso de querer cambiar el archivo y guardarlo se pueden agregar más líneas (en caso de que uno requiera o quiera agregar más y se utiliza la opción de guardar "Save File").
 
-![](../Assets/Proyecto1/Manual%20Usuario/Guardar.png)
-
-</br>
-
-En el caso de querer guardar el archivo como uno nuevo se utiliza la opción "Save As", abriendo una pestaña emergente para guardar el archivo (siempre al guardar poner la extensión).
-
-![](../Assets/Proyecto1/Manual%20Usuario/SaveAs.png)
+![](../../../Assets/Proyecto2/Usuario/U05.png)
 
 </br>
 
-![](../Assets/Proyecto1/Manual%20Usuario/SaveAs2.png)
+En el caso de querer guardar el archivo como uno nuevo se utiliza la opción "Save As", abriendo una pestaña emergente para guardar el archivo (guarda con la extensión el archivo).
+
+![](../../../Assets/Proyecto2/Usuario/U06.png)
 
 </br>
 
->Archivo Nuevo
+>Analizar Entrada
 
-En el caso para crear un nuevo archivo se utiliza la opción "nuevo" limpiando la pantalla de texto y el label que muestra la ruta.
+Agarra el contenido del TextArea y empieza el proceso de análisis, generando de esta forma el árbol, tablas de errores y sintácticos y la salida de consola.
 
-![](../Assets/Proyecto1/Manual%20Usuario/Nuevo.png)
-
-</br>
-
->Analizar Archivo & Generar
-
-Ahora bien, para analizar el archivo y ver gráficas y todo lo demás, se requiere un archivo abierto, con la opción de "Analizar" analizará el archivo línea por línea mostrando si tiene error alguno o no, también agregará en la lista las expresiones regulares en caso de no haber errores.
-
-![](../Assets/Proyecto1/Manual%20Usuario/analizar.png)
-
-</br>
-
-Ahora tocará generar los autómatas para poder visualizarlos </br>
-En la consola mostrará al generar si las cadenas fueron aceptadas con respecto a las Expresiones Regulares correspondientes.
-
-![](../Assets/Proyecto1/Manual%20Usuario/Generar.png)
-
-</br>
-
->Otros
-
-Como se puede ver se actualizo el árbol de archivos que muestra que si tienen archivos las carpetas y también ya se pueden visualizar las imágenes.
-
-![](../Assets/Proyecto1/Manual%20Usuario/vis.png)
-
-</br>
-
-Con la opción de "abrir carpeta directorio" abre la carpeta "Archivos" que es la que tiene los archivos de prueba.
-
-![](../Assets/Proyecto1/Manual%20Usuario/archivos.png)
-
-</br>
-
-Y por último esta la opción para limpiar y borrar todos los archivos de la carpeta de los reportes.
-
-
-![](../Assets/Proyecto1/Manual%20Usuario/borrar.png)
-
-</br>
-
-![](../Assets/Proyecto1/Manual%20Usuario/SalidaJSON.png)
-archivo de salida JSON
+![](../../../Assets/Proyecto2/Usuario/U07.png)
+![](../../../Assets/Proyecto2/Usuario/U08.png)
+![](../../../Assets/Proyecto2/Usuario/U09.png)
+![](../../../Assets/Proyecto2/Usuario/U10.png)
 
 </br>
 
 ### Funciones del Programa
 
-#### File
->- Nuevo: Crea un nuevo archivo con extención olc.
->- Open: Abre un menu desplegable en la carpeta de archivos para abrir archivos de extención olc. 
->- Save: Guarda el achivo con extención olc.
->- Save As: Guarda un nuevo archivo con extención olc.
->- Exit: Sale del programa.
+#### Open File
+>- Abre el archivo por medio del explorador de archivos
 
 </br>
 
-#### Generate & Analize
->- Analizar: Analiza el archivo abierto, en caso de haber errores los agrega a la tabla de errores.
->- Generar: Genera los grafos de las expresiones regulares, el archivo de salida y muestra cuales cadenas son aceptadas y cuales cadenas no son aceptadas. 
->- Borrar archivos Directorios: Borra todos los archivos del directorio para poner nuevos.
->- Abrir Directorio Archivos Prueba: Abre la carpeta en donde están los archivos de prueba, ya sea para agregar o para borrar archivos.
+#### Analize
+>- Analiza el archivo de la pestaña abierta y genera todo lo que es requerido (tablas de erores y símbolos, árbol y salida en consola)
+
+</br>
+
+#### Save File
+>- Guarda el archivo de la pestaña abierta en donde el usuario quiera
 
 </br>
 
