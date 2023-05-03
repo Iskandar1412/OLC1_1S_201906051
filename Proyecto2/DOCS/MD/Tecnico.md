@@ -2,179 +2,193 @@
 ## Manual Técnico
 ### Introducción
 <p style="text-align: justify;">
-Dentro del primer proyecto del laboratorio de Organización de Lenguajes  & Compiladores 1 la aplicación realizada fue en base al uso de JFlex y Cup en el lenguaje de programación Java, abordando los conceptos de gramáticas y expresiones regulares para la creación de lo que es el análisis léxico y sintáctico para analizar por consiguiente las cadenas o el archivo de prueba respectivo, la utilización de listas enlazadas para el almacenamiento de los errores, & tokens que son almacenados para su utilización en los que son los árboles y tablas graficadas posteriormente; utlizando asimismo el modo gráfico para obtener aparte de los archivos, generar, graficas, nuevos documentos y observar las imagenes de las expresiones regulares aceptadas.
-
-Se empleo el lenguaje de programación Java como herramienta en la función de las estructuras y analisis, para almacenar la información que la interfaz gráfica le enviaba, y la interfaz gráfica se utilizaba para la obtención y envío de información a las estructuras/actualización de tokens y realización gráficas; se utilizó Graphviz para graficar las estructuras de las tablas0 y árboles.
-
-Se pudo determinar que la implementación de las estructuras y el almacenamiento y/o arreglo de la información obtenida en cada una de ellas no mostro ningún problema durante su ejecución.</p>
+Dentro del segundo proyecto del laboratorio de Organización de Lenguajes & Compiladores 1, la aplicación realizada fue en base al uso de Jison para el lenguaje de programación de JavaScript, abordando la culminación de conceptos de gramáticas y expresiones regulares para crear un compilador y analizar por consiguiente los datos ingresados, la declaración de variables y cadenas, entre otras, mediante el archivo de prueba respectivo, la utilización de las listas para el almacenamiento de algunas variables dentro del archivo Jison y la utilización de memoria dinámica para almacenar las variables y tokens para la utilización posterior en lo que son las tablas de errores, tablas de símbolos y la generación de un árbol ast que contiene las concatenaciones de las respectivas variables y funciones que contienen valores e instrucciones aceptando mediante las expresiones regulares las variables y funciones correspondientes.
+Se empleo el lenguaje de JavaScript como herramienta en la función de las estructuras para el análisis, almacenamiento de la información y la utilización del fronted y backend para el envío y recibimiento de información (en este caso no se utilizaron métodos de POST, UPDATE & GET) todo fue desarrollado para el uso dentro del fronted respecto a las funciones, para el análisis de archivos de información, envío del AST, obtención de tabla de errores, obtención de tabla de símbolos, etc.
+Se pudo determinar que la implementación de las estructuras y el almacenamiento y/o arreglo de la información obtenida en cada una de ellas no mostro ningún problema durante su ejecución.
+</p>
 
 
 ### Requisitos del Sistema
 
 
+
 >- **_Sistema Operativo:_** Windows 7 o superior
 >- **_CPU:_** Intel Pentium D o AMD Athlon 64 (K8) 2.6GHz. (Requisitos Mínimo)
 >- **_RAM:_** 600MB
->- **_Lenguaje Utilizado:_** Java
->- **_IDE:_** NetBeans 16
->- **_JDK:_** 19.0 (Open JDK)
->- **_Versión Java:_** 19.0
-
-### Requisitos En el Proyecto (Dependencias Proyecto hecho en MAVEN)
+>- **_Lenguaje Utilizado:_** JavaScript
+>- **_IDE:_** Visual Studio Code
+>- **_USO de Framework:_** React
 
 
->- **_Versioó CUP:_** 11-b
->- **_Versión CUP-Runtime:_** 11-b
->- **_Versión Gson:_** 2.8.9
->- **_Versión JFlex:_** 1.9.0
->- **_Versión json-simple:_** 1.1.1
+### Requisitos del en el Proyecto (Dependencias Proyecto, React)
+
+
+>- **_"@emotion/react":_** "^11.10.4",
+>- **_"@emotion/styled":_** "^11.10.4",
+>- **_"@mui/icons-material":_** "^5.10.3",
+>- **_"@mui/material":_** "^5.10.3",
+>- **_"@testing-library/jest-dom":_** "^5.16.5",
+>- **_"@testing-library/react":_** "^13.4.0",
+>- **_"@testing-library/user-event":_** "^13.5.0",
+>- **_"@types/jest":_** "^27.5.2",
+>- **_"@types/node":_** "^16.18.23",
+>- **_"@types/react":_** "^18.0.35",
+>- **_"@types/react-dom":_** "^18.0.11",
+>- **_"bootswatch":_** "^5.2.3",
+>- **_"d3":_** "^7.8.4",
+>- **_"d3-selection":_** "^3.0.0",
+>- **_"file-saver":_** "^2.0.5",
+>- **_"fs":_** "^0.0.1-security",
+>- **_"graphviz-react":_** "^1.2.5",
+>- **_"jison":_** "^0.4.18",
+>- **_"react":_** "^18.2.0",
+>- **_"react-dom":_** "^18.2.0",
+>- **_"react-draggable":_** "^4.4.5",
+>- **_"react-graphviz":_** "^0.7.0",
+>- **_"react-router-dom":_** "^6.10.0",
+>- **_"react-scripts":_** "5.0.1",
+>- **_"react-zoom-pan-pinch":_** "^3.0.7",
+>- **_"web-vitals":_** "^2.1.4",
+>- **_"webpack":_** "^5.81.0"
+
 
 
 ### Explicación del Código
 
 #### Analisis Léxico
 ```
-Utiliza las siguientes expresiones regulares para obtener los parámetros a la hora de leer el archivo, obteniendo los errores
-léxicos que tenga el archivo.
+Utiliza las siguientes expresiones regulares para obtener los parámetros a la hora de leer el archivo, obteniendo los errores léxicos que tenga el archivo.
 ```
 
-![](../Assets/Proyecto1/lexico.png)
+![](../../../Assets/Proyecto2/Tecnico/T01.png)
+![](../../../Assets/Proyecto2/Tecnico/T02.png)
+![](../../../Assets/Proyecto2/Tecnico/T03.png)
+
+
+#### Precedencia de Operadores
+```
+Sirve para obtener un orden a la hora de hacer las operaciones de valores, cuales tienen mayor “relevancia” o cuales operar antes de otros dentro de una función u orden.
+```
+
+![](../../../Assets/Proyecto2/Tecnico/T04.png)
+
 
 #### Análisis Sintáctico
 ```
-Se encarga de obtener los errores sintácticos y mediante una gramática regular cada en cada producción obtener los datos
-requeridos.
+Se encarga de obtener los errores sintácticos y mediante una gramática regular cada en cada producción obtener los datos requeridos.
 
 Se analizarán las cadenas y separarán los tokens para verificarlos posteriormente.
 ```
 
-![](../Assets/Proyecto1/sintactico.png)
-![](../Assets/Proyecto1/sintactico01.png)
-![](../Assets/Proyecto1/sintactico02.png)
-![](../Assets/Proyecto1/sintactico03.png)
-![](../Assets/Proyecto1/sintactico04.png)
+![](../../../Assets/Proyecto2/Tecnico/T05.png)
+![](../../../Assets/Proyecto2/Tecnico/T06.png)
+![](../../../Assets/Proyecto2/Tecnico/T07.png)
+![](../../../Assets/Proyecto2/Tecnico/T08.png)
+![](../../../Assets/Proyecto2/Tecnico/T09.png)
+![](../../../Assets/Proyecto2/Tecnico/T10.png)
+![](../../../Assets/Proyecto2/Tecnico/T11.png)
+![](../../../Assets/Proyecto2/Tecnico/T12.png)
+
 
 </br>
 
-#### Codigo Java
+#### Codigo JavaScript
 ```
-Obtendrá los tokens ingresados, formará los arboles y tablas y analizará o mostrará si la cadena es valida o no es valida.
+Obtendrá los tokens ingresados, formará los árboles y tablas y analizará o mostrará si las expresiones y funciones son aceptadas (para posteriormente correr el código).
 ```
 </br>
 
-![](../Assets/Proyecto1/proyecto1.png)
+![](../../../Assets/Proyecto2/Tecnico/T13.png)
 
 </br>
 
 ```
-Por tener varias clases en java se dará un recorrido breve por cada uno:
+Se exportarán clases las cuales servirán para su posterior uso:
 ```
-- Las clases que terminen con "nodo" son los nodos que utilizarán las principales para la formación de las tablas y los arboles.
-- Las clases AFN, Conjunto, Siguientes, Struct & ER se encargan de recopilar la información y hacer los grafos que obtendrá de las otras clases respectivas.
-- La clase Reportes se encarga de hacer el archivo HTML de los errores.
-- La clase Proyecto1 solo corre la clase Grafica, que es la que tiene el modo gráfico.
+- Las clases en la que se pasan los parámetros (en general) son la TipoOperaciones, TipoValores, Tipados e Instrucciones dentro del archivo jison.
+- La clase index.js es la que corre la aplicación.
+- Al abrir la carpeta del proyecto usar el comando “npm install” o “npm i” para instalar todas las librerías y módulos que requiere para usar el programa.
+- Con “npm start” corre el programa abriendo en el “localhost:3000” corra el proyecto.
 
 </br>
 
-![](../Assets/Proyecto1/graf.png)
+![](../../../Assets/Proyecto2/Tecnico/T14.png)
+![](../../../Assets/Proyecto2/Tecnico/T15.png)
 
 </br>
 
->Gráfica del Proyecto
+>Fronted del proyecto
 
-![](../Assets/Proyecto1/grafica.png)
+![](../../../Assets/Proyecto2/Tecnico/T16.png)
+![](../../../Assets/Proyecto2/Tecnico/T17.png)
 
 </br>
 
 #### Función al Abrir el programa
 
-- Analiza las carpetas de reportes para ver si tiene o no tiene archivos creados, en caso de tener mas de algun archivo en la sección de reportes, agrega los archivos de imagen de las expresiones regulares creadas.
+- Al correr el servidor nos abre en el servidor local el puerto en donde uno va a usar la aplicación.
 
-![](../Assets/Proyecto1/initItemMenu.png)
-
-</br>
-
-#### Funciones Dentro de File
-
-- En el Item "nuevo", limpia la ruta, la consola, y el texto para que uno ingrese un nuevo archivo para analizar, no se puede analizar el archivo sin antes usar la opción de "Guardar Como".
-
-![](../Assets/Proyecto1/nuevoItemMenu.png)
+![](../../../Assets/Proyecto2/Tecnico/T18.png)
 
 </br>
 
-- En el Item "Open" abre la carpeta de "Archivos" para buscar archivos con extención ".olc" mostrando en la pantalla de texto todo lo que tiene el mismo archivo.
+#### Funciones del Progarama
 
-![](../Assets/Proyecto1/openItemMenu.png)
+- Consta de 3 botones, básicos para el análisis, guardado y abrir archivos..
+
 
 </br>
 
-- En el Item "Save" En el caso de abrir un archivo o haberlo guardado como, busca el archivo y le guarda los nuevos cambios que este tendrá.
+- Abre el explorador de medios para que el usuario busque archivos de extensión .tw
+- Al seleccionar el archivo, en el primer cuadro de texto muestra el contenido del archivo, este usa una función llamada handleOpenFile el cual se encarga de obtener la información del archivo y enviar todo el contenido del mismo a el cuadro de la pestaña que este abierta (si esta el usuario en la pestaña 1, en esa se mostrará el contenido, en caso de ser otra pestaña, solo esa tendrá el contenido del archivo)
 
-![](../Assets/Proyecto1/saveItemMenu.png)
-
-</br>
-
-- En el Item "Save As" Guarda el archivo del area de texto como nuevo archivo con extención ".olc".
-
-![](../Assets/Proyecto1/saveAsItemMenu.png)
-
-</br>
-
-- En el Item "Exit" Sale del programa.
-
-![](../Assets/Proyecto1/exitItemMenu.png)
-
-</br>
-
-#### Funciones Dentro Generate & Analize
-
-- En el Item "Analizar" con el archivo abierto, analiza linea a linea, guardando los tokens y obteniendo posteriormente las expresiones regulares, tambien analiza que no haya ningun error en el archivo.
-
-![](../Assets/Proyecto1/analizeItemMenu.png)
-
-</br>
-
-- En el Item "Generar" una vez analizado el archivo genera todos los grafos de los árboles y tablas, tambien generándo el archivo de salida JSON.
-
-![](../Assets/Proyecto1/genItemMenu.png)
-
-</br>
-
-- En el Item "Borrar archivos Directorios" Borra todos los archivos de imagen de los directorios de reportes.
-
-![](../Assets/Proyecto1/deleteItemMenu.png)
-
-</br>
-
-- En el Item "Abrir Directorio Archivos Prueba" Abre la carpeta donde se encuentran los archivos de prueba, para agregar nuevos.
-
-![](../Assets/Proyecto1/directoryItemMenu.png)
-
-</br>
-
-
-### Funciones del Programa
+![](../../../Assets/Proyecto2/Tecnico/T19.png)
+![](../../../Assets/Proyecto2/Tecnico/T20.png)
+![](../../../Assets/Proyecto2/Tecnico/T21.png)
+![](../../../Assets/Proyecto2/Tecnico/T22.png)
 
 ```
-Consta de 2 pestañas, 'File' y 'Generate & Analize', tambien tiene 2 combobox para la búsqueda de las imagenes y mostrarlas.
+Este código hace que cuando el usuario abre una pestaña (que está para abrir nuevas pestañas en la parte superior derecha de la ventana) esta misma tenga el un valor tanto los TextArea 1 y 2, evitando compartir información con los otros de las otras pestañas, pudiendo así el usuario tener abiertas varias pestañas independientes.
 ```
 
 </br>
 
-#### File
->- Nuevo: Crea un nuevo archivo con extención olc.
->- Open: Abre un menu desplegable en la carpeta de archivos para abrir archivos de extención olc. 
->- Save: Guarda el achivo con extención olc.
->- Save As: Guarda un nuevo archivo con extención olc.
->- Exit: Sale del programa.
+#### Analyze
+
+- Es de las más ¿complejas?, se encarga de obtener toda la información del cuadro de texto abierto en la pestaña y envía el contenido de la misma a una función que pasa posterior por 2, para parsear el contenido y para generar el árbol AST, la tabla de errores y la tabla de símbolos, sin mencionar la salida que también es generada por la misma.
 
 </br>
 
-#### Generate & Analize
->- Analizar: Analiza el archivo abierto, en caso de haber errores los agrega a la tabla de errores.
->- Generar: Genera los grafos de las expresiones regulares, el archivo de salida y muestra cuales cadenas son aceptadas y cuales cadenas no son aceptadas. 
->- Borrar archivos Directorios: Borra todos los archivos del directorio para poner nuevos.
->- Abrir Directorio Archivos Prueba: Abre la carpeta en donde están los archivos de prueba, ya sea para agregar o para borrar archivos.
+![](../../../Assets/Proyecto2/Tecnico/T23.png)
+![](../../../Assets/Proyecto2/Tecnico/T24.png)
+![](../../../Assets/Proyecto2/Tecnico/T25.png)
+![](../../../Assets/Proyecto2/Tecnico/T26.png)
+![](../../../Assets/Proyecto2/Tecnico/T27.png)
+![](../../../Assets/Proyecto2/Tecnico/T28.png)
+![](../../../Assets/Proyecto2/Tecnico/T29.png)
+![](../../../Assets/Proyecto2/Tecnico/T30.png)
+![](../../../Assets/Proyecto2/Tecnico/T31.png)
+
+</br>
+
+
+### Save File
+
+- Guarda el archivo como uno nuevo de extensión .tw
+
+</br>
+
+![](../../../Assets/Proyecto2/Tecnico/T32.png)
+
+```
+En caso de que el archivo tenga errores, lo mostrará en consola y en la tabla de errores
+```
+
+</br>
+
+![](../../../Assets/Proyecto2/Tecnico/T33.png)
+![](../../../Assets/Proyecto2/Tecnico/T34.png)
+![](../../../Assets/Proyecto2/Tecnico/T35.png)
 
 </br>
 
