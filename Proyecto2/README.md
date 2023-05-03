@@ -1,6 +1,6 @@
 | Nombre | Carné | Fecha Entrega |
 |:-:|:-:|:-:|
-|Juan Urbina| 201906051| Sin Confirmar |
+|Juan Urbina| 201906051| 03/05/2023 |
 ## Manuales
 
 >- [Manual Tecnico (MD)](./)
