@@ -1,3 +1,32 @@
+| Nombre | Carné | Fecha Entrega |
+|:-:|:-:|:-:|
+|Juan Urbina| 201906051| Sin Confirmar |
+## Manuales
+
+>- [Manual Tecnico (MD)](./)
+>- [Manual de Usuario (MD)](../)
+>- [Manual Tecnico (PDF)](./DOCS/Manual%20Tecnico%20-%20Proyecto%202.pdf)
+>- [Manual Usuario (PDF)](./DOCS/Manual%20Usuario%20-%20Proyecto%202.pdf)
+>- [Gramáticas](./DOCS/Gramatica%20-%20Proyecto%202.pdf)
+>- [Inciso Proyecto](./DOCS/%5BOLC1%5DProyecto2_1S2023.pdf)
+--------
+>- npm i
+>- npm i bootswatch
+>- npm install file-saver --save
+>- npm i --save-dev @types/file-saver
+>- npm install --save-dev electron
+
+
+
+
+
+
+##
+##
+##
+--------------------------
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
