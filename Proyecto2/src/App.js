@@ -30,16 +30,16 @@ function App() {
     //console.log(sim_data[0].valor)
     //err_data[n].<tipo_valor>
     var str_data_table = '';
-    str_data_table += '<table><tr><th>#</th><th>NOMBRE</th><th>SIMBOLO</th><th>TIPO DATO</th><th>AMBITO</th><th>LINEA</th><th>COLUMNA</th></tr>';
+    str_data_table += '<table><thead><tr><th scope="col">#</th><th scope="col">NOMBRE</th><th scope="col">SIMBOLO</th><th scope="col">TIPO DATO</th><th scope="col">AMBITO</th><th scope="col">LINEA</th><th scope="col">COLUMNA</th></tr></thead><tbody>';
     let i = 0;
     //console.log(sim_data.length)
     while(i < sim_data.length){
       //str_data_table += '<table><tr><th>ID</th><th>Objeto</th><th>Tipo</th><th>Entorno</th><th>Linea</th><th>Columna</th></tr>';
       //str_data_table += '<tr><td>' + sim_data[i].id + '</td><td>' + sim_data[i].objeto + '</td><td>' + sim_data[i].tipo + '</td><td>' + sim_data[i].entorno + '</td><td>' + sim_data[i].linea + '</td><td>' + sim_data[i].columna + '</td></tr>';
-      str_data_table += '<tr><td>' + (i + 1) +'</td><td>' + sim_data[i].id + '</td><td>' + sim_data[i].objeto + '</td><td>' + sim_data[i].tipo + '</td><td>' + sim_data[i].entorno + '</td><td>' + sim_data[i].linea + '</td><td>' + sim_data[i].columna + '</td></tr>';
+      str_data_table += '<tr><td scope="row">' + (i + 1) +'</td><td>' + sim_data[i].id + '</td><td>' + sim_data[i].objeto + '</td><td>' + sim_data[i].tipo + '</td><td>' + sim_data[i].entorno + '</td><td>' + sim_data[i].linea + '</td><td>' + sim_data[i].columna + '</td></tr>';
       i++;
     }
-    str_data_table += '</table>';
+    str_data_table += '</tbody></table>';
     setText(str_data_table);
   }
   //--------------------------------------------
@@ -50,14 +50,14 @@ function App() {
     var err_fs = err_data.arreglo_errores;
 
     
-    str_data_err += '<table><tr><th>#</th><th>TIPO</th><th>ERROR</th><th>LINEA</th><th>COLUMNA</th></tr>';
+    str_data_err += '<table><thead><tr><th scope="col">#</th><th scope="col">TIPO</th><th scope="col">ERROR</th><th scope="col">LINEA</th><th scope="col">COLUMNA</th></tr></thead><tbody>';
     let i = 0;
     //console.log(err_fs)
     while(i < err_fs.length){
-      str_data_err += '<tr><td>' + (i + 1) + '</td><td>' + err_fs[i].tipo + '</td><td>' + err_fs[i].error + '</td><td>' + err_fs[i].linea + '</td><td>' + err_fs[i].columna + '</td></td>';
+      str_data_err += '<tr><td scope="row">' + (i + 1) + '</td><td>' + err_fs[i].tipo + '</td><td>' + err_fs[i].error + '</td><td>' + err_fs[i].linea + '</td><td>' + err_fs[i].columna + '</td></td>';
       i++;
     }
-    str_data_err += '</table>';
+    str_data_err += '</tbody></table>';
     setText_err(str_data_err);
   }
   //--------------------------------------------
