@@ -4,8 +4,8 @@
 <p style="text-align: justify;">
 
 ini
-    : ENTRADA EOF  
-    | error EOF   
+&nbsp;    : ENTRADA EOF  
+&nbsp;    | error EOF   
 ;
 
 ENTRADA
