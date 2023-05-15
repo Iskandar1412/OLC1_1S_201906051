@@ -1,0 +1,85 @@
+/*
+* Probando el funcionamiento de estructuras de datos
+* Listas
+* Vectores
+*/
+
+void funcion1(){
+  // Prueba de operacion logica -> Resultado: True
+  print(true || false && !true);
+
+  // Declarar vector tipo 1
+  int[ ] vector1 = new int[4];
+
+  // Declarar vector tipo 2
+  string[ ] vector2 = {"hola", "Mundo"};
+  int[ ] vectorNumero = {2020,2021,2022};
+  print("Antes de modificar: " + vector2); 
+  vector2[0] = "OLC1 ";
+  print("Después de modificar: " + vector2);
+  vector2[1] = " 1er Semestre " + vectorNumero[1];
+  print(vector2);
+
+
+  // Acceso a vector 2
+  string valorPosicion = vector2[0];
+  print(valorPosicion);
+
+  // Declarar lista tipo 1
+  list<int> lista1 = new list<int>;
+
+  // Agregar datos a lista 1
+  lista1.add(2);
+  lista1.add(4);
+  lista1.add(100);
+  print(lista1);
+  int numeroLista = lista1[[2]];
+  print(numeroLista);
+
+
+  // Declarar lista tipo 2
+  list<char> caracteres = toCharArray("Hola");
+  
+  // Acceso a lista
+  char valor = caracteres[[2]];
+  print(valor);
+
+  // Modificación de listas
+  list<string> listaS = new list<string>;
+  int[ ] vectorNumero2 = {2020,2021,2022};
+  // Agregamos valores a la lista
+  listaS.add("Hola");
+  listaS.add("Mundo");
+  print(listaS);
+
+  // Modificando
+  listaS[[0]]= "OLC1 ";
+  listaS[[1]]= "1er Semestre "+ vectorNumero2[1];
+  print(listaS);
+
+  // Funcion Length
+  print(length("Hola mundo"));
+  print(length(listaS));
+
+}
+
+
+main funcion1();
+
+
+/*  Resultado ->
+
+true
+Antes de modificar: hola,Mundo
+Después de modificar: OLC1 ,Mundo
+OLC1 , 1er Semestre 2021
+OLC1
+2,4,100
+100
+l
+Hola,Mundo
+OLC1 ,1er Semestre 2021
+10
+2
+
+*/
